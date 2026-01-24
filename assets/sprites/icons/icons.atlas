@@ -1,0 +1,335 @@
+
+icons.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+arrow-cursor
+  rotate: false
+  xy: 2, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+barn
+  rotate: false
+  xy: 2, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+beehive
+  rotate: false
+  xy: 68, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+block-house
+  rotate: false
+  xy: 2, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+cancel
+  rotate: false
+  xy: 68, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+cargo-crate
+  rotate: false
+  xy: 134, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+carrot
+  rotate: false
+  xy: 68, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+clover
+  rotate: false
+  xy: 134, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+clover-spiked
+  rotate: false
+  xy: 200, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+connect-off
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+connect-on
+  rotate: false
+  xy: 926, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+contract
+  rotate: false
+  xy: 134, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+convergence-target
+  rotate: false
+  xy: 200, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+cross-mark
+  rotate: false
+  xy: 266, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+crosscut-saw
+  rotate: false
+  xy: 200, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+crosshair
+  rotate: false
+  xy: 266, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+family-house
+  rotate: false
+  xy: 332, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+flat-hammer
+  rotate: false
+  xy: 266, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+settings-hammer
+  rotate: false
+  xy: 266, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+grain-bundle
+  rotate: false
+  xy: 332, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+granary
+  rotate: false
+  xy: 398, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+ground-sprout
+  rotate: false
+  xy: 332, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+half-log
+  rotate: false
+  xy: 398, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hand
+  rotate: false
+  xy: 464, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hill-conquest
+  rotate: false
+  xy: 398, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hill-fort
+  rotate: false
+  xy: 464, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hills
+  rotate: false
+  xy: 530, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+houses
+  rotate: false
+  xy: 464, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+select
+  rotate: false
+  xy: 530, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+sprout
+  rotate: false
+  xy: 596, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stack
+  rotate: false
+  xy: 530, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stockpiles
+  rotate: false
+  xy: 596, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-block
+  rotate: false
+  xy: 662, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-crafting
+  rotate: false
+  xy: 596, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-path
+  rotate: false
+  xy: 662, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-pile
+  rotate: false
+  xy: 728, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-stack
+  rotate: false
+  xy: 662, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone-tower
+  rotate: false
+  xy: 728, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+targeted
+  rotate: false
+  xy: 794, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+targeting
+  rotate: false
+  xy: 728, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+trail
+  rotate: false
+  xy: 794, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+triple-gate
+  rotate: false
+  xy: 860, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+unlit-bomb
+  rotate: false
+  xy: 794, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+usable
+  rotate: false
+  xy: 860, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+village
+  rotate: false
+  xy: 926, 168
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+wheat
+  rotate: false
+  xy: 860, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+wooden-crate
+  rotate: false
+  xy: 926, 102
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,121 @@
+axe:
+  label: Axe
+  sprite: tools/axe
+  animation:
+    model: TOOL
+  equipmentInformation:
+    equipSlot: HANDS
+    equipType: AXE
+    action: CHOP
+    reach:
+      UP:
+        x: 0
+        y: -1
+      DOWN:
+        x: 0
+        y: 1
+      LEFT:
+        x: 1
+        y: 0
+      RIGHT:
+        x: -1
+        y: 0
+rod:
+  label: Rod
+  sprite: tools/rod
+  animation:
+    model: TOOL
+  equipmentInformation:
+    equipSlot: HANDS
+    equipType: ROD
+    action: FISH
+    reach:
+      UP:
+        x: 0
+        y: -1
+      DOWN:
+        x: 0
+        y: 1
+      LEFT:
+        x: 1
+        y: 0
+      RIGHT:
+        x: -1
+        y: 0
+pickaxe:
+  label: Pickaxe
+  sprite: tools/pickaxe
+  animation:
+    model: TOOL
+  equipmentInformation:
+    equipSlot: HANDS
+    equipType: PICKAXE
+    action: STRIKE
+    reach:
+      UP:
+        x: 0
+        y: -1
+      DOWN:
+        x: 0
+        y: 0
+      LEFT:
+        x: 1
+        y: 0
+      RIGHT:
+        x: -1
+        y: 0
+sword:
+  label: Sword
+  sprite: tools/sword
+  animation:
+    model: TOOL
+  equipmentInformation:
+    equipSlot: HANDS
+    equipType: SWORD
+    action: CHOP
+    reach:
+      UP:
+        x: 0
+        y: -1
+      DOWN:
+        x: 0
+        y: 1
+      LEFT:
+        x: 1
+        y: 0
+      RIGHT:
+        x: -1
+        y: 0
+axe_icon:
+  label: Axe Icon
+  sprite: tools/axe_icon
+battleaxe:
+  label: Battleaxe
+  sprite: tools/battleaxe
+bow_and_arrow01:
+  label: Bow And Arrow01
+  sprite: tools/bow_and_arrow01
+bow_and_arrow02:
+  label: Bow And Arrow02
+  sprite: tools/bow_and_arrow02
+club:
+  label: Club
+  sprite: tools/club
+fishing_rod:
+  label: Fishing Rod
+  sprite: tools/fishing_rod
+hammer:
+  label: Hammer
+  sprite: tools/hammer
+mace:
+  label: Mace
+  sprite: tools/mace
+net:
+  label: Net
+  sprite: tools/net
+sickle:
+  label: Sickle
+  sprite: tools/sickle
+watering_can:
+  label: Watering Can
+  sprite: tools/watering_can

@@ -1,0 +1,165 @@
+
+32x32_items.png
+size: 128, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+houses/door
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+houses/door
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+houses/door
+  rotate: false
+  xy: 70, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+
+32x32_items2.png
+size: 128, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+scenery/broken-tree-trunk
+  rotate: false
+  xy: 2, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/bush-bare
+  rotate: false
+  xy: 2, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/bush-fruit
+  rotate: false
+  xy: 36, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/felled-broken-tree-trunk
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/large-lily
+  rotate: false
+  xy: 36, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/medium-rock
+  rotate: false
+  xy: 70, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/medium-water-rock
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+scenery/small-bush-bare
+  rotate: false
+  xy: 70, 36
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+scenery/small-bush-fruit
+  rotate: false
+  xy: 104, 70
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+scenery/tall-grass
+  rotate: false
+  xy: 70, 2
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+
+32x32_items3.png
+size: 128, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+icons/food
+  rotate: false
+  xy: 2, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/gold
+  rotate: false
+  xy: 2, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/housing
+  rotate: false
+  xy: 36, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/jobs
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/load
+  rotate: false
+  xy: 36, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/population
+  rotate: false
+  xy: 70, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/population1
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/save
+  rotate: false
+  xy: 70, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

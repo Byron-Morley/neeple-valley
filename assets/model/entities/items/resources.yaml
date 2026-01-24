@@ -1,0 +1,282 @@
+wood_log:
+  label: Wood Log
+  sprite: resources/wood_log_spring
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 4
+    stackSize: 20
+  clickBehavior: resource_info
+stone:
+  label: Stone
+  sprite: resources/rock
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 4
+    stackSize: 20
+  clickBehavior: resource_info
+wheat:
+  label: Wheat
+  sprite: resources/wheat
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 10
+    stackSize: 100
+  clickBehavior: resource_info
+wood_beam:
+  label: Wood Beam
+  sprite: resources/wood_beam_spring
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+stone_block:
+  label: Stone Block
+  sprite: resources/stone_block
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+stone_raw:
+  label: Raw Stone
+  sprite: resources/stone_raw
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+stone_normal:
+  label: Stone
+  sprite: resources/stone_normal
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+iron_ore:
+  label: Iron Ore
+  sprite: resources/iron_ore
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 2
+    stackSize: 50
+  clickBehavior: resource_info
+gold:
+  label: Gold
+  sprite: resources/gold
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+gold_stack:
+  label: Gold Stack
+  sprite: resources/gold_stack
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+silver:
+  label: Silver
+  sprite: resources/silver
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+silver_stack:
+  label: Silver Stack
+  sprite: resources/silver_stack
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+platinum:
+  label: Platinum
+  sprite: resources/platinum
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+platinum_stack:
+  label: Platinum Stack
+  sprite: resources/platinum_stack
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+bronze:
+  label: Bronze
+  sprite: resources/bronze
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+bronze_stack:
+  label: Bronze Stack
+  sprite: resources/bronze_stack
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+mixed_stack:
+  label: Mixed Metals
+  sprite: resources/mixed_stack
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+leaf:
+  label: Leaf
+  sprite: resources/leaf_spring
+  information:
+    text: This is Information.
+  clickBehavior: resource_info
+copper_mine:
+  label: Copper Mine
+  sprite: resources/copper_mine
+iron_mine:
+  label: Iron Mine
+  sprite: resources/iron_mine
+leaf_spring:
+  label: Leaf Spring
+  sprite: resources/leaf_spring
+multiple_tree:
+  label: Multiple Tree
+  sprite: resources/multiple_tree
+rock:
+  label: Rock
+  sprite: resources/rock
+single_tree:
+  label: Single Tree
+  sprite: resources/single_tree
+stone_mine:
+  label: Stone Mine
+  sprite: resources/stone_mine
+tin_mine:
+  label: Tin Mine
+  sprite: resources/tin_mine
+water:
+  label: Water
+  sprite: resources/water
+wood_beam_spring:
+  label: Wood Beam Spring
+  sprite: resources/wood_beam_spring
+wood_log_spring:
+  label: Wood Log Spring
+  sprite: resources/wood_log_spring
+radish:
+  label: Radish
+  sprite: farmables/radish
+  animation:
+    model: FARM_RESOURCE
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+carrot:
+  label: Carrot
+  sprite: resources/carrot
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 8
+    yield: 300
+    stackSize: 300
+    foodUnit: 5f
+  clickBehavior: resource_info
+lettuce:
+  label: Lettuce
+  sprite: farmables/lettuce
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+corn:
+  label: Corn
+  sprite: farmables/corn
+  resourceInformation:
+    harvestTime: 1
+    yield: 2
+    stackSize: 100
+  clickBehavior: resource_info
+onion:
+  label: Onion
+  sprite: farmables/onion
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+potato:
+  label: Potato
+  sprite: farmables/potato
+  resourceInformation:
+    harvestTime: 1
+    yield: 2
+    stackSize: 100
+  clickBehavior: resource_info
+peas:
+  label: Peas
+  sprite: farmables/peas
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+beans:
+  label: Beans
+  sprite: farmables/beans
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+tomato:
+  label: Tomato
+  sprite: farmables/tomato
+  resourceInformation:
+    harvestTime: 1
+    yield: 2
+    stackSize: 100
+  clickBehavior: resource_info
+greenbean:
+  label: Greenbean
+  sprite: farmables/greenbean
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+kale:
+  label: Kale
+  sprite: farmables/kale
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+strawberry:
+  label: Strawberry
+  sprite: farmables/strawberry
+  resourceInformation:
+    harvestTime: 1
+    yield: 2
+    stackSize: 100
+  clickBehavior: resource_info
+grapes:
+  label: Grapes
+  sprite: farmables/grapes
+  resourceInformation:
+    harvestTime: 1
+    yield: 3
+    stackSize: 100
+  clickBehavior: resource_info
+pumpkin:
+  label: Pumpkin
+  sprite: farmables/pumpkin
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info
+brocoli:
+  label: Brocoli
+  sprite: farmables/brocoli
+  resourceInformation:
+    harvestTime: 1
+    yield: 1
+    stackSize: 100
+  clickBehavior: resource_info

@@ -1,0 +1,10 @@
+house:
+  label: House
+  sprite: workshops/house
+  bodyModel: custom_house_body_4
+door:
+  label: Door
+  sprite: houses/door
+  animation:
+    model: DOOR
+  door: true

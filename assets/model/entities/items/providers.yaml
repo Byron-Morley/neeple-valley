@@ -1,0 +1,113 @@
+farm:
+  label: Farm
+  sprite: providers/farm-tilled
+  renderPriority: BUILDING
+  bodyModel: body_farm
+  storage:
+    slots: 4
+  jobs: 1
+  clickBehavior: window
+  building:
+    door: false
+  farm:
+    origin:
+      x: 0
+      y: 0
+    plots:
+      - x: 1
+        y: 2
+      - x: 2
+        y: 2
+      - x: 3
+        y: 2
+      - x: 4
+        y: 2
+      - x: 5
+        y: 2
+      - x: 6
+        y: 2
+      - x: 1
+        y: 3
+      - x: 2
+        y: 3
+      - x: 3
+        y: 3
+      - x: 4
+        y: 3
+      - x: 5
+        y: 3
+      - x: 6
+        y: 3
+      - x: 1
+        y: 4
+      - x: 2
+        y: 4
+      - x: 3
+        y: 4
+      - x: 4
+        y: 4
+      - x: 5
+        y: 4
+      - x: 6
+        y: 4
+      - x: 1
+        y: 5
+      - x: 2
+        y: 5
+      - x: 3
+        y: 5
+      - x: 4
+        y: 5
+      - x: 5
+        y: 5
+      - x: 6
+        y: 5
+      - x: 1
+        y: 6
+      - x: 2
+        y: 6
+      - x: 3
+        y: 6
+      - x: 4
+        y: 6
+      - x: 5
+        y: 6
+      - x: 6
+        y: 6
+stone-cutter:
+  label: Stone Cutter
+  sprite: providers/stone-cutter
+  jobs: 1
+  storage:
+    slots: 2
+    workshop: true
+  clickBehavior: storage_window
+  bodyModel: custom_house_body
+  building:
+    door: true
+wood-cutter:
+  label: Wood Cutter
+  sprite: providers/wood-cutter
+  jobs: 1
+  storage:
+    slots: 2
+    workshop: true
+    priority: 0
+  clickBehavior: storage_window
+  bodyModel: custom_house_body
+  building:
+    door: true
+farm-foundation:
+  label: Farm-Foundation
+  sprite: providers/farm-foundation
+fishing-hut:
+  label: Fishing-Hut
+  sprite: providers/fishing-hut
+  building:
+    door: true
+foundation:
+  label: Foundation
+  sprite: providers/foundation
+storehouse:
+  label: Storehouse
+  sprite: providers/storehouse

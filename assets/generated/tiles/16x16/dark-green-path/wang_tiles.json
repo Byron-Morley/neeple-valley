@@ -1,0 +1,82 @@
+{
+  "0": {
+    "filename": "0.png",
+    "property": "NONE"
+  },
+  "1": {
+    "filename": "1.png",
+    "property": "TOP"
+  },
+  "2": {
+    "filename": "2.png",
+    "property": "RIGHT"
+  },
+  "3": {
+    "filename": "3.png",
+    "property": "TOP|RIGHT"
+  },
+  "4": {
+    "filename": "4.png",
+    "property": "BOTTOM"
+  },
+  "5": {
+    "filename": "5.png",
+    "property": "TOP|BOTTOM"
+  },
+  "6": {
+    "filename": "6.png",
+    "property": "RIGHT|BOTTOM"
+  },
+  "7": {
+    "filename": "7.png",
+    "property": "TOP|RIGHT|BOTTOM"
+  },
+  "8": {
+    "filename": "8.png",
+    "property": "LEFT"
+  },
+  "9": {
+    "filename": "9.png",
+    "property": "TOP|LEFT"
+  },
+  "10": {
+    "filename": "10.png",
+    "property": "RIGHT|LEFT"
+  },
+  "11": {
+    "filename": "11.png",
+    "property": "TOP|RIGHT|LEFT"
+  },
+  "12": {
+    "filename": "12.png",
+    "property": "BOTTOM|LEFT"
+  },
+  "13": {
+    "filename": "13.png",
+    "property": "TOP|BOTTOM|LEFT"
+  },
+  "14": {
+    "filename": "14.png",
+    "property": "RIGHT|BOTTOM|LEFT"
+  },
+  "15": {
+    "filename": "15.png",
+    "property": "TOP|RIGHT|BOTTOM|LEFT"
+  },
+  "16": {
+    "filename": "16.png",
+    "property": "NONE"
+  },
+  "17": {
+    "filename": "17.png",
+    "property": "NONE"
+  },
+  "18": {
+    "filename": "18.png",
+    "property": "NONE"
+  },
+  "19": {
+    "filename": "19.png",
+    "property": "NONE"
+  }
+}

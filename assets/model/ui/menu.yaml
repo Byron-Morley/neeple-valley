@@ -1,0 +1,73 @@
+- label: Harvest
+  icon: mark
+  behaviorId: harvest
+
+- label: Destroy
+  icon: destroy
+  behaviorId: destroy
+
+- label: Storage
+  icon: box
+  children:
+    - label: Storage Space
+      icon: box
+      spawn: storage/storage_group
+      behaviorId: area
+      name: storage_group
+    - label: Storage Warehouse
+      icon: box
+      spawn: storage/warehouse
+      behaviorId: spawn
+      name: warehouse
+
+- label: Industry
+  icon: hammer
+  children:
+    - label: Wood Cutter
+      icon: house
+      spawn: providers/wood_cutter
+      behaviorId: spawn
+      name: wood_cutter
+    - label: Stone Cutter
+      icon: house
+      spawn: providers/stone_cutter
+      behaviorId: spawn
+      name: stone_cutter
+
+- label: Housing
+  icon: house
+  children:
+    - label: House
+      icon: house-1
+      spawn: houses/house
+      behaviorId: spawn
+      name: house
+
+- label: Pathing
+  icon: paving
+  children:
+    - label: Cobblestone
+      icon: paving
+      name: cobblestone
+      spawn: tiled/cobblestone
+      behaviorId: paint
+    - label: Dirt
+      icon: paving
+      name: dirt
+      spawn: tiled/dirt
+      behaviorId: paint
+    - label: Water
+      icon: paving
+      name: shallow-water
+      spawn: tiled/shallow-water
+      behaviorId: paint
+    - label: Grass
+      icon: paving
+      name: light-grass
+      spawn: tiled/light-grass
+      behaviorId: paint
+    - label: Dark Grass
+      icon: paving
+      name: dark-grass
+      spawn: tiled/dark-grass
+      behaviorId: paint

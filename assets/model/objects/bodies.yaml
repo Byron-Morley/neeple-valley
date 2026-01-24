@@ -1,0 +1,353 @@
+path:
+  width: 1
+  height: 1
+  n: 1
+
+neep_body:
+  offset:
+    x: 0
+    y: 0
+  width: 1
+  height: 2
+  interactionPoint:
+    x: 0
+    y: 0
+  customCollider:
+    - x: 0
+      y: 0
+      n: 1
+    - x: 0
+      y: 1
+      n: 1
+
+custom_house_body:
+  offset:
+    x: 1
+    y: 1
+  width: 6
+  height: 3
+  interactionPoint:
+    x: 4
+    y: 1
+  customCollider:
+    - x: 0
+      y: -1
+    - x: 1
+      y: -1
+    - x: 0
+      y: 3
+      n: 1
+    - x: 0
+      y: 4
+      n: 1
+    - x: 1
+      y: 3
+      n: 1
+    - x: 1
+      y: 4
+      n: 1
+    - x: 2
+      y: 3
+      n: 1
+    - x: 2
+      y: 4
+      n: 1
+    - x: 3
+      y: 3
+      n: 1
+    - x: 2
+      y: 4
+      n: 1
+    - x: 3
+      y: 3
+      n: 1
+    - x: 3
+      y: 4
+      n: 1
+    - x: 4
+      y: 3
+      n: 1
+    - x: 4
+      y: 4
+      n: 1
+    - x: 5
+      y: 3
+      n: 1
+    - x: 5
+      y: 4
+      n: 1
+    - x: 6
+      y: 3
+      n: 1
+    - x: 6
+      y: 2
+      n: 1
+    - x: -1
+      y: 3
+      n: 1
+    - x: -1
+      y: 2
+      n: 1
+    - x: -1
+      y: 1
+      n: 1
+    - x: 6
+      y: 1
+      n: 1
+
+custom_house_body_2:
+  offset:
+    x: 0
+    y: 1
+  width: 8
+  height: 8
+  interactionPoint:
+    x: 4
+    y: 1
+
+custom_house_body_3:
+  offset:
+    x: 1
+    y: 1
+  width: 6
+  height: 4
+  interactionPoint:
+    x: 3
+    y: 0
+
+custom_house_body_4:
+  offset:
+    x: 1
+    y: 0
+  width: 6
+  height: 5
+  interactionPoint:
+    x: 4
+    y: 0
+
+custom_house_body_5:
+  interactionPoint:
+    x: 4
+    y: 1
+
+custom_house_body_6:
+  offset:
+    x: 1
+    y: 0
+  width: 7
+  height: 7
+  collision: false
+  interactionPoint:
+    x: 4
+    y: 4
+  customCollider:
+    - x: 0
+      y: 0
+    - x: 1
+      y: 0
+    - x: 2
+      y: 0
+    - x: 3
+      y: 0
+    - x: 4
+      y: 0
+    - x: 5
+      y: 0
+    - x: 6
+      y: 0
+    - x: 6
+      y: 1
+    - x: 6
+      y: 2
+    - x: 6
+      y: 3
+    - x: 6
+      y: 4
+    - x: 6
+      y: 5
+    - x: 6
+      y: 6
+    - x: 5
+      y: 6
+    - x: 4
+      y: 6
+    - x: 3
+      y: 6
+    - x: 2
+      y: 6
+    - x: 1
+      y: 6
+    - x: 0
+      y: 6
+    - x: 0
+      y: 5
+    - x: 0
+      y: 4
+
+fence:
+  width: 1
+  height: 1
+  n: 2
+  offset:
+    x: 0
+    y: 0
+
+body_1x1:
+  width: 1
+  height: 1
+  interactionPoint:
+    x: 1
+    y: 0
+  offset:
+    x: 1
+    y: 0
+  focusPoints:
+    - x: 1
+      y: 0
+
+small_tree:
+  width: 3
+  height: 4
+  n: 1
+  interactionPoint:
+    x: 1
+    y: 0
+  offset:
+    x: 0
+    y: 2
+  focusPoints:
+    - x: 1
+      y: -4
+  customCollider:
+    - x: 1
+      y: -1
+      n: 1
+    - x: 1
+      y: -2
+      n: 2
+
+medium_tree:
+  width: 5
+  height: 5
+  n: 1
+  interactionPoint:
+    x: 1
+    y: 0
+  offset:
+    x: 0
+    y: 2
+  focusPoints:
+    - x: 1
+      y: -4
+  customCollider:
+    - x: 2
+      y: -1
+      n: 2
+    - x: 2
+      y: -2
+      n: 2
+    - x: 1
+      y: -2
+      n: 1
+    - x: 3
+      y: -2
+      n: 1
+
+body_1x2_custom:
+  width: 1
+  height: 2
+  offset:
+    x: 1
+    y: 0
+  focusPoints:
+    - x: 1
+      y: 0
+
+body_1x2_custom_2:
+  width: 1
+  height: 2
+  offset:
+    x: 2
+    y: 0
+  focusPoints:
+    - x: 2
+      y: 0
+
+body_2x2:
+  offset:
+    x: 1
+    y: 0
+  width: 2
+  height: 3
+  focusPoints:
+    - x: 1
+      y: 1
+    - x: 2
+      y: 1
+    - x: 1
+      y: 2
+    - x: 2
+      y: 2
+body_farm:
+  offset:
+    x: 0
+    y: 1
+  collision: true
+  interactionPoint:
+    x: 4
+    y: 0
+  customCollider:
+    - x: 0
+      y: 0
+    - x: 1
+      y: 0
+    - x: 2
+      y: 0
+    - x: 5
+      y: 0
+    - x: 6
+      y: 0
+    - x: 7
+      y: 0
+    - x: 7
+      y: 1
+    - x: 7
+      y: 2
+    - x: 7
+      y: 3
+    - x: 7
+      y: 4
+    - x: 7
+      y: 5
+    - x: 7
+      y: 6
+    - x: 6
+      y: 6
+    - x: 5
+      y: 6
+    - x: 4
+      y: 6
+    - x: 3
+      y: 6
+    - x: 2
+      y: 6
+    - x: 1
+      y: 6
+    - x: 0
+      y: 6
+    - x: 0
+      y: 5
+    - x: 0
+      y: 4
+    - x: 0
+      y: 3
+    - x: 0
+      y: 2
+    - x: 0
+      y: 1
+    - x: 1
+      y: -1
+    - x: 5
+      y: -1
+    - x: 6
+      y: -1

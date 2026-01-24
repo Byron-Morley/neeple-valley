@@ -1,0 +1,123 @@
+
+large_items.png
+size: 256, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+houses/house
+  rotate: false
+  xy: 2, 2
+  size: 128, 144
+  orig: 128, 144
+  offset: 0, 0
+  index: -1
+
+large_items2.png
+size: 256, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+scenery/large-tree
+  rotate: false
+  xy: 84, 18
+  size: 80, 96
+  orig: 80, 96
+  offset: 0, 0
+  index: -1
+scenery/medium-tree
+  rotate: false
+  xy: 2, 2
+  size: 80, 112
+  orig: 80, 112
+  offset: 0, 0
+  index: -1
+scenery/small-tree
+  rotate: false
+  xy: 166, 18
+  size: 48, 96
+  orig: 48, 96
+  offset: 0, 0
+  index: -1
+
+large_items3.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+providers/farm-foundation
+  rotate: false
+  xy: 132, 116
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+providers/farm-tilled
+  rotate: false
+  xy: 262, 116
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+providers/fishing-hut
+  rotate: false
+  xy: 392, 18
+  size: 96, 112
+  orig: 96, 112
+  offset: 0, 0
+  index: -1
+providers/fishing-hut-d
+  rotate: false
+  xy: 490, 18
+  size: 96, 112
+  orig: 96, 112
+  offset: 0, 0
+  index: -1
+providers/foundation
+  rotate: false
+  xy: 2, 100
+  size: 128, 144
+  orig: 128, 144
+  offset: 0, 0
+  index: -1
+providers/stone-cutter
+  rotate: false
+  xy: 2, 2
+  size: 128, 96
+  orig: 128, 96
+  offset: 0, 0
+  index: -1
+providers/stone-cutter-d
+  rotate: false
+  xy: 132, 18
+  size: 128, 96
+  orig: 128, 96
+  offset: 0, 0
+  index: -1
+providers/storehouse
+  rotate: false
+  xy: 392, 132
+  size: 128, 112
+  orig: 128, 112
+  offset: 0, 0
+  index: -1
+providers/storehouse-d
+  rotate: false
+  xy: 522, 132
+  size: 128, 112
+  orig: 128, 112
+  offset: 0, 0
+  index: -1
+providers/wood-cutter
+  rotate: false
+  xy: 652, 148
+  size: 128, 96
+  orig: 128, 96
+  offset: 0, 0
+  index: -1
+providers/wood-cutter-d
+  rotate: false
+  xy: 262, 18
+  size: 128, 96
+  orig: 128, 96
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,160 @@
+radish:
+  label: Radish
+  sprite: farmables/radish
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 10
+    yield: 1
+
+carrot:
+  label: Carrot
+  sprite: farmables/carrot
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 36
+    yield: 1
+
+lettuce:
+  label: Lettuce
+  sprite: farmables/lettuce
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 1
+    yield: 1
+
+corn:
+  label: Corn
+  sprite: farmables/corn
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 72
+    yield: 2
+
+onion:
+  label: Onion
+  sprite: farmables/onion
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 30
+    yield: 1
+
+potato:
+  label: Potato
+  sprite: farmables/potato
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 60
+    yield: 2
+
+peas:
+  label: Peas
+  sprite: farmables/peas
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 42
+    yield: 1
+
+beans:
+  label: Beans
+  sprite: farmables/beans
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 54
+    yield: 1
+
+tomato:
+  label: Tomato
+  sprite: farmables/tomato
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 66
+    yield: 2
+
+wheat:
+  label: Wheat
+  sprite: farmables/wheat
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 96
+    yield: 3
+
+greenbean:
+  label: Greenbean
+  sprite: farmables/greenbean
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 45
+    yield: 1
+
+kale:
+  label: Kale
+  sprite: farmables/kale
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 33
+    yield: 1
+
+strawberry:
+  label: Strawberry
+  sprite: farmables/strawberry
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 78
+    yield: 2
+
+grapes:
+  label: Grapes
+  sprite: farmables/grapes
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 120
+    yield: 3
+
+pumpkin:
+  label: Pumpkin
+  sprite: farmables/pumpkin
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 144
+    yield: 1
+
+brocoli:
+  label: Brocoli
+  sprite: farmables/brocoli
+  renderPriority: CROP
+  animation:
+    model: FARMABLE
+  growable:
+    growthTime: 39
+    yield: 1
+

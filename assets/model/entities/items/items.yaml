@@ -1,0 +1,12 @@
+- assets/model/entities/items/resources.yaml
+- assets/model/entities/items/providers.yaml
+- assets/model/entities/items/storage.yaml
+- assets/model/entities/items/houses.yaml
+- assets/model/entities/items/tiled.yaml
+- assets/model/entities/items/ui.yaml
+- assets/model/entities/items/icons.yaml
+- assets/model/entities/items/scenery.yaml
+- assets/model/entities/items/tools.yaml
+- assets/model/entities/items/farmables.yaml
+- assets/model/entities/items/test.yaml
+- assets/model/entities/items/clothes.yaml

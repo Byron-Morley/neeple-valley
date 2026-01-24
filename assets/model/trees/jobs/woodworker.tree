@@ -1,0 +1,19 @@
+#
+# Wood Worker Tree
+#
+
+import CanICarryOutWork?:"com.liquidpixel.main.ai.behavior.leaves.conditions.CanICarryOutWork"
+import IsHarvestableItemAvailable?:"com.liquidpixel.main.ai.behavior.leaves.conditions.IsHarvestableItemAvailable"
+import DoesWorkshopNeedItemsHauled?:"com.liquidpixel.main.ai.behavior.leaves.conditions.DoesWorkshopNeedItemsHauled"
+import Harvest:"com.liquidpixel.main.ai.behavior.leaves.actions.Harvest"
+import Work:"com.liquidpixel.main.ai.behavior.leaves.actions.Work"
+import Haul:"com.liquidpixel.main.ai.behavior.leaves.actions.Haul"
+
+root
+  selector
+    sequence
+      (CanICarryOutWork?) Work
+    sequence
+      (DoesWorkshopNeedItemsHauled?) Haul
+    sequence
+      (IsHarvestableItemAvailable?) Harvest

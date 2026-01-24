@@ -1,0 +1,151 @@
+camera:
+  name: Camera
+  velocity: 50
+  player: true
+  camera: true
+  settlement: player
+
+ai:
+  settlement: ai
+
+population:
+  name: Population
+  worker: true
+  selectable: true
+  animation:
+    model: AGENT
+  velocity: 5
+  bodyModel: neep_body
+  layers:
+    - name: human
+      mod: 4
+    - name: longwavy
+      mod: 10
+    - name: shorts
+      mod: 10
+    - name: socks_low
+      mod: 10
+    - name: bra
+      mod: 10
+
+man:
+  name: Man
+  worker: true
+  selectable: true
+  animation:
+    model: AGENT
+  velocity: 5
+  bodyModel: neep_body
+  layers:
+    - name: human
+      mod: 4
+    - name: spiky_hair
+      mod: 4
+    - name: shorts
+      mod: 4
+    - name: short_shirt
+      mod: 6
+    - name: overalls
+      mod: 4
+    - name: shoes
+      mod: 4
+
+woman:
+  name: Population
+  worker: true
+  selectable: true
+  animation:
+    model: AGENT
+  velocity: 5
+  bodyModel: neep_body
+  layers:
+    - name: human
+      mod: 4
+    - name: longwavy
+      mod: 25
+    - name: shorts
+      mod: 14
+    - name: socks_low
+      mod: 14
+    - name: bra
+      mod: 14
+
+example:
+  name: Population
+  worker: true
+  selectable: true
+  animation:
+    model: AGENT
+  velocity: 5
+  bodyModel: neep_body
+  layers:
+    - name: human
+      mod: 8
+    - name: flattop
+      mod: 2
+    - name: glasses
+      mod: 4
+    - name: socks_high
+      mod: 1
+    - name: shoes
+      mod: 4
+    - name: shorts
+      mod: 12
+    - name: short_shirt
+      mod: 43
+
+
+aseprite:
+  name: Aseprite
+  worker: true
+  selectable: true
+  animation:
+    model: AGENT
+  velocity: 5
+  bodyModel: neep_body
+  layers:
+    - name: human
+      mod: 1
+    - name: cowboy_hat
+      mod: 1
+    - name: spiky2
+      mod: 32
+    - name: shades
+      mod: 4
+    - name: scarf
+      mod: 18
+    - name: tanktop
+      mod: 15
+    - name: gloves
+      mod: 4
+    - name: vest
+      mod: 19
+    - name: shorts
+      mod: 15
+    - name: socks_high
+      mod: 8
+    - name: shoes
+      mod: 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

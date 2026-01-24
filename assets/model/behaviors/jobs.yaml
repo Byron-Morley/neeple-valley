@@ -1,0 +1,14 @@
+crafter:
+  id: crafter
+
+hauler:
+  id: hauler
+
+builder:
+  id: builder
+
+storehouse-manager:
+  id: storehouse-manager
+
+worker:
+  id: worker

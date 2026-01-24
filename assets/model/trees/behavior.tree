@@ -1,0 +1,29 @@
+#
+# Behavior Tree
+#
+
+# Alias definitions
+
+
+
+import DoesFoundationNeedResources?:"com.liquidpixel.main.ai.behavior.leaves.conditions.DoesFoundationNeedResources"
+import CanIBuildSomething?:"com.liquidpixel.main.ai.behavior.leaves.conditions.CanIBuildSomething"
+import Build:"com.liquidpixel.main.ai.behavior.leaves.actions.Build"
+import Haul:"com.liquidpixel.main.ai.behavior.leaves.actions.Haul"
+import IsThisMyJob:"com.liquidpixel.main.ai.behavior.leaves.conditions.IsThisMyJobTask"
+import AttemptToGetAJob:"com.liquidpixel.main.ai.behavior.leaves.actions.AttemptToGetAJob"
+import Wait:"com.liquidpixel.main.tasks.leaves.actions.WaitTask"
+
+root
+  selector
+    AttemptToGetAJob
+    sequence
+      IsThisMyJob job:"crafter"
+      include subtree:"assets/model/trees/jobs/woodworker.tree" lazy:true
+    sequence
+      IsThisMyJob job:"storehouse-manager"
+      include subtree:"assets/model/trees/jobs/storehouse-manager.tree" lazy:true
+    sequence
+      (DoesFoundationNeedResources?) Haul
+    sequence
+      (CanIBuildSomething?) Build

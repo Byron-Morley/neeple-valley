@@ -1,0 +1,147 @@
+wood_log:
+  input: [ ]
+  output:
+    - name: resources/wood_log
+      quantity: 4
+  effort: 10
+
+stone:
+  input: [ ]
+  output:
+    - name: resources/stone
+      quantity: 4
+  effort: 10
+
+wood_cutter:
+  input:
+    - name: resources/wood_log
+      quantity: 20
+  output:
+    - name: providers/wood_cutter
+      quantity: 1
+  effort: 0
+
+stone_cutter:
+  input:
+    - name: resources/wood_log
+      quantity: 20
+  output:
+    - name: providers/stone_cutter
+      quantity: 1
+  effort: 0
+
+mining_crane:
+  input:
+    - name: resources/wood_log
+      quantity: 30
+  output:
+    - name: providers/mining_crane
+      quantity: 1
+  effort: 0
+
+warehouse:
+  input:
+    - name: resources/wood_log
+      quantity: 40
+    - name: resources/stone
+      quantity: 30
+  output:
+    - name: storage/warehouse
+      quantity: 1
+  effort: 0
+
+storage_group:
+  input: [ ]
+  output:
+    - name: storage/storage_group
+      quantity: 1
+  effort: 0
+
+storage_yard:
+  input:
+    - name: resources/wood_log
+      quantity: 10
+  output:
+    - name: storage/storage_yard
+      quantity: 1
+  effort: 0
+
+green_path:
+  input:
+    - name: resources/wood_log
+      quantity: 5
+  output:
+    - name: tiled/green_path
+      quantity: 1
+  effort: 0
+
+river:
+  input:
+    - name: resources/wood_log
+      quantity: 10
+  output:
+    - name: tiled/river
+      quantity: 1
+  effort: 0
+
+castle:
+  input:
+    - name: resources/stone
+      quantity: 100
+  output:
+    - name: tiled/castle
+      quantity: 1
+  effort: 0
+
+house:
+  input:
+    - name: resources/wood_log
+      quantity: 20
+  output:
+    - name: houses/house
+      quantity: 1
+  effort: 0
+
+farm:
+  input:
+    - name: resources/wood_log
+      quantity: 10
+  output:
+    - name: providers/farm
+      quantity: 1
+  effort: 0
+
+fence:
+  input: [ ]
+  output:
+    - name: tiled/fence
+      quantity: 1
+  effort: 0
+
+cobblestone:
+  input: [ ]
+  output:
+    - name: tiled/cobblestone
+      quantity: 1
+  effort: 0
+
+shallow-water:
+  input: [ ]
+  output:
+    - name: tiled/shallow-water
+      quantity: 1
+  effort: 0
+
+light-grass:
+  input: [ ]
+  output:
+    - name: tiled/light-grass
+      quantity: 1
+  effort: 0
+
+dark-grass:
+  input: [ ]
+  output:
+    - name: tiled/dark-grass
+      quantity: 1
+  effort: 0

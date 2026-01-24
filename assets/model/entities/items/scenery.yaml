@@ -1,0 +1,200 @@
+small-tree:
+  label: small-tree
+  bodyModel: small_tree
+  sprite: scenery/small-tree
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+medium-tree:
+  label: medium-tree
+  bodyModel: medium_tree
+  sprite: scenery/medium-tree
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+large-tree:
+  label: large-tree
+  bodyModel: body_1x2_custom
+  sprite: scenery/large-tree
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+big_rock:
+  label: big-rock
+  bodyModel: body_2x2
+  sprite: scenery/big-rock
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+large_rock:
+  label: large-rock
+  bodyModel: body_2x2
+  sprite: scenery/large-rock
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+leaves1:
+  label: leaves1
+  sprite: scenery/leaves1
+leaves2:
+  label: leaves2
+  sprite: scenery/leaves2
+leaves3:
+  label: leaves3
+  sprite: scenery/leaves3
+lily1:
+  label: lily1
+  sprite: scenery/lily1
+lily2:
+  label: lily2
+  sprite: scenery/lily2
+lily_pad1:
+  label: lily-pad1
+  sprite: scenery/lily_pad1
+lily_pad2:
+  label: lily-pad2
+  sprite: scenery/lily_pad2
+lily_pad3:
+  label: lily-pad3
+  sprite: scenery/lily_pad3
+lily_pad4:
+  label: lily-pad4
+  sprite: scenery/lily_pad4
+mushroom1:
+  label: mushroom1
+  sprite: scenery/mushroom1
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+mushroom2:
+  label: mushroom2
+  sprite: scenery/mushroom2
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+mushroom3:
+  label: mushroom3
+  sprite: scenery/mushroom3
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+mushroom4:
+  label: mushroom4
+  sprite: scenery/mushroom4
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+mushroom5:
+  label: mushroom5
+  sprite: scenery/mushroom5
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+mushroom6:
+  label: mushroom6
+  sprite: scenery/mushroom6
+  harvestInformation:
+    recipe: mushroom
+    tool: tools/sickle
+plant1:
+  label: plant1
+  sprite: scenery/plant1
+  harvestInformation:
+    recipe: herb
+    tool: tools/sickle
+plant2:
+  label: plant2
+  sprite: scenery/plant2
+  harvestInformation:
+    recipe: herb
+    tool: tools/sickle
+rock1:
+  label: rock1
+  sprite: scenery/rock1
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+rock2:
+  label: rock2
+  sprite: scenery/rock2
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+rock3:
+  label: rock3
+  sprite: scenery/rock3
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+rock4:
+  label: rock4
+  sprite: scenery/rock4
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+rock5:
+  label: rock5
+  sprite: scenery/rock5
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+rock6:
+  label: rock6
+  sprite: scenery/rock6
+  harvestInformation:
+    recipe: stone
+    tool: tools/pickaxe
+sticks1:
+  label: sticks1
+  sprite: scenery/sticks1
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+sticks2:
+  label: sticks2
+  sprite: scenery/sticks2
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+sticks3:
+  label: sticks3
+  sprite: scenery/sticks3
+  harvestInformation:
+    recipe: wood_log
+    tool: tools/axe
+broken-tree-trunk:
+  label: Broken-Tree-Trunk
+  sprite: scenery/broken-tree-trunk
+bush-bare:
+  label: Bush-Bare
+  sprite: scenery/bush-bare
+bush-fruit:
+  label: Bush-Fruit
+  sprite: scenery/bush-fruit
+felled-broken-tree-trunk:
+  label: Felled-Broken-Tree-Trunk
+  sprite: scenery/felled-broken-tree-trunk
+large-lily:
+  label: Large-Lily
+  sprite: scenery/large-lily
+medium-rock:
+  label: Medium-Rock
+  sprite: scenery/medium-rock
+medium-water-rock:
+  label: Medium-Water-Rock
+  sprite: scenery/medium-water-rock
+small-bush-bare:
+  label: Small-Bush-Bare
+  sprite: scenery/small-bush-bare
+small-bush-fruit:
+  label: Small-Bush-Fruit
+  sprite: scenery/small-bush-fruit
+big-rock:
+  label: Big-Rock
+  sprite: scenery/big-rock
+large-rock:
+  label: Large-Rock
+  sprite: scenery/large-rock
+tall-grass:
+  label: Tall-Grass
+  sprite: scenery/tall-grass

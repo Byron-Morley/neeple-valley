@@ -1,0 +1,50 @@
+fence:
+  label: Wooden Fence
+  sprite: fence
+  dontSave: true
+  render: false
+  bodyModel: fence
+  tileset:
+    region: fence
+  animation:
+    enabled: false
+
+cobblestone:
+  label: Cobblestone
+  sprite: summer-default/terrain
+  dontSave: true
+  render: false
+  costModifier: -0.5f
+  bodyModel: path
+
+dirt:
+  label: Dirt
+  sprite: summer-default/terrain
+  dontSave: true
+  render: false
+  costModifier: -0.5f
+  bodyModel: path
+
+shallow-water:
+  label: Water
+  sprite: summer-default/terrain
+  dontSave: true
+  render: false
+  costModifier: -0.5f
+  bodyModel: path
+
+light-grass:
+  label: Grass
+  sprite: summer-default/terrain
+  dontSave: true
+  render: false
+  costModifier: -0.5f
+  bodyModel: path
+
+dark-grass:
+  label: Drak Grass
+  sprite: summer-default/terrain
+  dontSave: true
+  render: false
+  costModifier: -0.5f
+  bodyModel: path

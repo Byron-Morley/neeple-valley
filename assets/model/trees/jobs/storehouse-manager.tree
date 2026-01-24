@@ -1,0 +1,18 @@
+#
+# Storehouse Manager Tree
+#
+
+import CanIBuildSomething?:"com.liquidpixel.main.ai.behavior.leaves.conditions.CanIBuildSomething"
+import DoesWorkshopNeedItemsHauled?:"com.liquidpixel.main.ai.behavior.leaves.conditions.DoesWorkshopNeedItemsHauled"
+import DoesFoundationNeedResources?:"com.liquidpixel.main.ai.behavior.leaves.conditions.DoesFoundationNeedResources"
+import Haul:"com.liquidpixel.main.ai.behavior.leaves.actions.Haul"
+import Build:"com.liquidpixel.main.ai.behavior.leaves.actions.Build"
+
+root
+  selector
+    sequence
+      (DoesFoundationNeedResources?) Haul
+    sequence
+      (CanIBuildSomething?) Build
+    sequence
+      (DoesWorkshopNeedItemsHauled?) Haul

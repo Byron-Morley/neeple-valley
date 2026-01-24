@@ -1,0 +1,13 @@
+[
+  "assets/sprites/items/16x16_items.atlas",
+  "assets/sprites/items/16x32_items.atlas",
+  "assets/sprites/items/32x32_items.atlas",
+  "assets/sprites/items/64x64_items.atlas",
+  "assets/sprites/items/128x128_items.atlas",
+  "assets/sprites/items/large_items.atlas",
+  "assets/sprites/body/body.atlas",
+  "assets/sprites/terrain/16x16_terrain.atlas",
+  "assets/sprites/tiles/16x16_tiles.atlas",
+  "assets/sprites/icons/icons.atlas",
+  "assets/sprites/icons/64x64_icon.atlas"
+]

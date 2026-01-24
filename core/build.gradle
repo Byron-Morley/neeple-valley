@@ -1,0 +1,85 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.javamodularity.moduleplugin' version '1.8.15'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
+  id 'org.beryx.jlink' version '2.25.0'
+}
+
+javafx {
+  version = '20.0.1'
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+application {
+  applicationDefaultJvmArgs = ['--add-exports=javafx.base/com.sun.javafx.collections=ALL-UNNAMED']
+}
+
+repositories {
+  maven {
+    url = uri("https://maven.pkg.github.com/Byron-Morley/core")
+    credentials {
+      username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+      password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+    }
+  }
+  maven {
+    url = uri("https://maven.pkg.github.com/Byron-Morley/sprite")
+    credentials {
+      username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+      password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+    }
+  }
+  maven {
+    url = uri("https://maven.pkg.github.com/Byron-Morley/procgen")
+    credentials {
+      username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+      password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+    }
+  }
+  maven {
+    name = "GitHubPackages"
+    url = uri("https://maven.pkg.github.com/Byron-Morley/blu-e")
+    credentials {
+      username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+      password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+    }
+  }
+  mavenCentral()
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+dependencies {
+  api "com.badlogicgames.ashley:ashley:$ashleyVersion"
+  api "com.badlogicgames.box2dlights:box2dlights:$box2dlightsVersion"
+  api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+  api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  api "com.github.tommyettinger:digital:$digitalVersion"
+  api "com.github.tommyettinger:juniper:$juniperVersion"
+  api "com.strongjoshua:libgdx-inGameConsole:$inGameConsoleVersion"
+  api "com.sudoplay.joise:joise:$joiseVersion"
+  api 'com.github.raeleus.TenPatch:tenpatch:5.2.3'
+  api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+  api "com.kotcrab.vis:vis-ui:$visUiVersion"
+
+  implementation "com.liquidpixel:core:$core"
+  implementation "com.liquidpixel:sprite:$sprite"
+  implementation "com.liquidpixel:procgen:$procgen"
+  implementation "com.liquidpixel:blu-e:$blue"
+
+
+
+  testImplementation "junit:junit:4.13"
+  implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.0'
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.5'
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.5'
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.5'
+//  testImplementation project(path: ':headless')
+//  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+//  testImplementation 'org.mockito:mockito-core:4.2.0'
+//  testImplementation 'org.mockito:mockito-testng:0.5.2'
+//  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+}

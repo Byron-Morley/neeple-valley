@@ -1,0 +1,50 @@
+storage_group:
+  label: Storage Group
+  sprite: ui/blue_tint
+  storage:
+    group: true
+    priority: 1
+    slots: 0
+  spawnConfig: area
+  renderPriority: FLOOR_UI
+
+invisible_storage:
+  label: Storage Space
+  clickBehavior: storage_window
+  sprite: ui/blank
+  storage:
+    tile: true
+    priority: 0
+  renderPriority: FLOOR_RESOURCE
+
+carry_storage:
+  label: Storage Space
+  sprite: ui/blank
+
+5x5_storage_space:
+  label: 5x5 Storage Space
+  storage:
+    slots: 25
+    groundSpace: true
+  render: false
+  gridInformation:
+    width: 5
+    height: 5
+    color:
+      r: 0f
+      g: 0f
+      b: 0f
+      a: 0.2f
+    cellSize: 1f
+    showInvalidTiles: false
+
+warehouse:
+  label: Warehouse
+  sprite: workshops/storehouse
+  clickBehavior: storage_window
+  jobs: 1
+  bodyModel: custom_house_body_3
+  storage:
+    slots: 4
+    workshop: true
+    priority: 2

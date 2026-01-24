@@ -1,0 +1,30 @@
+wood:
+  label: Wood Log
+  sprite: resources/wood_log_spring
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 4
+    stackSize: 20
+  clickBehavior: resource_info
+stone:
+  label: Stone
+  sprite: resources/rock
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 4
+    stackSize: 20
+  clickBehavior: resource_info
+iron:
+  label: Stone
+  sprite: resources/rock
+  information:
+    text: This is Information.
+  resourceInformation:
+    harvestTime: 1
+    yield: 4
+    stackSize: 20
+  clickBehavior: resource_info

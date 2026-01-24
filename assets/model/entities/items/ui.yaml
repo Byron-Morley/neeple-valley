@@ -1,0 +1,62 @@
+selection_top_right:
+  label: ui/selection_top_right
+  sprite: ui/selection_top_right
+selection_bottom_right:
+  label: ui/selection_bottom_right
+  sprite: ui/selection_bottom_right
+selection_bottom_left:
+  label: ui/selection_bottom_left
+  sprite: ui/selection_bottom_left
+selection_top_left:
+  label: ui/selection_top_left
+  sprite: ui/selection_top_left
+ghost:
+  label: ghost
+  sprite: ui/selection_opaque
+  renderPriority: UI
+cross:
+  label: remove
+  sprite: ui/cross
+  renderPriority: UI
+blank:
+  label: Blank
+  sprite: ui/blank
+blue_tint:
+  label: Blue Tint
+  sprite: ui/blue_tint
+bomb:
+  label: Bomb
+  sprite: ui/bomb
+count_overlay:
+  label: Count Overlay
+  sprite: ui/count_overlay
+cyan_tint:
+  label: Cyan Tint
+  sprite: ui/cyan_tint
+green_tint:
+  label: Green Tint
+  sprite: ui/green_tint
+peach_tint:
+  label: Peach Tint
+  sprite: ui/peach_tint
+pink_tint:
+  label: Pink Tint
+  sprite: ui/pink_tint
+red_tint:
+  label: Red Tint
+  sprite: ui/red_tint
+selection_green:
+  label: Selection Green
+  sprite: ui/selection_green
+selection_opaque:
+  label: Selection Opaque
+  sprite: ui/selection_opaque
+selection_red:
+  label: Selection Red
+  sprite: ui/selection_red
+yellow_tint:
+  label: Yellow Tint
+  sprite: ui/yellow_tint
+circle:
+  label: Circle
+  sprite: ui/circle

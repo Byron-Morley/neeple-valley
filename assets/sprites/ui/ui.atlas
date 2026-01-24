@@ -1,0 +1,40 @@
+
+ui.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+liquid-logo-md
+  rotate: false
+  xy: 641, 574
+  size: 319, 407
+  orig: 319, 407
+  offset: 0, 0
+  index: -1
+liquid-logo-sm
+  rotate: false
+  xy: 2, 2
+  size: 127, 163
+  orig: 127, 163
+  offset: 0, 0
+  index: -1
+liquid-pixel-logo
+  rotate: false
+  xy: 2, 167
+  size: 637, 814
+  orig: 637, 814
+  offset: 0, 0
+  index: -1
+
+ui2.png
+size: 1024, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+logo
+  rotate: false
+  xy: 2, 2
+  size: 674, 421
+  orig: 674, 421
+  offset: 0, 0
+  index: -1

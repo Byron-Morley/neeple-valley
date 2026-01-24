@@ -1,0 +1,32 @@
+population:
+  label: Population
+  sprite: icons/population
+  colonyResource: true
+  dontSave: true
+jobs:
+  label: Jobs
+  sprite: icons/jobs
+  colonyResource: true
+  dontSave: true
+housing:
+  label: Housing
+  sprite: icons/housing
+  colonyResource: true
+  dontSave: true
+food:
+  label: Food
+  sprite: icons/food
+  colonyResource: true
+  dontSave: true
+cross:
+  label: Cross
+  sprite: cross-mark
+load:
+  label: Load
+  sprite: icons/load
+population1:
+  label: Population1
+  sprite: icons/population1
+save:
+  label: Save
+  sprite: icons/save
