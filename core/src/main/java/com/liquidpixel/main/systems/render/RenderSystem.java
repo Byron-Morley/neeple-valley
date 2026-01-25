@@ -25,9 +25,6 @@ import com.liquidpixel.main.utils.Mappers;
 
 import java.util.*;
 
-/**
- * A custom SortedIteratingSystem that handles entity rendering with optimized performance.
- */
 public class RenderSystem extends CachedSortedIteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<RenderComponent> rm = Mappers.render;

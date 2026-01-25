@@ -2,7 +2,6 @@ package com.liquidpixel.main.components.render;
 
 
 import com.badlogic.gdx.graphics.Color;
-import com.liquidpixel.main.renderposition.DefaultRenderPositionStrategyImpl;
 import com.liquidpixel.main.renderposition.RenderPositionStrategy;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.main.model.RenderPriority;
@@ -11,8 +10,6 @@ import com.liquidpixel.sprite.api.component.IRenderComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 
 public class RenderComponent implements IRenderComponent {
@@ -36,35 +33,6 @@ public class RenderComponent implements IRenderComponent {
     @JsonIgnore
     private RenderPositionStrategy renderPositionStrategy;
 
-    @JsonProperty
-    List<String> spriteNames;
-
-    @JsonCreator
-    public RenderComponent(
-        @JsonProperty("spriteNames") List<String> spriteNames,
-        @JsonProperty("priority") RenderPriority priority,
-        @JsonProperty("width") int width,
-        @JsonProperty("height") int height,
-        @JsonProperty("color") Color color,
-        @JsonProperty("renderPositionStrategyType") String renderPositionStrategyType) {
-
-        this.sprites = new ArrayList<>();
-        this.spriteNames = spriteNames;
-        this.priority = priority;
-        this.width = width;
-        this.height = height;
-        this.color = (color != null) ? color : new Color(Color.WHITE);
-        this.renderPositionStrategy = createStrategy(renderPositionStrategyType);
-    }
-
-    private RenderPositionStrategy createStrategy(String strategyType) {
-        try {
-            return (RenderPositionStrategy) Class.forName(strategyType).getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            return new DefaultRenderPositionStrategyImpl();
-        }
-    }
-
     public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority, Color color) {
         this.sprites = new ArrayList<>();
         this.renderPositionStrategy = renderPositionStrategy;
@@ -76,6 +44,13 @@ public class RenderComponent implements IRenderComponent {
         this.sprites = new ArrayList<>();
         this.renderPositionStrategy = renderPositionStrategy;
         this.priority = priority;
+    }
+
+    public RenderComponent(GameSprite sprite, RenderPositionStrategy renderPositionStrategy, RenderPriority priority) {
+        this.sprites = new ArrayList<>();
+        this.renderPositionStrategy = renderPositionStrategy;
+        this.priority = priority;
+        setSprite(sprite);
     }
 
     public List<GameSprite> getSprites() {
@@ -102,6 +77,11 @@ public class RenderComponent implements IRenderComponent {
         this.sprites.add(sprite);
     }
 
+    @Override
+    public boolean hasSprites() {
+        return !sprites.isEmpty();
+    }
+
     public int getWidth() {
         return width;
     }
@@ -118,26 +98,6 @@ public class RenderComponent implements IRenderComponent {
         this.height = height;
     }
 
-    @JsonProperty
-    public List<String> getSpriteNames() {
-        return sprites.stream()
-            .map(sprite -> ((GameSprite) sprite).getSpriteName())
-            .collect(Collectors.toList());
-    }
-
-    @JsonProperty("color")
-    public Color getSerializedColor() {
-        if (color.equals(new Color(1, 1, 1, 1))) {
-            return null;
-        }
-        return color;
-    }
-
-    @JsonProperty
-    private String getRenderPositionStrategyType() {
-        return renderPositionStrategy.getClass().getName();
-    }
-
     public void setRenderPositionStrategy(RenderPositionStrategy renderPositionStrategy) {
         this.renderPositionStrategy = renderPositionStrategy;
     }
@@ -148,7 +108,6 @@ public class RenderComponent implements IRenderComponent {
 
     @Override
     public void setSprite(GameSprite sprite) {
-        spriteNames.clear();
         this.sprites.add(sprite);
     }
 

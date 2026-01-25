@@ -46,6 +46,9 @@ public class SelectionScenario extends Scenario implements IScenario {
 
     @Override
     public void start() {
+
+        new ScenarioBuilder().build(worldMap, mapService);
+
         Entity person = agentService.spawnAgent(new GridPoint2(12, 12), "population");
         trackEntity(person);
 
@@ -79,8 +82,8 @@ public class SelectionScenario extends Scenario implements IScenario {
 //        person.add(shaderComponent);
 
 
-//        Entity building = itemService.getItem("ui/circle").build();
-//        itemService.spawnItem(building, new GridPoint2(16, 16));
+        Entity building = itemService.getItem("ui/circle").build();
+        itemService.spawnItem(building, new GridPoint2(16, 16));
 
 
         // Spawn a building

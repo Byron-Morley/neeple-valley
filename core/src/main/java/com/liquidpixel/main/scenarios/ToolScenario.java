@@ -2,6 +2,8 @@ package com.liquidpixel.main.scenarios;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.GridPoint2;
+import com.liquidpixel.core.core.Status;
+import com.liquidpixel.main.components.agent.AgentComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.components.tasks.FishingComponent;
 import com.liquidpixel.main.interfaces.IScenario;
@@ -10,23 +12,43 @@ import com.liquidpixel.main.interfaces.ScenarioState;
 import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
+import com.liquidpixel.sprite.api.services.IAnimationService;
+import com.liquidpixel.sprite.services.AnimationService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-public class ActionScenario extends Scenario implements IScenario {
+public class ToolScenario extends Scenario implements IScenario {
 
-    public ActionScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                          ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
+    Entity agent;
+    IAnimationService animationService;
+
+    public ToolScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
+                        ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
         super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
     }
 
     @Override
     public void start() {
-        System.out.println("TaskScenario started");
-        new ScenarioBuilder().withRiver().build(worldMap, mapService);
+        System.out.println("ExampleScenario started");
+        new ScenarioBuilder().build(worldMap, mapService);
+
+        agent = agentService.spawnAgent(new GridPoint2(16, 16), "man");
+        trackEntity(agent);
+
+        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+        settlement.addPopulation(agent);
+        animationService = new AnimationService(agent);
+
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onFrameChanged(int frameIndex, boolean isFinished) {
+                System.out.println("Frame changed: " + frameIndex);
+                if (isFinished) animationService.setIdle();
+            }
+        });
     }
 
     @Override
@@ -38,8 +60,7 @@ public class ActionScenario extends Scenario implements IScenario {
     @Override
     public List<ScenarioState> getAvailableStates() {
         return Arrays.asList(
-            new ScenarioState("fishing", "Fishing"),
-            new ScenarioState("advanced", "Advanced State")
+            new ScenarioState("fishing", "Fishing")
         );
     }
 
@@ -65,16 +86,24 @@ public class ActionScenario extends Scenario implements IScenario {
     }
 
     public void fishing() {
-        System.out.println("Loading fishing state...");
 
-        Entity person = agentService.spawnAgent(new GridPoint2(16, 16), "man");
-        trackEntity(person);
+        //get the correct tool
+        Entity toolEntity = itemService.getItem("tools/rod").build();
+        itemService.spawnItem(toolEntity, new GridPoint2(-300, -300));
+        Mappers.equipment.get(agent).addEquipment(toolEntity);
 
-        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
-        settlement.addPopulation(person);
+        //equip the tool
+        AgentComponent agentComponent = Mappers.agent.get(agent);
+        agentComponent.setEquipped(toolEntity);
 
-        person.add(new FishingComponent());
 
+        Entity item = itemService.getItem("resources/corn").build();
+        itemService.spawnItem(item, new GridPoint2(10, 10));
+
+
+
+        animationService.setAnimation(new Status("CAST_DOWN"));
+        System.out.println("Fishing State loaded - Agent positioned to fish");
     }
 
     public void advanced() {

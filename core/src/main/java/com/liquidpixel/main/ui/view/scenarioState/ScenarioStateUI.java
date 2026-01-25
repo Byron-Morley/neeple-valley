@@ -17,7 +17,9 @@ import com.liquidpixel.main.ui.common.ReuseableWindow;
 import com.liquidpixel.main.ui.view.common.ScrollPanelUI;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.liquidpixel.main.screens.WorldScreen.UI_SCALE;
 
@@ -109,33 +111,53 @@ public class ScenarioStateUI extends ReuseableWindow implements IGet<Group>, Upd
     }
 
     private void buildStateTree(List<ScenarioState> availableStates) {
-        ArrayList<String> menusAdded = new ArrayList<>();
+        Map<String, List<ScenarioState>> groupedStates = new LinkedHashMap<>();
 
+        // Group states by menu category
         for (ScenarioState state : availableStates) {
             String displayName = state.getDisplayName();
             String[] parts = displayName.split(" ");
             String menu = parts[0];
-            String nodeText = parts.length > 1 ? displayName.substring(menu.length() + 1) : displayName;
 
-            ClickListener clickListener = new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Clicked on " + state.getDisplayName());
-                    loadScenarioState(state.getId());
-                }
-            };
-
-            MenuNode menuNode;
-            if (menusAdded.contains(menu)) {
-                menuNode = (MenuNode) tree.findNode(menu);
-            } else {
-                menusAdded.add(menu);
-                menuNode = new MenuNode(menu);
-                tree.add(menuNode);
+            if (!groupedStates.containsKey(menu)) {
+                groupedStates.put(menu, new ArrayList<>());
             }
-
-            menuNode.add(new Node(nodeText, clickListener));
+            groupedStates.get(menu).add(state);
         }
+
+        // Build tree
+        for (Map.Entry<String, List<ScenarioState>> entry : groupedStates.entrySet()) {
+            String menuName = entry.getKey();
+            List<ScenarioState> states = entry.getValue();
+
+            if (states.size() == 1) {
+                // Single item - add as direct node
+                ScenarioState state = states.get(0);
+                tree.add(createNode(state.getDisplayName(), state));
+            } else {
+                // Multiple items - add dropdown
+                MenuNode menuNode = new MenuNode(menuName);
+                tree.add(menuNode);
+
+                for (ScenarioState state : states) {
+                    String displayName = state.getDisplayName();
+                    String nodeText = displayName.startsWith(menuName + " ")
+                            ? displayName.substring(menuName.length() + 1)
+                            : displayName;
+                    menuNode.add(createNode(nodeText, state));
+                }
+            }
+        }
+    }
+
+    private Node createNode(String text, ScenarioState state) {
+        return new Node(text, new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Clicked on " + state.getDisplayName());
+                loadScenarioState(state.getId());
+            }
+        });
     }
 
     private void addGenericResetButton() {

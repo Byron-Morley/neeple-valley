@@ -20,12 +20,20 @@ import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.api.models.IAnimationDefinition;
 import com.liquidpixel.sprite.api.models.IRamp;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class ItemFactory {
 
     ISpriteComponentFactory spriteComponentFactory;
     IAnimationFactory animationFactory;
+    ISpriteFactory spriteFactory;
 
     static Map<String, Item> models;
     static Map<String, IRecipe> recipes;
@@ -42,8 +50,12 @@ public class ItemFactory {
         models = ModelFactory.getItemsModel();
         recipes = ModelFactory.getRecipesModel(models, spriteFactory);
         bodies = ModelFactory.getBodyOffsetModel();
+
         this.spriteComponentFactory = spriteComponentFactory;
         this.animationFactory = animationFactory;
+        this.spriteFactory = spriteFactory;
+
+        updateAvailableItemsFile();
     }
 
     public ItemBuilder getItem(String name) {
@@ -84,7 +96,7 @@ public class ItemFactory {
     }
 
     private ItemBuilder buildItem(Item model, int quantity) {
-        ItemBuilder itemBuilder = new ItemBuilder(model.getName(), quantity, spriteComponentFactory);
+        ItemBuilder itemBuilder = new ItemBuilder(model.getName(), quantity, spriteComponentFactory, spriteFactory);
 
         try {
             if (model.getAnimation().isEnabled()) {
@@ -338,7 +350,7 @@ public class ItemFactory {
         String id = setId(name);
         Item model = models.get(name);
 
-        ItemBuilder itemBuilder = new ItemBuilder(name, 1, spriteComponentFactory);
+        ItemBuilder itemBuilder = new ItemBuilder(name, 1, spriteComponentFactory, spriteFactory);
         itemBuilder.withInvisibleRender(model.getSpriteName());
         itemBuilder.withFoundation();
 
@@ -360,7 +372,7 @@ public class ItemFactory {
         String id = setId(name);
         Item model = models.get(name);
 
-        ItemBuilder itemBuilder = new ItemBuilder(name, 1, spriteComponentFactory);
+        ItemBuilder itemBuilder = new ItemBuilder(name, 1, spriteComponentFactory, spriteFactory);
 
         if (model.hasBody()) {
             itemBuilder.withFoundationBody(model.getBodyModel());
@@ -380,7 +392,7 @@ public class ItemFactory {
         String id = setId(name);
         Item model = models.get(name);
 
-        return new ItemBuilder(name, 1, spriteComponentFactory).isLayer(model, ramp);
+        return new ItemBuilder(name, 1, spriteComponentFactory,spriteFactory).isLayer(model, ramp);
     }
 
     private String setId(String name) {
@@ -391,8 +403,41 @@ public class ItemFactory {
         String id = setId(name);
         Item model = models.get(name);
 
-        return new ItemBuilder(name, quantity, spriteComponentFactory)
+        return new ItemBuilder(name, quantity, spriteComponentFactory,spriteFactory)
             .withGhostRender(model.getSpriteName());
+    }
+
+    private void updateAvailableItemsFile() {
+        File file = new File("available_items.txt");
+        int currentCount = models.size();
+
+        if (file.exists()) {
+            try (Scanner scanner = new Scanner(file)) {
+                if (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (line.startsWith("Count: ")) {
+                        try {
+                            int savedCount = Integer.parseInt(line.substring(7).trim());
+                            if (savedCount == currentCount) return;
+                        } catch (NumberFormatException ignored) {
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading available_items.txt: " + e.getMessage());
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write("Count: " + currentCount + "\n");
+            List<String> sortedKeys = new ArrayList<>(models.keySet());
+            Collections.sort(sortedKeys);
+            for (String key : sortedKeys) {
+                writer.write(key + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing available_items.txt: " + e.getMessage());
+        }
     }
 
     public static Map<String, Item> getModels() {

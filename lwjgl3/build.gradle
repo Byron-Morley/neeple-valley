@@ -20,8 +20,8 @@ apply plugin: 'io.github.fourlastor.construo'
 import io.github.fourlastor.construo.Target
 
 sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
-application.mainClass = 'com.liquidpixel.lwjgl3.Lwjgl3Launcher'
-application.applicationName = appName
+def mainClassName = 'com.liquidpixel.lwjgl3.LaunchScenarioEditor'
+application.setMainClass(mainClassName)
 eclipse.project.name = appName + '-lwjgl3'
 java.sourceCompatibility = 17
 java.targetCompatibility = 17
@@ -45,7 +45,7 @@ dependencies {
   implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
   implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
   implementation project(':core')
-  implementation("com.badlogicgames.gdx:gdx-tools:$gdxVersion"){exclude group: 'com.badlogicgames.gdx', module: 'gdx-backend-lwjgl'}
+  compileOnly "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-backend-lwjgl3:$graalHelperVersion"
@@ -191,4 +191,12 @@ startScripts.classpath = project.tasks.jar.outputs.files
 
 if(enableGraalNative == 'true') {
   apply from: file("nativeimage.gradle")
+}
+
+tasks.withType(JavaExec).configureEach {
+  doFirst {
+    println "=== JavaExec PID ==="
+    println java.lang.management.ManagementFactory.runtimeMXBean.name
+    println "JVM args: $jvmArgs"
+  }
 }

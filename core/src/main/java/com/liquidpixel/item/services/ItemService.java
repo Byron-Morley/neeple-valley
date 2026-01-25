@@ -145,7 +145,6 @@ public class ItemService extends Service implements IItemService {
         return getList(getEngine().getEntitiesFor(Family.all(PositionComponent.class, ItemComponent.class, PickupableComponent.class).get()));
     }
 
-
     @Override
     public ItemBuilder getItem(String name, int quantity) {
         return itemManager.getItemFactory().getItem(name, quantity);

@@ -46,6 +46,7 @@ import com.liquidpixel.main.systems.farming.GrowSystem;
 import com.liquidpixel.main.systems.inits.BuildingDoorInitSystem;
 import com.liquidpixel.main.systems.inits.BuildingInitSystem;
 import com.liquidpixel.main.systems.inits.ClickBehaviorInitSystem;
+import com.liquidpixel.main.systems.tasks.FishingSystem;
 import com.liquidpixel.main.ui.view.scenario.ScenarioSelectionUI;
 import com.liquidpixel.main.ui.view.agent.AgentUI;
 import com.liquidpixel.main.ui.view.items.ItemsUI;
@@ -330,9 +331,9 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new TileRenderSystem(itemManager.getItemService()));
         engine.addSystem(new TileSelectionRenderSystem(itemManager.getItemService(), selectionManager.getSelectionService(), mapManager.getMapService().getWorldMap()));
 
-        engine.addSystem(new RenderSystem());
+//        engine.addSystem(new RenderSystem());
         engine.addSystem(new ShapeRenderSystem());
-//        engine.addSystem(new BatchedRenderSystem());
+        engine.addSystem(new BatchedRenderSystem());
 
 
         engine.addSystem(new DebugRenderSystem((MapGraph) mapManager.getWorldMap()));
@@ -369,6 +370,9 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
 
         engine.addSystem(new EnterDoorSystem());
         engine.addSystem(new ExitDoorSystem());
+        engine.addSystem(new FishingSystem());
+
+
     }
 
     public void initializeGame() {

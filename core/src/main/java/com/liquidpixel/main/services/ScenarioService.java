@@ -39,15 +39,17 @@ public class ScenarioService implements IScenarioService {
     }
 
     private void initializeScenarioRegistry() {
-        scenarioClasses.put("ActionScenario", ActionScenario.class);
+        scenarioClasses.put("TaskScenario", TaskScenario.class);
+        scenarioClasses.put("ToolScenario", ToolScenario.class);
+        scenarioClasses.put("AnimationScenario", AnimationScenario.class);
+//        scenarioClasses.put("Selection", SelectionScenario.class);
+//        scenarioClasses.put("Haul", HaulScenario.class);
 //        scenarioClasses.put("ProcGenScenario", ProcGenScenario.class);
 //        scenarioClasses.put("DoorScenario", DoorScenario.class);
 //        scenarioClasses.put("BuildingScenario", BuildingScenario.class);
 //        scenarioClasses.put("FarmingScenario", FarmingScenario.class);
 //        scenarioClasses.put("AgentColorScenario", AgentColorScenario.class);
 //        scenarioClasses.put("WoodCutter", WoodCutterScenario.class);
-//        scenarioClasses.put("Selection", SelectionScenario.class);
-//        scenarioClasses.put("Haul", HaulScenario.class);
     }
 
     @Override

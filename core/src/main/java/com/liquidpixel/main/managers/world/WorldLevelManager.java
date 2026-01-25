@@ -50,6 +50,11 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
+        Entity agent = agentService.spawnAgent(new GridPoint2(11, 11), "man");
+        Entity item = itemService.getItem("scenery/medium-water-rock").build();
+        itemService.spawnItem(item, new GridPoint2(10, 10));
+
+        System.out.println("World Level Manager Initialized - Agent positioned to water");
 //        Entity person1 = agentService.spawnAgent(new GridPoint2(32, 32), "population");
 
 

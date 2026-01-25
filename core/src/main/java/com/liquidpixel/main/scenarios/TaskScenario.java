@@ -1,9 +1,14 @@
 package com.liquidpixel.main.scenarios;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.GridPoint2;
+import com.liquidpixel.main.components.items.SettlementComponent;
+import com.liquidpixel.main.components.tasks.FishingComponent;
 import com.liquidpixel.main.interfaces.IScenario;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.ScenarioState;
 import com.liquidpixel.main.interfaces.services.*;
+import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
 
 import java.lang.reflect.InvocationTargetException;
@@ -11,29 +16,33 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExampleScenario extends Scenario implements IScenario {
+/**
+ * Example scenario showing how to implement custom states
+ * This scenario doesn't actually do anything, it's just a template
+ */
+public class TaskScenario extends Scenario implements IScenario {
 
-    public ExampleScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                           ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
+    public TaskScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
+                        ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
         super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
     }
 
     @Override
     public void start() {
-        // Basic scenario setup
-        System.out.println("ExampleScenario started");
+        System.out.println("TaskScenario started");
+        new ScenarioBuilder().withRiver().build(worldMap, mapService);
     }
 
     @Override
     public void reset() {
         clearAllSpawnedEntities();
-        System.out.println("ExampleScenario reset");
+        System.out.println("TaskScenario reset");
     }
 
     @Override
     public List<ScenarioState> getAvailableStates() {
         return Arrays.asList(
-            new ScenarioState("basic", "Basic State"),
+            new ScenarioState("fishing", "Fishing"),
             new ScenarioState("advanced", "Advanced State")
         );
     }
@@ -59,12 +68,20 @@ public class ExampleScenario extends Scenario implements IScenario {
         return false;
     }
 
-    private void basic() {
-        System.out.println("Loading basic state...");
-        // Add basic entities here
+    public void fishing() {
+        System.out.println("Loading fishing state...");
+
+        Entity person = agentService.spawnAgent(new GridPoint2(16, 16), "man");
+        trackEntity(person);
+
+        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+        settlement.addPopulation(person);
+
+        person.add(new FishingComponent());
+
     }
 
-    private void advanced() {
+    public void advanced() {
         System.out.println("Loading advanced state...");
         // Add more complex setup here
     }

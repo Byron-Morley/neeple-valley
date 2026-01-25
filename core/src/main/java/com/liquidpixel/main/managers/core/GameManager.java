@@ -13,5 +13,6 @@ public class GameManager implements LevelManager{
     }
 
     public void init() {
+        System.out.println("GameManager initialized");
     }
 }

@@ -31,6 +31,7 @@ import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.item.components.RefreshItemBuildComponent;
 import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
+import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.api.models.IAnimationDefinition;
 import com.liquidpixel.sprite.api.models.IRamp;
 import com.liquidpixel.sprite.components.AnimableSpriteComponent;
@@ -41,13 +42,15 @@ import com.liquidpixel.sprite.components.StackedSpritesComponent;
 public class ItemBuilder {
     private Entity entity;
     private ISpriteComponentFactory animationComponentFactory;
+    ISpriteFactory spriteFactory;
 
-    public ItemBuilder(String name, int quantity, ISpriteComponentFactory animationComponentFactory) {
+    public ItemBuilder(String name, int quantity, ISpriteComponentFactory animationComponentFactory, ISpriteFactory spriteFactory) {
         this.entity = new Entity()
             .add(new ItemComponent(name, quantity))
             .add(new RefreshItemBuildComponent()
             );
         this.animationComponentFactory = animationComponentFactory;
+        this.spriteFactory = spriteFactory;
     }
 
     public ItemBuilder isLayer(Item item) {
@@ -82,9 +85,9 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withAnimations(RenderPositionStrategy renderPositionStrategy, IAnimationDefinition animationDefinition, String spriteName, RenderPriority renderPriority) {
-        entity.add(new RenderComponent(renderPositionStrategy, renderPriority))
+        entity.add(new RenderComponent(spriteFactory.getSprite(spriteName), renderPositionStrategy, renderPriority))
             .add(new StatusComponent(Action.IDLE, Direction.NONE))
-            .add(new SpriteComponent(spriteName))
+            .add(new SpriteComponent.Builder(spriteName).build())
             .add(animationComponentFactory.createSpriteStackBuilderComponent())
             .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
             .add(new AnimableSpriteComponent())
