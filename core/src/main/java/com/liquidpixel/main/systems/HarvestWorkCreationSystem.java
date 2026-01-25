@@ -8,6 +8,7 @@ import com.liquidpixel.main.components.HarvestableComponent;
 import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.components.ui.MarkComponent;
+import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.model.storage.WorkOrder;
 import com.liquidpixel.main.utils.Mappers;
@@ -20,8 +21,11 @@ import static com.liquidpixel.main.utils.utils.getSettlementFromAsset;
 
 public class HarvestWorkCreationSystem extends IntervalIteratingSystem {
 
-    public HarvestWorkCreationSystem() {
+    IItemService itemService;
+
+    public HarvestWorkCreationSystem(IItemService itemService) {
         super(Family.all(HarvestableComponent.class, MarkComponent.class, ItemComponent.class, BodyComponent.class).get(), 2f);
+        this.itemService =itemService;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class HarvestWorkCreationSystem extends IntervalIteratingSystem {
         SettlementComponent settlement = getSettlementFromAsset(entity);
         ItemComponent itemComponent = Mappers.item.get(entity);
         if (!doesOrderAlreadyExist(entity)) {
-            IWorkOrder workOrder = new WorkOrder(entity, entity, itemComponent.getItem(), HARVEST);
+            IWorkOrder workOrder = new WorkOrder(entity, entity, itemService.getStorageItem(entity), HARVEST);
             settlement.addWorkOrder(workOrder);
         }
     }

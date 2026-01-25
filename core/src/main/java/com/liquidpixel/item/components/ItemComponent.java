@@ -2,45 +2,22 @@ package com.liquidpixel.item.components;
 
 import com.badlogic.ashley.core.Component;
 import com.liquidpixel.main.factories.ModelFactory;
-import com.liquidpixel.main.interfaces.IStorageItem;
-import com.liquidpixel.main.model.item.StorageItem;
-import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.main.model.item.Item;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.liquidpixel.main.utils.utils.getFilenameFromPath;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemComponent implements Component {
 
-    @JsonProperty
-    final String name;
+    private final String name;
+    private int quantity;
+    private final String label;
+    private boolean isStackable;
+    private int stackSize;
+    private int unitSize;
 
-    @JsonProperty
-    int quantity;
-
-    @JsonIgnore
-    final String label;
-
-    @JsonIgnore
-    GameSprite sprite;
-
-    @JsonIgnore
-    boolean isStackable;
-
-    @JsonIgnore
-    int stackSize;
-
-    @JsonIgnore
-    int unitSize;
-
-    @JsonCreator
     public ItemComponent(
-        @JsonProperty("name") String name,
-        @JsonProperty("quantity") int quantity
+        String name,
+        int quantity
     ) {
         this.name = name;
         this.quantity = quantity;
@@ -65,22 +42,10 @@ public class ItemComponent implements Component {
         return name;
     }
 
-    @JsonIgnore
-    public GameSprite getSprite() {
-        return sprite;
-    }
-
-    @JsonIgnore
-    public GameSprite getIcon() {
-        return getSprite();
-    }
-
-    @JsonIgnore
     public int getStackSize() {
         return stackSize;
     }
 
-    @JsonIgnore
     public int getQuantity() {
         return quantity;
     }
@@ -89,12 +54,10 @@ public class ItemComponent implements Component {
         this.quantity = quantity;
     }
 
-    @JsonIgnore
     public String getLabel() {
         return label;
     }
 
-    @JsonIgnore
     public boolean isStackable() {
         return isStackable;
     }
@@ -110,17 +73,5 @@ public class ItemComponent implements Component {
 
     public String getRecipeName() {
         return getFilenameFromPath(name);
-    }
-
-    public IStorageItem getItem() {
-        return new StorageItem(name, quantity, stackSize, sprite);
-    }
-
-    public IStorageItem getItem(int quantity) {
-        return new StorageItem(name, quantity, stackSize, sprite);
-    }
-
-    public void setSprite(GameSprite sprite) {
-        this.sprite = sprite;
     }
 }

@@ -10,4 +10,6 @@ public interface IStorageItem {
     String getName();
     String getSpriteName();
     GameSprite getSprite();
+    void setSprite(GameSprite sprite);
+
 }

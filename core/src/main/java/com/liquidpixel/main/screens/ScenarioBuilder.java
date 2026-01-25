@@ -64,7 +64,6 @@ import com.liquidpixel.main.systems.spectral.SpectralMovementSystem;
 import com.liquidpixel.main.systems.spectral.SpectralSelectionSystem;
 import com.liquidpixel.main.systems.spectral.TerrainPaintSystem;
 import com.liquidpixel.item.managers.ItemManager;
-import com.liquidpixel.item.systems.ItemBuildSystem;
 import com.liquidpixel.pathfinding.systems.MovementTaskSystem;
 import com.liquidpixel.pathfinding.systems.TraverseSystem;
 import com.liquidpixel.selection.api.IClickBehaviorManager;
@@ -281,7 +280,6 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         Engine engine = resources.getEngine();
 
         //INITIALIZATION SYSTEMS
-        engine.addSystem(new ItemBuildSystem(itemManager.getItemService(), spriteFactory));
         engine.addSystem(new BuildingDoorInitSystem(itemManager.getItemService()));
         engine.addSystem(new BuildingInitSystem(mapManager.getWorldMap()));
         engine.addSystem(new ClickBehaviorInitSystem(clickBehaviorManager.getClickBehaviorService()));
@@ -342,7 +340,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new ImmigrationSystem(agentService));
         engine.addSystem(new HarvestProviderSystem(selectionManager.getStorageService(), spriteFactory));
 
-        engine.addSystem(new HarvestWorkCreationSystem());
+        engine.addSystem(new HarvestWorkCreationSystem(itemManager.getItemService()));
         engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getStorageService(), selectionManager.getSettlementService()));
         engine.addSystem(new ProviderWorkCreationSystem(selectionManager.getStorageService()));
 
@@ -353,7 +351,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new AutoAssignJobSystem());
         engine.addSystem(new AutoAssignHouseSystem());
         engine.addSystem(new AutoAssignResourcesToAreaSystem());
-        engine.addSystem(new StorageRenderSystem());
+        engine.addSystem(new StorageRenderSystem(spriteFactory));
         engine.addSystem(new EntitySelectionSystem(itemManager.getItemService()));
 
         engine.addSystem(new ResourceSelectionRenderSystem(selectionManager.getSelectionService(), cameraManager.getCameraService()));

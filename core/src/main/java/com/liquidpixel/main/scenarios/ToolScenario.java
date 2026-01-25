@@ -101,7 +101,6 @@ public class ToolScenario extends Scenario implements IScenario {
         itemService.spawnItem(item, new GridPoint2(10, 10));
 
 
-
         animationService.setAnimation(new Status("CAST_DOWN"));
         System.out.println("Fishing State loaded - Agent positioned to fish");
     }

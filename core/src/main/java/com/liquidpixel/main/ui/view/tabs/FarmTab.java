@@ -117,9 +117,8 @@ public class FarmTab implements IUniversalTab {
     private void addCrop(Entity crop, FarmComponent farmComponent) {
         GrowableComponent growableComponent = Mappers.growable.get(crop);
         GameClock.DayHour result = GameClock.convertHoursToDayHour(growableComponent.getHoursRemainingToGrow());
-        ItemComponent itemComponent = Mappers.item.get(crop);
 
-        FarmItem farmItem = new FarmItem(itemComponent.getItem(), result.days(), result.hours());
+        FarmItem farmItem = new FarmItem(itemService.getStorageItem(crop), result.days(), result.hours());
 
         FarmItemUI farmItemUI = new FarmItemUI(
             farmItem,

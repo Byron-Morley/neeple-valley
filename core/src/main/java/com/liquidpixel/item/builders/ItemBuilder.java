@@ -29,7 +29,6 @@ import com.liquidpixel.main.renderposition.ItemRenderPositionStrategy;
 import com.liquidpixel.main.renderposition.RenderPositionStrategy;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.item.components.ItemComponent;
-import com.liquidpixel.item.components.RefreshItemBuildComponent;
 import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
 import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.api.models.IAnimationDefinition;
@@ -46,9 +45,7 @@ public class ItemBuilder {
 
     public ItemBuilder(String name, int quantity, ISpriteComponentFactory animationComponentFactory, ISpriteFactory spriteFactory) {
         this.entity = new Entity()
-            .add(new ItemComponent(name, quantity))
-            .add(new RefreshItemBuildComponent()
-            );
+            .add(new ItemComponent(name, quantity));
         this.animationComponentFactory = animationComponentFactory;
         this.spriteFactory = spriteFactory;
     }

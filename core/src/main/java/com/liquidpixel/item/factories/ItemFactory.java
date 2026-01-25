@@ -9,6 +9,7 @@ import com.liquidpixel.main.factories.ModelFactory;
 import com.liquidpixel.main.interfaces.IRecipe;
 import com.liquidpixel.main.model.item.Item;
 import com.liquidpixel.main.model.item.Storage;
+import com.liquidpixel.main.model.item.StorageItem;
 import com.liquidpixel.main.model.sprite.BodyOffset;
 import com.liquidpixel.main.renderposition.EquipmentRenderPositionStrategy;
 import com.liquidpixel.main.renderposition.ItemRenderPositionStrategy;
@@ -75,11 +76,10 @@ public class ItemFactory {
             if (model.isResource()) {
                 Item invisibleStorage = models.get("storage/invisible_storage");
                 ItemComponent itemComponent = new ItemComponent(name, quantity);
-
                 ItemBuilder itemBuilder = buildItem(invisibleStorage, 1);
                 Entity entity = itemBuilder.build();
                 StorageComponent storageComponent = Mappers.storage.get(entity);
-                storageComponent.addItem(itemComponent.getItem());
+                storageComponent.addItem(new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), spriteFactory.getSprite(model.getSprite())));
                 storageComponent.setOneUse(true);
                 itemBuilder.updateStorageRender();
 

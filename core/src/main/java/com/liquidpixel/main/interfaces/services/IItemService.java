@@ -53,4 +53,6 @@ public interface IItemService {
     List<Entity> getTerrainItemsInArea(GridPoint2 start, GridPoint2 end);
 
     ISpriteComponent getSpriteComponent(String name, int mod);
+
+    IStorageItem getStorageItem(Entity entity);
 }

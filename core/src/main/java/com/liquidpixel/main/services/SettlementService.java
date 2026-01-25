@@ -191,8 +191,7 @@ public class SettlementService implements ISettlementService {
         for (Entity building : settlement.getAssets()) {
             StorageComponent storageComponent = Mappers.storage.get(building);
             if (Mappers.resource.has(building)) {
-                ItemComponent itemComponent = Mappers.item.get(building);
-                calculateResourceTotals(resources, itemComponent.getItem());
+                calculateResourceTotals(resources, itemService.getStorageItem(building));
             } else if (storageComponent != null) {
                 for (Map.Entry<String, IStorageItem> entry : storageComponent.getItems().entrySet()) {
                     calculateResourceTotals(resources, entry.getValue());

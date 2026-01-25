@@ -51,7 +51,7 @@ public class WorldLevelManager extends GameManager {
         System.out.println("World Level Manager Initialized");
 
         Entity agent = agentService.spawnAgent(new GridPoint2(11, 11), "man");
-        Entity item = itemService.getItem("scenery/medium-water-rock").build();
+        Entity item = itemService.getItem("resources/corn").build();
         itemService.spawnItem(item, new GridPoint2(10, 10));
 
         System.out.println("World Level Manager Initialized - Agent positioned to water");
@@ -146,8 +146,7 @@ public class WorldLevelManager extends GameManager {
     private void addToStorage(Entity storehouse, String itemName, int quantity) {
         StorageComponent storage = Mappers.storage.get(storehouse);
         Entity entity = itemService.getItem(itemName, quantity).build();
-        ItemComponent stoneItem = Mappers.item.get(entity);
-        storage.addItem(stoneItem.getItem());
+        storage.addItem(itemService.getStorageItem(entity));
     }
 
 

@@ -323,7 +323,7 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
         engine.addSystem(new ImmigrationSystem(agentService));
         engine.addSystem(new HarvestProviderSystem(selectionManager.getStorageService(), spriteFactory));
         engine.addSystem(new ProviderWorkCreationSystem(selectionManager.getStorageService()));
-        engine.addSystem(new HarvestWorkCreationSystem());
+        engine.addSystem(new HarvestWorkCreationSystem(itemManager.getItemService()));
         engine.addSystem(new WorkerAssignmentSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
         engine.addSystem(new WorkProcessingSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
         engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getStorageService(), selectionManager.getSettlementService()));
@@ -332,7 +332,7 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
         engine.addSystem(new AutoAssignJobSystem());
         engine.addSystem(new AutoAssignHouseSystem());
         engine.addSystem(new AutoAssignResourcesToAreaSystem());
-        engine.addSystem(new StorageRenderSystem());
+        engine.addSystem(new StorageRenderSystem(spriteFactory));
 
         engine.addSystem(new ResourceSelectionRenderSystem(selectionManager.getSelectionService(), cameraManager.getCameraService()));
         engine.addSystem(new SpawnConfigurationSystem(

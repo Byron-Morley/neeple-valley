@@ -205,8 +205,7 @@ public class ItemService extends Service implements IItemService {
         List<IStorageItem> resourcesSet = new ArrayList<>();
 
         for (Entity resource : resources) {
-            ItemComponent itemComponent = Mappers.item.get(resource);
-            resourcesSet.add(new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), itemComponent.getSprite()));
+            resourcesSet.add(getStorageItem(resource));
         }
         return resourcesSet;
     }
@@ -254,4 +253,12 @@ public class ItemService extends Service implements IItemService {
             .order(item.getSlot().getRenderPriority())
             .build();
     }
+
+    public IStorageItem getStorageItem(Entity entity){
+        ItemComponent itemComponent = entity.getComponent(ItemComponent.class);
+        SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
+        GameSprite gameSprite = spriteFactory.getSprite(spriteComponent.getName());
+        return new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), gameSprite);
+    }
+
 }
