@@ -215,7 +215,8 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
             itemManager.getItemService(),
             mapManager.getMapService(),
             selectionManager.getSelectionService(),
-            selectionManager.getSettlementService()
+            selectionManager.getSettlementService(),
+            spriteAnimationModule
         );
 
         clickBehaviorManager.init(

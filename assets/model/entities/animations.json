@@ -159,6 +159,116 @@
         }
       }
     },
+    "AXE": {
+      "name": "AXE",
+      "frameDuration": 0.1,
+      "subAnimations": {
+        "CHOP_DOWN": {
+          "frameDuration": 0.2,
+          "cells": [
+            {
+              "cell": 1,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 2,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 3,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 3,
+              "flipX": false,
+              "flipY": false
+            }
+          ],
+          "playMode": "LOOP"
+        },
+        "CHOP_UP": {
+          "frameDuration": 0.2,
+          "cells": [
+            {
+              "cell": 4,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 5,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 6,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 6,
+              "flipX": false,
+              "flipY": false
+            }
+          ],
+          "playMode": "LOOP"
+        },
+        "CHOP_RIGHT": {
+          "frameDuration": 0.2,
+          "cells": [
+            {
+              "cell": 7,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 8,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 9,
+              "flipX": false,
+              "flipY": false
+            },
+            {
+              "cell": 9,
+              "flipX": false,
+              "flipY": false
+            }
+          ],
+          "playMode": "LOOP"
+        },
+        "CHOP_LEFT": {
+          "frameDuration": 0.2,
+          "cells": [
+            {
+              "cell": 7,
+              "flipX": true,
+              "flipY": false
+            },
+            {
+              "cell": 8,
+              "flipX": true,
+              "flipY": false
+            },
+            {
+              "cell": 9,
+              "flipX": true,
+              "flipY": false
+            },
+            {
+              "cell": 9,
+              "flipX": true,
+              "flipY": false
+            }
+          ],
+          "playMode": "LOOP"
+        }
+      }
+    },
     "TOOL": {
       "name": "TOOL",
       "frameDuration": 0.1,

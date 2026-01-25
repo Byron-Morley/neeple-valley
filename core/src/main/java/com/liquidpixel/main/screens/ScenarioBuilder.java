@@ -237,7 +237,8 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
             itemManager.getItemService(),
             mapManager.getMapService(),
             selectionManager.getSelectionService(),
-            selectionManager.getSettlementService()
+            selectionManager.getSettlementService(),
+            spriteAnimationModule
         );
 
         loadAndSaveManager.init(
@@ -369,8 +370,6 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new EnterDoorSystem());
         engine.addSystem(new ExitDoorSystem());
         engine.addSystem(new FishingSystem());
-
-
     }
 
     public void initializeGame() {

@@ -3,9 +3,12 @@ package com.liquidpixel.main.managers.world;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.GridPoint2;
+import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.core.components.core.StatusComponent;
+import com.liquidpixel.core.core.Status;
 import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
+import com.liquidpixel.main.components.render.RenderComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.engine.GameResources;
 import com.liquidpixel.main.interfaces.IWorldMap;
@@ -13,8 +16,23 @@ import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.managers.core.GameManager;
 import com.liquidpixel.core.core.Action;
 import com.liquidpixel.core.core.Direction;
+import com.liquidpixel.main.model.RenderPriority;
+import com.liquidpixel.main.renderposition.EquipmentRenderPositionStrategy;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
+import com.liquidpixel.sprite.api.ISpriteAnimationModule;
+import com.liquidpixel.sprite.api.factory.IAnimationFactory;
+import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
+import com.liquidpixel.sprite.api.factory.ISpriteFactory;
+import com.liquidpixel.sprite.api.services.IAnimationService;
+import com.liquidpixel.sprite.components.AnimableSpriteComponent;
+import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
+import com.liquidpixel.sprite.components.SpriteComponent;
+import com.liquidpixel.sprite.components.StackedSpritesComponent;
+import com.liquidpixel.sprite.model.AnimationState;
+import com.liquidpixel.sprite.model.GameSprite;
+import com.liquidpixel.sprite.registry.SpriteItemRegistry;
+import com.liquidpixel.sprite.services.AnimationService;
 
 import java.util.*;
 
@@ -25,6 +43,7 @@ public class WorldLevelManager extends GameManager {
     IWorldMap worldMap;
     ISelectionService selectionService;
     ISettlementService settlementService;
+    private ISpriteAnimationModule spriteModule;
     Random random;
     int high = WORLD_WIDTH;
     int low = 1;
@@ -35,12 +54,14 @@ public class WorldLevelManager extends GameManager {
         IItemService itemService,
         IMapService mapService,
         ISelectionService selectionService,
-        ISettlementService settlementService
+        ISettlementService settlementService,
+        ISpriteAnimationModule spriteModule
     ) {
         super(agentService, itemService);
         this.settlementService = settlementService;
         this.selectionService = selectionService;
         this.mapService = mapService;
+        this.spriteModule = spriteModule;
         worldMap = mapService.getWorldMap();
         this.random = new Random();
         engine = GameResources.get().getEngine();
@@ -50,11 +71,67 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
-        Entity agent = agentService.spawnAgent(new GridPoint2(11, 11), "man");
-        Entity item = itemService.getItem("resources/corn").build();
-        itemService.spawnItem(item, new GridPoint2(10, 10));
 
-        System.out.println("World Level Manager Initialized - Agent positioned to water");
+        ISpriteComponentFactory animationComponentFactory = spriteModule.getSpriteComponentFactory();
+        IAnimationFactory animationFactory = spriteModule.getAnimationFactory();
+        ISpriteFactory spriteFactory = spriteModule.getSpriteFactory();
+
+        Entity item = new Entity();
+
+        String name = "item";
+        String spriteName = "tools/axe";
+        GameSprite sprite = spriteFactory.getSprite(spriteName);
+
+        item.add(new RenderComponent(sprite, new EquipmentRenderPositionStrategy(), RenderPriority.ITEM))
+            .add(new PositionComponent(32, 32))
+            .add(new StatusComponent(Action.CHOP, Direction.DOWN))
+            .add(new SpriteComponent.Builder(spriteName).build())
+            .add(animationComponentFactory.createSpriteStackBuilderComponent())
+            .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
+            .add(new AnimableSpriteComponent())
+            .add(new StackedSpritesComponent(animationFactory.get("AXE")))
+            .add(new RefreshSpriteRequirementComponent()
+            );
+
+        engine.addEntity(item);
+
+        IAnimationService animationService = new AnimationService(item);
+        AnimationState state = animationService.getAnimationState();
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onFrameChanged(int frameIndex, boolean isFinished) {
+                System.out.println("Animation frame changed to: " + frameIndex);
+//                System.out.println(animationService.getAnimationState().toString());
+                if (isFinished){
+                    animationService.setAnimation(new Status("CHOP_UP"));
+                    animationService.playAnimation();
+                }
+            }
+        });
+        animationService.setAnimation(new Status("CHOP_DOWN"));
+
+
+
+//        Entity agent = agentService.spawnAgent(new GridPoint2(11, 11), "man");
+//        Entity item = itemService.getItem("scenery/small-tree").build();
+//        Entity item = itemService.getItem("test/item").build();
+//        itemService.spawnItem(item, new GridPoint2(32, 32));
+//
+//        IAnimationService anim = new AnimationService(item);
+//
+//        anim.addListener(new AnimationService.AnimationListener() {
+//            @Override
+//            public void onFrameChanged(int frameIndex, boolean isFinished) {
+//                System.out.println("Animation frame changed to: " + frameIndex);
+//                System.out.println(anim.getAnimationState().toString());
+//                anim.setAnimation(new Status("CHOP_DOWN"));
+//            }
+//        });
+//
+//        anim.setAnimation(new Status("CHOP_DOWN"));
+//        anim.setCurrentFrame(1);
+//
+//        System.out.println("World Level Manager Initialized - Agent positioned to water");
 //        Entity person1 = agentService.spawnAgent(new GridPoint2(32, 32), "population");
 
 

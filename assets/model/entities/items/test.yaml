@@ -28,3 +28,8 @@ iron:
     yield: 4
     stackSize: 20
   clickBehavior: resource_info
+item:
+  label: item
+  sprite: tools/axe
+  animation:
+    model: AXE

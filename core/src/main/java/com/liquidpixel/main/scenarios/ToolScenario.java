@@ -88,20 +88,21 @@ public class ToolScenario extends Scenario implements IScenario {
     public void fishing() {
 
         //get the correct tool
-        Entity toolEntity = itemService.getItem("tools/rod").build();
-        itemService.spawnItem(toolEntity, new GridPoint2(-300, -300));
-        Mappers.equipment.get(agent).addEquipment(toolEntity);
+        Entity toolEntity = itemService.getItem("tools/axe").build();
+        itemService.spawnItem(toolEntity, new GridPoint2(10, 10));
+
+
+        IAnimationService anim = new AnimationService(toolEntity);
+        anim.setAnimation(new Status("CHOP_DOWN"));
+
+
+//        Mappers.equipment.get(agent).addEquipment(toolEntity);
 
         //equip the tool
-        AgentComponent agentComponent = Mappers.agent.get(agent);
-        agentComponent.setEquipped(toolEntity);
+//        AgentComponent agentComponent = Mappers.agent.get(agent);
+//        agentComponent.setEquipped(toolEntity);
 
-
-        Entity item = itemService.getItem("resources/corn").build();
-        itemService.spawnItem(item, new GridPoint2(10, 10));
-
-
-        animationService.setAnimation(new Status("CAST_DOWN"));
+//        animationService.setAnimation(new Status("CHOP_DOWN"));
         System.out.println("Fishing State loaded - Agent positioned to fish");
     }
 
