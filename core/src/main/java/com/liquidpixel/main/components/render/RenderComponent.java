@@ -3,6 +3,7 @@ package com.liquidpixel.main.components.render;
 
 import com.badlogic.gdx.graphics.Color;
 import com.liquidpixel.main.renderposition.RenderPositionStrategy;
+import com.liquidpixel.main.renderposition.SpriteRenderPositionStrategy;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.main.model.RenderPriority;
 import com.fasterxml.jackson.annotation.*;
@@ -51,6 +52,12 @@ public class RenderComponent implements IRenderComponent {
         this.renderPositionStrategy = renderPositionStrategy;
         this.priority = priority;
         setSprite(sprite);
+    }
+
+    public RenderComponent() {
+        renderPositionStrategy = new SpriteRenderPositionStrategy();
+        priority = RenderPriority.AGENT;
+        this.sprites = new ArrayList<>();
     }
 
     public List<GameSprite> getSprites() {

@@ -1,10 +1,26 @@
 package com.liquidpixel.item.builders;
 
+import com.liquidpixel.core.components.core.StatusComponent;
+import com.liquidpixel.main.components.render.RenderComponent;
+import com.liquidpixel.item.components.ItemComponent;
+import com.liquidpixel.sprite.components.AnimableSpriteComponent;
+import com.liquidpixel.sprite.components.SpriteComponent;
+import com.liquidpixel.sprite.components.StackedSpritesComponent;
+import com.liquidpixel.core.core.Direction;
+import com.liquidpixel.core.core.Action;
+import com.liquidpixel.main.renderposition.ItemRenderPositionStrategy;
+import com.liquidpixel.main.renderposition.RenderPositionStrategy;
+import com.liquidpixel.main.utils.Mappers;
+import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
+import com.liquidpixel.sprite.api.factory.ISpriteFactory;
+import com.liquidpixel.sprite.api.models.IAnimationDefinition;
+import com.liquidpixel.sprite.api.models.IRamp;
+import com.liquidpixel.main.model.RenderPriority;
+import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.liquidpixel.core.components.core.StatusComponent;
 import com.liquidpixel.main.components.*;
 import com.liquidpixel.main.components.colony.BuildingComponent;
 import com.liquidpixel.main.components.colony.HouseComponent;
@@ -14,28 +30,15 @@ import com.liquidpixel.main.components.items.*;
 import com.liquidpixel.main.components.items.ResourceComponent;
 import com.liquidpixel.main.components.load.CreateFoundationFencesComponent;
 import com.liquidpixel.main.components.load.DontSaveComponent;
-import com.liquidpixel.main.components.render.RenderComponent;
 import com.liquidpixel.main.components.selection.SelectableEntityComponent;
 import com.liquidpixel.main.components.sprite.*;
 import com.liquidpixel.main.components.storage.*;
 import com.liquidpixel.main.components.workshop.JobComponent;
 import com.liquidpixel.main.components.workshop.WorkshopComponent;
 import com.liquidpixel.main.interfaces.IRecipe;
-import com.liquidpixel.main.model.RenderPriority;
 import com.liquidpixel.main.model.item.*;
-import com.liquidpixel.core.core.Direction;
-import com.liquidpixel.core.core.Action;
-import com.liquidpixel.main.renderposition.ItemRenderPositionStrategy;
-import com.liquidpixel.main.renderposition.RenderPositionStrategy;
-import com.liquidpixel.main.utils.Mappers;
-import com.liquidpixel.item.components.ItemComponent;
-import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
-import com.liquidpixel.sprite.api.factory.ISpriteFactory;
-import com.liquidpixel.sprite.api.models.IAnimationDefinition;
-import com.liquidpixel.sprite.api.models.IRamp;
-import com.liquidpixel.sprite.components.AnimableSpriteComponent;
-import com.liquidpixel.sprite.components.SpriteComponent;
-import com.liquidpixel.sprite.components.StackedSpritesComponent;
+
+
 
 
 public class ItemBuilder {
@@ -145,7 +148,7 @@ public class ItemBuilder {
             .add(new SpriteComponent(spriteName))
             .add(new RenderComponent(new ItemRenderPositionStrategy(), renderPriority, Color.WHITE))
             .add(new StatusComponent(Action.IDLE, Direction.NONE))
-            .add(new AnimableSpriteComponent(sync != null, sync))
+            .add(new AnimableSpriteComponent())
             .add(new StackedSpritesComponent(animationDefinition))
             .add(new RefreshSpriteRequirementComponent())
             .add(new SpriteComponent.Builder(spriteName).build())

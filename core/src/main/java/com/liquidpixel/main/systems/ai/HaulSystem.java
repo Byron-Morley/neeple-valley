@@ -10,7 +10,6 @@ import com.liquidpixel.main.components.agent.AgentComponent;
 import com.liquidpixel.pathfinding.components.MovementTaskComponent;
 import com.liquidpixel.main.components.ai.actions.HaulComponent;
 import com.liquidpixel.main.components.player.CarryComponent;
-import com.liquidpixel.main.components.sprite.RefreshSpriteRequirementComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.components.storage.StorageRenderRefreshComponent;
 import com.liquidpixel.main.components.ui.MarkComponent;
@@ -21,6 +20,7 @@ import com.liquidpixel.pathfinding.api.IMapService;
 import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.status.WorkState;
 import com.liquidpixel.main.utils.Mappers;
+import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
 
 import static com.liquidpixel.main.utils.PositionUtils.reduceToCell;
 

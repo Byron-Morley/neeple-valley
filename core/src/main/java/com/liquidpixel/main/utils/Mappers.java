@@ -90,7 +90,6 @@ public class Mappers {
     public static final ComponentMapper<StorageGroupComponent> storageGroup = ComponentMapper.getFor(StorageGroupComponent.class);
     public static final ComponentMapper<EquipmentComponent> equipment = ComponentMapper.getFor(EquipmentComponent.class);
     public static final ComponentMapper<TerrainItemComponent> terrainItem = ComponentMapper.getFor(TerrainItemComponent.class);
-    public static final ComponentMapper<RefreshSpriteRequirementComponent> refreshAnim = ComponentMapper.getFor(RefreshSpriteRequirementComponent.class);
     public static final ComponentMapper<AnimationStoppedComponent> animationStopped = ComponentMapper.getFor(AnimationStoppedComponent.class);
     public static final ComponentMapper<EnterDoorComponent> enterDoor = ComponentMapper.getFor(EnterDoorComponent.class);
     public static final ComponentMapper<ExitDoorComponent> exitDoor = ComponentMapper.getFor(ExitDoorComponent.class);

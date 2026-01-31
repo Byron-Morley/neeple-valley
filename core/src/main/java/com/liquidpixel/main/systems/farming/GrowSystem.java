@@ -7,7 +7,6 @@ import com.liquidpixel.core.components.core.StatusComponent;
 import com.liquidpixel.main.components.items.FarmComponent;
 import com.liquidpixel.main.components.items.GrowableComponent;
 import com.liquidpixel.item.components.ItemComponent;
-import com.liquidpixel.main.components.sprite.RefreshSpriteRequirementComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.engine.GameClock;
 import com.liquidpixel.main.factories.ModelFactory;
@@ -21,7 +20,7 @@ import com.liquidpixel.core.core.Action;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.services.AnimationService;
-
+import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
 import java.util.Iterator;
 import java.util.List;
 

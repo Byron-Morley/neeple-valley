@@ -1,38 +1,30 @@
 package com.liquidpixel.main.managers.world;
 
+import com.liquidpixel.core.components.core.PositionComponent;
+import com.liquidpixel.core.components.core.StatusComponent;
+import com.liquidpixel.main.components.agent.AgentComponent;
+import com.liquidpixel.main.components.render.RenderComponent;
+import com.liquidpixel.main.factories.ComponentFactory;
+import com.liquidpixel.main.helpers.EquipHelper;
+import com.liquidpixel.main.model.RenderPriority;
+import com.liquidpixel.main.renderposition.EquipmentRenderPositionStrategy;
+import com.liquidpixel.sprite.components.AnimableSpriteComponent;
+import com.liquidpixel.core.core.Action;
+import com.liquidpixel.core.core.Direction;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.GridPoint2;
-import com.liquidpixel.core.components.core.PositionComponent;
-import com.liquidpixel.core.components.core.StatusComponent;
-import com.liquidpixel.core.core.Status;
-import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
-import com.liquidpixel.main.components.render.RenderComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.engine.GameResources;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.managers.core.GameManager;
-import com.liquidpixel.core.core.Action;
-import com.liquidpixel.core.core.Direction;
-import com.liquidpixel.main.model.RenderPriority;
-import com.liquidpixel.main.renderposition.EquipmentRenderPositionStrategy;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
 import com.liquidpixel.sprite.api.ISpriteAnimationModule;
-import com.liquidpixel.sprite.api.factory.IAnimationFactory;
-import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
-import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.api.services.IAnimationService;
-import com.liquidpixel.sprite.components.AnimableSpriteComponent;
-import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
-import com.liquidpixel.sprite.components.SpriteComponent;
-import com.liquidpixel.sprite.components.StackedSpritesComponent;
-import com.liquidpixel.sprite.model.AnimationState;
-import com.liquidpixel.sprite.model.GameSprite;
-import com.liquidpixel.sprite.registry.SpriteItemRegistry;
-import com.liquidpixel.sprite.services.AnimationService;
+
 
 import java.util.*;
 
@@ -44,6 +36,7 @@ public class WorldLevelManager extends GameManager {
     ISelectionService selectionService;
     ISettlementService settlementService;
     private ISpriteAnimationModule spriteModule;
+    private IAnimationService animationService;
     Random random;
     int high = WORLD_WIDTH;
     int low = 1;
@@ -72,50 +65,122 @@ public class WorldLevelManager extends GameManager {
         System.out.println("World Level Manager Initialized");
 
 
-        ISpriteComponentFactory animationComponentFactory = spriteModule.getSpriteComponentFactory();
-        IAnimationFactory animationFactory = spriteModule.getAnimationFactory();
-        ISpriteFactory spriteFactory = spriteModule.getSpriteFactory();
-
-        Entity item = new Entity();
-
-        String name = "item";
-        String spriteName = "tools/axe";
-        GameSprite sprite = spriteFactory.getSprite(spriteName);
-
-        item.add(new RenderComponent(sprite, new EquipmentRenderPositionStrategy(), RenderPriority.ITEM))
-            .add(new PositionComponent(32, 32))
-            .add(new StatusComponent(Action.CHOP, Direction.DOWN))
-            .add(new SpriteComponent.Builder(spriteName).build())
-            .add(animationComponentFactory.createSpriteStackBuilderComponent())
-            .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
-            .add(new AnimableSpriteComponent())
-            .add(new StackedSpritesComponent(animationFactory.get("AXE")))
-            .add(new RefreshSpriteRequirementComponent()
-            );
-
-        engine.addEntity(item);
-
-        IAnimationService animationService = new AnimationService(item);
-        AnimationState state = animationService.getAnimationState();
-        animationService.addListener(new AnimationService.AnimationListener() {
-            @Override
-            public void onFrameChanged(int frameIndex, boolean isFinished) {
-                System.out.println("Animation frame changed to: " + frameIndex);
-//                System.out.println(animationService.getAnimationState().toString());
-                if (isFinished){
-                    animationService.setAnimation(new Status("CHOP_UP"));
-                    animationService.playAnimation();
-                }
-            }
-        });
-        animationService.setAnimation(new Status("CHOP_DOWN"));
 
 
 
-//        Entity agent = agentService.spawnAgent(new GridPoint2(11, 11), "man");
-//        Entity item = itemService.getItem("scenery/small-tree").build();
-//        Entity item = itemService.getItem("test/item").build();
-//        itemService.spawnItem(item, new GridPoint2(32, 32));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        spriteModule.setComponentFactory(new ComponentFactory());
+//        ISpriteComponentFactory animationComponentFactory = spriteModule.getSpriteComponentFactory();
+//        IAnimationFactory animationFactory = spriteModule.getAnimationFactory();
+//        ISpriteFactory spriteFactory = spriteModule.getSpriteFactory();
+//
+//        Entity agent = spriteModule.createEntity("AGENT")
+//            .at(32, 32)
+//            .withLayer("human", 12)
+//            .withLayer("mohawk", 18)
+//            .withLayer("vest", 7)
+//            .withLayer("boots", 8)
+//            .named("player")
+//            .build();
+//        engine.addEntity(agent);
+//
+//        animationService = new AnimationService(agent);
+//
+//
+//
+//
+//        Entity tool = new Entity();
+//
+//        String spriteName = "tools/rod";
+//        GameSprite sprite = spriteFactory.getSprite(spriteName);
+//
+//        tool.add(new RenderComponent(sprite, new EquipmentRenderPositionStrategy(), RenderPriority.AGENT))
+//            .add(new PositionComponent(32, 32))
+//            .add(new StatusComponent(Action.IDLE, Direction.NONE))
+//            .add(new SpriteComponent.Builder(spriteName).build())
+//            .add(animationComponentFactory.createSpriteStackBuilderComponent())
+//            .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
+//            .add(new AnimableSpriteComponent())
+//            .add(new StackedSpritesComponent(animationFactory.get("ROD")))
+//            .add(new RefreshSpriteRequirementComponent()
+//            );
+//
+//        engine.addEntity(tool);
+//
+//        AnimableSpriteComponent axeAnimableSpriteComponent = tool.getComponent(AnimableSpriteComponent.class);
+//        axeAnimableSpriteComponent.setTileType("player");
+//        axeAnimableSpriteComponent.setSynchronized(true);
+//
+//
+//
+//        animationService.addListener(new AnimationService.AnimationListener() {
+//            @Override
+//            public void onFrameChanged(int frameIndex, boolean isFinished) {
+//                System.out.println("Animation frame changed to: " + frameIndex);
+//                if (isFinished) {
+//                    AnimationState state = animationService.getAnimationState();
+////                    animationService.setAnimation(new Status("CHOP_DOWN"));
+////                    animationService.playAnimation();
+//                    System.out.println("agent "+ agent);
+//                    System.out.println("tool "+ tool);
+//                    System.out.println("Animation finished");
+//                }
+//            }
+//        });
+//
+//        animationService.setAnimation(new Status("CAST_DOWN"));
+
+
+        //create a man
+//        Entity agent = agentService.spawnAgent(new GridPoint2(32, 32), "man");
+//
+//        //create an item
+//        Entity tool = itemService.getItem("tools/axe").build();
+//        itemService.spawnItem(tool, new GridPoint2(32, 32));
+//
+//
+//        EquipHelper equipHelper = new EquipHelper(agent, tool);
+//        equipHelper.equip();
+//
+//
+//        animationService = new AnimationService(agent);
+//        animationService.addListener(new AnimationService.AnimationListener() {
+//            @Override
+//            public void onFrameChanged(int frameIndex, boolean isFinished) {
+//                System.out.println("Animation frame changed to: " + frameIndex);
+//                if (isFinished) {
+//                    System.out.println("agent "+ agent);
+//                    System.out.println("tool "+ tool);
+//                    AnimationState state = animationService.getAnimationState();
+//                    System.out.println("Animation finished");
+////                    animationService.setAnimation(new Status("CHOP_DOWN"));
+//                }
+//            }
+//        });
+//        animationService.setAnimation(new Status("CHOP_DOWN"));
+
+
 //
 //        IAnimationService anim = new AnimationService(item);
 //
@@ -137,7 +202,6 @@ public class WorldLevelManager extends GameManager {
 
         //        Entity person2 = agentService.spawnAgent(new GridPoint2(34, 32), "woman");
 //        Entity person3 = agentService.spawnAgent(new GridPoint2(36, 32), "example");
-
 
 
 //        settlementService.buildInSettlement("storage/warehouse", new GridPoint2(68, 68));
@@ -210,6 +274,27 @@ public class WorldLevelManager extends GameManager {
 //        randomSpawn("scenery/medium-tree", 150, false);
 //        randomSpawn("scenery/big_rock", 30, false);
 
+
+        //        Entity item = new Entity();
+//
+//        String name = "test/item";
+//        String spriteName = "tools/axe";
+//        GameSprite sprite = spriteFactory.getSprite(spriteName);
+//
+//        item.add(new RenderComponent(sprite, new EquipmentRenderPositionStrategy(), RenderPriority.ITEM))
+//            .add(new PositionComponent(32, 32))
+//            .add(new StatusComponent(Action.IDLE, Direction.NONE))
+//            .add(new SpriteComponent.Builder(spriteName).build())
+//            .add(animationComponentFactory.createSpriteStackBuilderComponent())
+//            .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
+//            .add(new AnimableSpriteComponent())
+//            .add(new StackedSpritesComponent(animationFactory.get("AXE")))
+//            .add(new RefreshSpriteRequirementComponent())
+//            .add(new ItemComponent(name, 1))
+//            .add(new ProviderComponent()
+//            );
+//
+//        engine.addEntity(item);
 
     }
 

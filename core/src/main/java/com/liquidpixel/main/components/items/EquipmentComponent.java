@@ -18,6 +18,10 @@ public class EquipmentComponent implements Component {
         equipment.add(item);
     }
 
+    public void removeEquipment(Entity item) {
+        equipment.remove(item);
+    }
+
     public boolean hasEquipment() {
         return !equipment.isEmpty();
     }

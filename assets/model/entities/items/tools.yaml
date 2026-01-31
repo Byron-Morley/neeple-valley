@@ -2,7 +2,7 @@ axe:
   label: Axe
   sprite: tools/axe
   animation:
-    model: TOOL
+    model: AXE
   equipmentInformation:
     equipSlot: HANDS
     equipType: AXE

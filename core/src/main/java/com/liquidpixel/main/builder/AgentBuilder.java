@@ -66,7 +66,7 @@ public class AgentBuilder {
             .add(spriteComponentFactory.createSpriteStackBuilderComponent())
             .add(spriteComponentFactory.createRefreshSpriteStackBuilderComponent())
             .add(new StackedSpritesComponent(animationDefinition))
-            .add(new AnimableSpriteComponent(true, id))
+            .add(new AnimableSpriteComponent())
             .add(new RefreshSpriteRequirementComponent());
         return this;
     }

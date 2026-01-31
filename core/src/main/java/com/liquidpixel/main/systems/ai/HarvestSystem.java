@@ -129,8 +129,11 @@ public class HarvestSystem extends IteratingSystem {
 
         //sync the animation
         AnimableSpriteComponent axeAnimableSpriteComponent = Mappers.animableSprite.get(toolEntity);
-        axeAnimableSpriteComponent.setTileType(agentComponent.getId());
-        axeAnimableSpriteComponent.setSynchronized(true);
+//        axeAnimableSpriteComponent.setTileType(agentComponent.getId());
+//        axeAnimableSpriteComponent.setSynchronized(true);
+
+        AnimableSpriteComponent animableSpriteComponent = Mappers.animableSprite.get(agent);
+        animableSpriteComponent.addSynchronisedEntity(toolEntity, agent);
 
         //start harvesting
         agent.add(new WorkTaskComponent(harvestable.getRecipe()));

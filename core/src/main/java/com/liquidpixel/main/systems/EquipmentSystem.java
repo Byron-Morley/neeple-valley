@@ -10,9 +10,8 @@ import com.liquidpixel.main.components.agent.AgentComponent;
 import com.liquidpixel.main.components.items.EquipableComponent;
 import com.liquidpixel.main.components.items.EquipmentComponent;
 import com.liquidpixel.sprite.components.AnimableSpriteComponent;
-import com.liquidpixel.main.components.sprite.RefreshSpriteRequirementComponent;
 import com.liquidpixel.main.utils.Mappers;
-
+import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
 import java.util.List;
 
 public class EquipmentSystem extends IteratingSystem {
@@ -51,6 +50,7 @@ public class EquipmentSystem extends IteratingSystem {
             StatusComponent agentStatus = Mappers.status.get(agent);
             StatusComponent toolStatus = Mappers.status.get(tool);
 
+
             // Sync action and direction from agent to tool
             toolStatus.setAction(agentStatus.getAction());
             toolStatus.setDirection(agentStatus.getDirection());
@@ -60,20 +60,16 @@ public class EquipmentSystem extends IteratingSystem {
     private void setupToolForFirstTime(Entity agent, Entity tool) {
         // Set up animation synchronization if not already done
         if (Mappers.animableSprite.has(tool) && Mappers.agent.has(agent)) {
-            AnimableSpriteComponent toolAnimComponent = Mappers.animableSprite.get(tool);
+            AnimableSpriteComponent animableSpriteComponent = Mappers.animableSprite.get(tool);
             AgentComponent agentComponent = Mappers.agent.get(agent);
-
-            if (!toolAnimComponent.isSynchronized()) {
-                toolAnimComponent.setTileType(agentComponent.getId());
-                toolAnimComponent.setSynchronized(true);
-            }
+            System.out.println("tool not setup");
         }
 
         // Add refresh sprite requirement if tool doesn't have animations loaded yet
         if (Mappers.animableSprite.has(tool)) {
             AnimableSpriteComponent toolAnimComponent = Mappers.animableSprite.get(tool);
             if (toolAnimComponent.getTexturesToAnimations() == null || toolAnimComponent.getTexturesToAnimations().isEmpty()) {
-                if (!Mappers.refreshAnim.has(tool)) {
+                if (tool.getComponent(RefreshSpriteRequirementComponent.class) == null) {
                     tool.add(new RefreshSpriteRequirementComponent());
                 }
             }

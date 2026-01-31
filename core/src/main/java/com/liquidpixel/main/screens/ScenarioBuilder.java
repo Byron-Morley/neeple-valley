@@ -330,9 +330,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new TileRenderSystem(itemManager.getItemService()));
         engine.addSystem(new TileSelectionRenderSystem(itemManager.getItemService(), selectionManager.getSelectionService(), mapManager.getMapService().getWorldMap()));
 
-//        engine.addSystem(new RenderSystem());
-        engine.addSystem(new ShapeRenderSystem());
-        engine.addSystem(new BatchedRenderSystem());
+
 
 
         engine.addSystem(new DebugRenderSystem((MapGraph) mapManager.getWorldMap()));
@@ -370,6 +368,10 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new EnterDoorSystem());
         engine.addSystem(new ExitDoorSystem());
         engine.addSystem(new FishingSystem());
+
+        //        engine.addSystem(new RenderSystem());
+        engine.addSystem(new ShapeRenderSystem());
+        engine.addSystem(new BatchedRenderSystem());
     }
 
     public void initializeGame() {

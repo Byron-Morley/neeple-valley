@@ -55,7 +55,6 @@ public class LoadAndSaveManager implements ILoadAndSaveManager {
     private Engine engine;
     private ObjectMapper mapper;
     List<Class<? extends Component>> excludeList = Arrays.asList(
-        RefreshSpriteRequirementComponent.class, //this might have to be added manually
         InventoryComponent.class
     );
 
@@ -179,7 +178,7 @@ public class LoadAndSaveManager implements ILoadAndSaveManager {
                 }
             }
 
-            entity.add(new RefreshSpriteRequirementComponent());
+//            entity.add(new RefreshSpriteRequirementComponent());
 
             if (Mappers.foundation.has(entity)) {
                 entity.add(new CreateFoundationFencesComponent());

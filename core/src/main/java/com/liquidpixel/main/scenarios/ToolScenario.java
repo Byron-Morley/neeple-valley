@@ -6,6 +6,7 @@ import com.liquidpixel.core.core.Status;
 import com.liquidpixel.main.components.agent.AgentComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.components.tasks.FishingComponent;
+import com.liquidpixel.main.helpers.EquipHelper;
 import com.liquidpixel.main.interfaces.IScenario;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.ScenarioState;
@@ -13,6 +14,7 @@ import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
 import com.liquidpixel.sprite.api.services.IAnimationService;
+import com.liquidpixel.sprite.model.AnimationState;
 import com.liquidpixel.sprite.services.AnimationService;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +37,7 @@ public class ToolScenario extends Scenario implements IScenario {
         System.out.println("ExampleScenario started");
         new ScenarioBuilder().build(worldMap, mapService);
 
-        agent = agentService.spawnAgent(new GridPoint2(16, 16), "man");
+        agent = agentService.spawnAgent(new GridPoint2(32, 32), "man");
         trackEntity(agent);
 
         SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
@@ -60,7 +62,8 @@ public class ToolScenario extends Scenario implements IScenario {
     @Override
     public List<ScenarioState> getAvailableStates() {
         return Arrays.asList(
-            new ScenarioState("fishing", "Fishing")
+            new ScenarioState("fishing", "Fishing"),
+            new ScenarioState("chopping", "Chopping")
         );
     }
 
@@ -85,26 +88,51 @@ public class ToolScenario extends Scenario implements IScenario {
         return false;
     }
 
-    public void fishing() {
+    public void chopping() {
 
-        //get the correct tool
-        Entity toolEntity = itemService.getItem("tools/axe").build();
-        itemService.spawnItem(toolEntity, new GridPoint2(10, 10));
-
-
-        IAnimationService anim = new AnimationService(toolEntity);
-        anim.setAnimation(new Status("CHOP_DOWN"));
-
-
-//        Mappers.equipment.get(agent).addEquipment(toolEntity);
+        Entity tool = itemService.getItem("tools/axe").build();
+        itemService.spawnItem(tool, new GridPoint2(32, 32));
 
         //equip the tool
-//        AgentComponent agentComponent = Mappers.agent.get(agent);
-//        agentComponent.setEquipped(toolEntity);
+        EquipHelper equipHelper = new EquipHelper(agent, tool);
+        equipHelper.equip();
 
-//        animationService.setAnimation(new Status("CHOP_DOWN"));
-        System.out.println("Fishing State loaded - Agent positioned to fish");
+        IAnimationService anim = new AnimationService(agent);
+        anim.setAnimation(new Status("CHOP_DOWN"));
+
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onFrameChanged(int frameIndex, boolean isFinished) {
+                if (isFinished) {
+                    equipHelper.unequip();
+                }
+            }
+        });
+
+
     }
+
+    public void fishing() {
+
+        Entity tool = itemService.getItem("tools/rod").build();
+        itemService.spawnItem(tool, new GridPoint2(32, 32));
+
+        EquipHelper equipHelper = new EquipHelper(agent, tool);
+        equipHelper.equip();
+
+        IAnimationService anim = new AnimationService(agent);
+        anim.setAnimation(new Status("CAST_DOWN"));
+
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onFrameChanged(int frameIndex, boolean isFinished) {
+                if (isFinished) {
+                    equipHelper.unequip();
+                }
+            }
+        });
+    }
+
 
     public void advanced() {
         System.out.println("Loading advanced state...");
