@@ -64,6 +64,8 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
+        Entity tree = itemService.getItem("scenery/medium-tree").build();
+        itemService.spawnItem(tree, new GridPoint2(32, 32));
 
 
 

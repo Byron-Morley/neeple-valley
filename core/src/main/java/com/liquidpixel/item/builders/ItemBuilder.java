@@ -72,7 +72,7 @@ public class ItemBuilder {
     public ItemBuilder withRender(String spriteName, Color color) {
         try {
             this.entity
-                .add(new RenderComponent(new ItemRenderPositionStrategy(), RenderPriority.ITEM, color))
+                .add(new RenderComponent(spriteFactory.getSprite(spriteName), new ItemRenderPositionStrategy(), RenderPriority.ITEM, color))
                 .add(animationComponentFactory.createSpriteStackBuilderComponent())
                 .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
                 .add(new SpriteComponent.Builder(spriteName).build());
@@ -146,7 +146,7 @@ public class ItemBuilder {
     public ItemBuilder withTileset(String sync, String region, IAnimationDefinition animationDefinition, String spriteName, RenderPriority renderPriority) {
         entity.add(new TileableComponent(region))
             .add(new SpriteComponent(spriteName))
-            .add(new RenderComponent(new ItemRenderPositionStrategy(), renderPriority, Color.WHITE))
+            .add(new RenderComponent(spriteFactory.getSprite(spriteName),new ItemRenderPositionStrategy(), renderPriority, Color.WHITE))
             .add(new StatusComponent(Action.IDLE, Direction.NONE))
             .add(new AnimableSpriteComponent())
             .add(new StackedSpritesComponent(animationDefinition))

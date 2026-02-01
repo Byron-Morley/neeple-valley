@@ -34,11 +34,12 @@ public class RenderComponent implements IRenderComponent {
     @JsonIgnore
     private RenderPositionStrategy renderPositionStrategy;
 
-    public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority, Color color) {
+    public RenderComponent(GameSprite sprite, RenderPositionStrategy renderPositionStrategy, RenderPriority priority, Color color) {
         this.sprites = new ArrayList<>();
         this.renderPositionStrategy = renderPositionStrategy;
         this.priority = priority;
         this.color = color;
+        setSprite(sprite);
     }
 
     public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority) {
