@@ -68,13 +68,10 @@ public class ItemBuilder {
         return this;
     }
 
-
     public ItemBuilder withRender(String spriteName, Color color) {
         try {
             this.entity
                 .add(new RenderComponent(spriteFactory.getSprite(spriteName), new ItemRenderPositionStrategy(), RenderPriority.ITEM, color))
-                .add(animationComponentFactory.createSpriteStackBuilderComponent())
-                .add(animationComponentFactory.createRefreshSpriteStackBuilderComponent())
                 .add(new SpriteComponent.Builder(spriteName).build());
 
         } catch (Exception e) {

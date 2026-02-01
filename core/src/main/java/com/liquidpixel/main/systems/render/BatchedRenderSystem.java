@@ -6,7 +6,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Array;
 import com.liquidpixel.core.components.core.PositionComponent;
+import com.liquidpixel.main.helpers.ItemHelper;
 import com.liquidpixel.main.managers.EntityInteractionManager;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +27,7 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<RenderComponent> rm = Mappers.render;
     private SpriteBatch batch;
+    private Array<String> missingSprites = new Array<>();
 
     public BatchedRenderSystem() {
         super(Family.all(PositionComponent.class, RenderComponent.class).get(), new ZComparator());
@@ -38,10 +41,7 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
         List<GameSprite> sprites = renderComponent.getSprites();
         OrthographicCamera camera = GameResources.get().getCamera();
 
-        if (sprites.isEmpty()) {
-            Gdx.app.debug("BatchedRenderSystem", "No sprites found for entity!");
-            return;
-        }
+        if (!spriteExists(entity, sprites)) return;
 
         for (GameSprite sprite : sprites) {
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(
@@ -72,6 +72,22 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
                 sprite.getRotation()
             );
         }
+    }
+
+    private boolean spriteExists(Entity entity, List<GameSprite> sprites) {
+        String name = ItemHelper.getName(entity);
+        if (sprites.isEmpty()) {
+            if (!missingSprites.contains(name, true)) {
+                Gdx.app.debug("BatchedRenderSystem", ItemHelper.getName(entity) + ": No sprites found for entity!");
+                missingSprites.add(name);
+            }
+            return false;
+        } else {
+            if (missingSprites.contains(name, true)) {
+                missingSprites.removeValue(name, true);
+            }
+        }
+        return true;
     }
 
 

@@ -22,7 +22,7 @@ public class MapManager implements IMapManager {
     public static float TIME_PER_TILE = 2f;
 
     public static boolean RIVER_ON = true;
-    public static boolean TERRAIN_ITEMS_ON = true;
+    public static boolean TERRAIN_ITEMS_ON = false;
     public static long NON_WATER_SEED = 709748066;
     public static long MUDDY_SEED = -1150544974;
     public static long WATER_SEED = -922278602;
