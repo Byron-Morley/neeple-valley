@@ -70,6 +70,7 @@ public class WorldLevelManager extends GameManager {
 
 
 
+        System.out.println("item added");
 
 
 
