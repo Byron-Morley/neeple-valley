@@ -37,10 +37,10 @@ public class EquipmentSystem extends IteratingSystem {
                 itemPositionComponent.setPosition(agentPosition);
 
                 // Handle status synchronization
-                syncStatusWithAgent(entity, item);
+//                syncStatusWithAgent(entity, item);
 
                 // Handle initial tool setup
-                setupToolForFirstTime(entity, item);
+//                setupToolForFirstTime(entity, item);
             }
         }
     }

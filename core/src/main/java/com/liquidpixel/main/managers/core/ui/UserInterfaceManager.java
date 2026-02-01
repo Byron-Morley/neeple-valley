@@ -129,7 +129,7 @@ public class UserInterfaceManager implements Renderable, IUIManager, IWindowMana
 
         registerWindow(PAUSE_MENU, new PauseMenuUI(loadAndSaveManager));
 //        registerWindow(MODE_BUTTONS, new ModeButtonsUI(selectionService));
-        registerWindow(GLOBAL_RESOURCES, new ResourcesUI(selectionService, itemService, settlementService));
+//        registerWindow(GLOBAL_RESOURCES, new ResourcesUI(selectionService, itemService, settlementService));
 //        registerWindow(TRADE_WINDOW, new TradeUI(selectionService, tradingService));
         registerWindow(COST_PANEL, new CostUI(settlementService));
 

@@ -57,7 +57,7 @@ public class AgentBuilder {
 
     public AgentBuilder withAnimations(IAnimationDefinition animationDefinition, String id) {
 
-        RenderComponent renderComponent = new RenderComponent(new SpriteRenderPositionStrategy(), RenderPriority.AGENT);
+        RenderComponent renderComponent = new RenderComponent(new SpriteRenderPositionStrategy(), RenderPriority.AGENT, true);
         //TODO hardcoded in maybe cause an issue later
         renderComponent.setWidth(1);
         renderComponent.setHeight(2);

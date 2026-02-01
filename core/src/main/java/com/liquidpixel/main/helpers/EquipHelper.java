@@ -3,6 +3,7 @@ package com.liquidpixel.main.helpers;
 import com.badlogic.ashley.core.Entity;
 import com.liquidpixel.core.engine.GameResources;
 import com.liquidpixel.main.components.agent.AgentComponent;
+import com.liquidpixel.main.components.render.RenderComponent;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.sprite.components.AnimableSpriteComponent;
 
@@ -21,6 +22,9 @@ public class EquipHelper {
 
         AgentComponent agentComponent = Mappers.agent.get(agent);
         agentComponent.setEquipped(tool);
+
+        RenderComponent renderComponent = Mappers.render.get(tool);
+        renderComponent.setCentered(true);
 
         AnimableSpriteComponent animableSpriteComponent = Mappers.animableSprite.get(agent);
         animableSpriteComponent.addSynchronisedEntity(tool, agent);

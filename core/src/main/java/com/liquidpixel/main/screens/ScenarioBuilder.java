@@ -294,7 +294,6 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         //Rendering
         engine.addSystem(new FadeSystem());
 
-
         spriteAnimationModule.registerSystems(
             engine,
             new GameSpriteProvider(itemManager.getItemService())
@@ -369,9 +368,13 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new ExitDoorSystem());
         engine.addSystem(new FishingSystem());
 
+
+
         //        engine.addSystem(new RenderSystem());
         engine.addSystem(new ShapeRenderSystem());
         engine.addSystem(new BatchedRenderSystem());
+
+
     }
 
     public void initializeGame() {

@@ -31,6 +31,8 @@ public class RenderComponent implements IRenderComponent {
     @JsonIgnore
     private List<GameSprite> sprites;
 
+    private boolean centered = false;
+
     @JsonIgnore
     private RenderPositionStrategy renderPositionStrategy;
 
@@ -42,10 +44,11 @@ public class RenderComponent implements IRenderComponent {
         setSprite(sprite);
     }
 
-    public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority) {
+    public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority, boolean centered) {
         this.sprites = new ArrayList<>();
         this.renderPositionStrategy = renderPositionStrategy;
         this.priority = priority;
+        this.centered = centered;
     }
 
     public RenderComponent(GameSprite sprite, RenderPositionStrategy renderPositionStrategy, RenderPriority priority) {
@@ -116,8 +119,16 @@ public class RenderComponent implements IRenderComponent {
 
     @Override
     public void setSprite(GameSprite sprite) {
+//        clear();
         this.sprites.add(sprite);
     }
 
+    @Override
+    public boolean isCentered() {
+        return centered;
+    }
 
+    public void setCentered(boolean centered) {
+        this.centered = centered;
+    }
 }

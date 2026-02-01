@@ -47,10 +47,14 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(
                 positionComponent.getX(), positionComponent.getY());
 
-            float x = pos.x - Dimensions.toMeters(sprite.getOriginX());
-            float y = pos.y - Dimensions.toMeters(sprite.getOriginY());
+            float originX = sprite.getOriginX();
+            float originY = sprite.getOriginY();
+
+            float x = pos.x - originX;
+            float y = pos.y - originY;
             float width = Dimensions.toMeters(sprite.getRegionWidth());
             float height = Dimensions.toMeters(sprite.getRegionHeight());
+
 
             // Check if sprite has valid texture
             if (sprite.getTexture() == null) {
@@ -63,6 +67,8 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
             boolean inFrustum = camera.frustum.boundsInFrustum(
                 x - width * margin, y - height * margin, 0,
                 width * (margin * 2), height * (margin * 2), 0);
+
+            if (!inFrustum) continue;
 
             batch.setColor(renderComponent.getColor());
             batch.draw(sprite, x, y,
@@ -116,12 +122,12 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
             int priorityDiff = getPriorityDifference(e1, e2);
 
             if (priorityDiff == 0)
-                return getVerticalPositionDifferente(e1, e2);
+                return getVerticalPositionDifference(e1, e2);
 
             return priorityDiff;
         }
 
-        private int getVerticalPositionDifferente(Entity e1, Entity e2) {
+        private int getVerticalPositionDifference(Entity e1, Entity e2) {
             PositionComponent p1 = pm.get(e1);
             PositionComponent p2 = pm.get(e2);
             BodyComponent b2 = bm.get(e2);

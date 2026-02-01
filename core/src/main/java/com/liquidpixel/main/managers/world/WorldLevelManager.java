@@ -64,8 +64,20 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
-        Entity item = itemService.getItem("providers/stone-cutter").build();
-        itemService.spawnItem(item, new GridPoint2(32, 32));
+//        Entity item = itemService.getItem("ui/blue_tint").build();
+//        itemService.spawnItem(item, new GridPoint2(35, 35));
+
+        settlementService.buildInSettlement("resources/carrot", new GridPoint2(32, 32), 30);
+
+
+        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+//
+//        Entity person = agentService.spawnAgent(new GridPoint2(32, 32), "population");
+//        settlement.addPopulation(person);
+
+
+//        Entity tool = itemService.getItem("tools/rod").build();
+//        itemService.spawnItem(tool, new GridPoint2(32, 32));
 
 
 

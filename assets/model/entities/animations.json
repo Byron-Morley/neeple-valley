@@ -776,6 +776,16 @@
       "name": "ROD",
       "frameDuration": 0.1,
       "subAnimations": {
+        "IDLE": {
+          "cells": [
+            {
+              "cell": 1,
+              "flipX": false,
+              "flipY": false
+            }
+          ],
+          "playMode": "LOOP"
+        },
         "CAST_DOWN": {
           "frameDuration": 0.3,
           "cells": [

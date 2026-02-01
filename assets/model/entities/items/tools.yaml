@@ -24,7 +24,7 @@ rod:
   label: Rod
   sprite: tools/rod
   animation:
-    model: TOOL
+    model: ROD
   equipmentInformation:
     equipSlot: HANDS
     equipType: ROD

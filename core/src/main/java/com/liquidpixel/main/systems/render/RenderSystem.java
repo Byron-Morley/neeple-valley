@@ -170,6 +170,8 @@ public class RenderSystem extends CachedSortedIteratingSystem {
             RenderComponent renderComponent = rm.get(entity);
             PositionComponent positionComponent = pm.get(entity);
 
+
+
             if (renderComponent.getSprites().isEmpty()) continue;
 
             tempPos.set(positionComponent.getX(), positionComponent.getY());

@@ -25,6 +25,7 @@ public class DebugRenderSystem extends EntitySystem {
     OrthographicCamera camera;
     MapGraph mapGraph;
     public static boolean RENDER_DEBUG = true;
+    public static boolean RENDER_GRID = true;
     public static boolean RENDER_CONNECTIONS = false; // Flag to toggle connection rendering
     public static boolean RENDER_COST_CONNECTIONS = false; // Flag to toggle cost-based connection rendering
     float MAX_COST = 2f; // Maximum connection cost for color scaling
@@ -71,6 +72,15 @@ public class DebugRenderSystem extends EntitySystem {
                 }
             }
             renderer.end();
+
+            if (RENDER_GRID) {
+                renderer.begin(ShapeRenderer.ShapeType.Line);
+                renderer.setColor(Color.YELLOW);
+                for (GridPoint2 position : mapGraph.getNodes().keySet()) {
+                    renderer.rect(position.x, position.y, 1, 1);
+                }
+                renderer.end();
+            }
 
             // Render connections between nodes
             if (RENDER_CONNECTIONS) {
@@ -155,6 +165,11 @@ public class DebugRenderSystem extends EntitySystem {
     // Method to toggle connection rendering
     public void setRenderConnections(boolean renderConnections) {
         this.RENDER_CONNECTIONS = renderConnections;
+    }
+
+    // Method to toggle grid rendering
+    public void setRenderGrid(boolean renderGrid) {
+        this.RENDER_GRID = renderGrid;
     }
 
     // Method to toggle cost-based connection rendering

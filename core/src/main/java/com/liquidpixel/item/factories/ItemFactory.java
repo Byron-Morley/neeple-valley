@@ -20,6 +20,7 @@ import com.liquidpixel.sprite.api.factory.ISpriteComponentFactory;
 import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 import com.liquidpixel.sprite.api.models.IAnimationDefinition;
 import com.liquidpixel.sprite.api.models.IRamp;
+import com.liquidpixel.sprite.components.AnimableSpriteComponent;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -82,6 +83,7 @@ public class ItemFactory {
                 storageComponent.addItem(new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), spriteFactory.getSprite(model.getSprite())));
                 storageComponent.setOneUse(true);
                 itemBuilder.updateStorageRender();
+                entity.remove(AnimableSpriteComponent.class);
 
                 return itemBuilder;
             } else {

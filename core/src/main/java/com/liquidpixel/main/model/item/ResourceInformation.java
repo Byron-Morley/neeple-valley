@@ -10,7 +10,6 @@ public class ResourceInformation {
     public ResourceInformation() {
     }
 
-
     public int getYield() {
         return yield;
     }
