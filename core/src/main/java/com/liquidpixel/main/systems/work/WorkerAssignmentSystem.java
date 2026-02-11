@@ -10,7 +10,6 @@ import com.liquidpixel.main.handlers.TransportWorkHandler;
 import com.liquidpixel.main.results.WorkOrderResult;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.pathfinding.api.IMapService;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.interfaces.work.IWorkOrderHandler;
 import com.liquidpixel.main.model.storage.WorkOrder;
@@ -22,22 +21,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorkerAssignmentSystem extends IntervalIteratingSystem {
-    IStorageService storageService;
     IMapService mapService;
     IItemService itemService;
 
     private final TransportWorkHandler transportHandler;
     private final HarvestWorkHandler harvestHandler;
 
-    public WorkerAssignmentSystem(IStorageService storageService, IMapService mapService, IItemService itemService) {
+    public WorkerAssignmentSystem(IMapService mapService, IItemService itemService) {
         super(Family.all(SettlementComponent.class).get(), 2f);
-        this.storageService = storageService;
         this.mapService = mapService;
         this.itemService = itemService;
 
         // Initialize handlers
         this.harvestHandler = new HarvestWorkHandler(mapService, itemService);
-        this.transportHandler = new TransportWorkHandler(storageService, mapService, itemService);
+        this.transportHandler = new TransportWorkHandler(mapService, itemService);
     }
 
     @Override
@@ -54,14 +51,13 @@ public class WorkerAssignmentSystem extends IntervalIteratingSystem {
             findAnyJob(workOrderList, worker, settlement);
         }
 
-
-//        for (Entity worker : workers) {
-//            if (Mappers.agentjob.has(worker)) {
-//                findJobRelatedWork(workOrderList, worker, settlement);
-//            } else {
-//                findNonJobRelatedWork(workOrderList, worker, settlement);
-//            }
-//        }
+        for (Entity worker : workers) {
+            if (Mappers.agentjob.has(worker)) {
+                findJobRelatedWork(workOrderList, worker, settlement);
+            } else {
+                findNonJobRelatedWork(workOrderList, worker, settlement);
+            }
+        }
     }
 
     private void findAnyJob(List<IWorkOrder> workOrderList, Entity worker, SettlementComponent settlement) {

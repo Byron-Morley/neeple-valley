@@ -11,10 +11,10 @@ import com.liquidpixel.main.exceptions.storage.InsufficientQuantityException;
 import com.liquidpixel.main.interfaces.IRecipe;
 import com.liquidpixel.main.interfaces.services.ISettlementService;
 import com.liquidpixel.main.interfaces.IStorageItem;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.item.StorageItem;
 import com.liquidpixel.main.model.storage.WorkOrder;
 import com.liquidpixel.main.services.SettlementService;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.main.utils.predicates.Sorter;
 import com.liquidpixel.main.utils.predicates.Storage;
@@ -26,12 +26,10 @@ import static com.liquidpixel.main.model.Work.TRANSPORT;
 import static com.liquidpixel.main.utils.utils.getSettlementFromAsset;
 
 public class CreateConsumerWorkSystem extends IteratingSystem {
-    IStorageService storageService;
     ISettlementService settlementService;
 
-    public CreateConsumerWorkSystem(IStorageService storageService, ISettlementService settlementService) {
+    public CreateConsumerWorkSystem(ISettlementService settlementService) {
         super(Family.all(CreateConsumerWorkComponent.class).get());
-        this.storageService = storageService;
         this.settlementService = settlementService;
     }
 
@@ -56,7 +54,7 @@ public class CreateConsumerWorkSystem extends IteratingSystem {
             int quantityAlreadyInStorage = 0;
             if (consumerStorage != null) {
                 try {
-                    quantityAlreadyInStorage = storageService.getAvailableQuantity(consumerStorage, requiredResource.getName());
+                    quantityAlreadyInStorage = StorageHelper.getAvailableQuantity(consumerStorage, requiredResource.getName());
                 } catch (Exception e) {
                     // If there's an error getting the quantity, assume 0
                     quantityAlreadyInStorage = 0;
@@ -82,7 +80,7 @@ public class CreateConsumerWorkSystem extends IteratingSystem {
                 StorageComponent storage = Mappers.storage.get(supplyLocation);
                 try {
                     // Check if the required quantity is available
-                    storageService.isItemQuantityAvailable(storage, new StorageItem(requiredResource.getName(), remainingQuantityNeeded, requiredResource.getStackSize(), requiredResource.getSprite()));
+                    StorageHelper.isItemQuantityAvailable(storage, new StorageItem(requiredResource.getName(), remainingQuantityNeeded, requiredResource.getStackSize(), requiredResource.getSprite()));
 
                     // If we get here, the full remaining quantity is available at this location
                     WorkOrder workOrder = new WorkOrder(
@@ -132,7 +130,7 @@ public class CreateConsumerWorkSystem extends IteratingSystem {
 
     private List<Entity> getSupplyLocations(Entity consumer, SettlementComponent settlement, IStorageItem item) {
         Sorter sorter = new Sorter(Mappers.position.get(consumer).getPosition());
-        Storage storage = new Storage(item, storageService);
+        Storage storage = new Storage(item);
 
         return settlement.getAssets()
             .stream()

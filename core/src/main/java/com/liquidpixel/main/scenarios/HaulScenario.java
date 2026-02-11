@@ -7,6 +7,7 @@ import com.liquidpixel.main.interfaces.IScenario;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.ScenarioState;
 import com.liquidpixel.main.interfaces.services.*;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
 
@@ -16,8 +17,8 @@ import java.util.List;
 
 public class HaulScenario extends Scenario implements IScenario {
 
-    public HaulScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+    public HaulScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class HaulScenario extends Scenario implements IScenario {
 
         //TODO    Create a new method for creating a storage group correctly for testing
 
-        Entity storage = storageService.createGroupStorage(new GridPoint2(20, 20), settlementService, 1, 1);
+        Entity storage = StorageHelper.createGroupStorage(new GridPoint2(20, 20), settlementService, 1, 1);
 
         settlementService.buildInSettlement("resources/wood_log", new GridPoint2(30, 40), 100);
     }
@@ -93,11 +94,11 @@ public class HaulScenario extends Scenario implements IScenario {
 
 
 
-        Entity storage1 = storageService.createGroupStorage(new GridPoint2(20, 20), settlementService, 2, 2);
-        Entity storage2 = storageService.createGroupStorage(new GridPoint2(27, 20), settlementService, 2, 2);
+        Entity storage1 = StorageHelper.createGroupStorage(new GridPoint2(20, 20), settlementService, 2, 2);
+        Entity storage2 = StorageHelper.createGroupStorage(new GridPoint2(27, 20), settlementService, 2, 2);
 
 //        storageService.setPriority(storage1, 2);
-        storageService.setPriority(storage2, 2);
+        StorageHelper.setPriority(storage2, 2);
 
         settlementService.buildInSettlement("resources/wood_log", new GridPoint2(15, 30), 30);
         settlementService.buildInSettlement("resources/stone", new GridPoint2(18, 28), 30);

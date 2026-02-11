@@ -11,6 +11,7 @@ import com.liquidpixel.main.interfaces.ScenarioState;
 import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.model.item.Item;
 import com.liquidpixel.main.model.item.StorageItem;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
@@ -20,8 +21,8 @@ import java.util.List;
 
 public class WoodCutterScenario extends Scenario implements IScenario {
 
-    public WoodCutterScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+    public WoodCutterScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override
@@ -163,7 +164,7 @@ public class WoodCutterScenario extends Scenario implements IScenario {
         trackEntity(house);
 
         // Add population
-        Entity person = agentService.getAgent("population");
+        Entity person = agentService.createAgent("population");
         settlementComponent.addPopulation(person);
         settlementComponent.addPersonToHouse(person);
         settlementComponent.addPersonToJob(person);
@@ -196,7 +197,7 @@ public class WoodCutterScenario extends Scenario implements IScenario {
         StorageComponent storage = Mappers.storage.get(storageEntity);
         if (storage != null) {
             StorageItem woodItem = createWoodStorageItem(15);
-            storageService.addItem(storage, woodItem);
+            StorageHelper.addItem(storage, woodItem);
         }
     }
 
@@ -212,7 +213,7 @@ public class WoodCutterScenario extends Scenario implements IScenario {
         StorageComponent storage = Mappers.storage.get(tempStorage);
         if (storage != null) {
             StorageItem resourceItem = createResourceStorageItem(resourceName, quantity);
-            storageService.addItem(storage, resourceItem);
+            StorageHelper.addItem(storage, resourceItem);
         }
 
         // Add to settlement as asset

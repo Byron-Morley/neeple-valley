@@ -9,8 +9,8 @@ import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.interfaces.IStorageItem;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.services.IItemService;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.pathfinding.api.IMapService;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.interfaces.work.IWorkOrderHandler;
 import com.liquidpixel.main.model.item.StorageItem;
@@ -26,13 +26,11 @@ import java.util.List;
 import static com.liquidpixel.main.screens.WorldScreen.STACK_TO_CARRY_RATIO;
 
 public class TransportWorkHandler implements IWorkOrderHandler {
-    private final IStorageService storageService;
     private final IMapService mapService;
     private final IItemService itemService;
     private final IWorldMap worldMap;
 
-    public TransportWorkHandler(IStorageService storageService, IMapService mapService, IItemService itemService) {
-        this.storageService = storageService;
+    public TransportWorkHandler(IMapService mapService, IItemService itemService) {
         this.mapService = mapService;
         this.itemService = itemService;
         this.worldMap = mapService.getWorldMap();
@@ -55,7 +53,7 @@ public class TransportWorkHandler implements IWorkOrderHandler {
 
 
     private WorkOrderResult processFullWorkOrder(IWorkOrder workOrder, Entity worker) {
-        if (storageService.isWorkValid(workOrder)) {
+        if (StorageHelper.isWorkValid(workOrder)) {
             assignTransportWorkOrder(workOrder, worker);
             return WorkOrderResult.success();
         } else {
@@ -67,7 +65,7 @@ public class TransportWorkHandler implements IWorkOrderHandler {
         int quantityToProcess = workerCarryCapacity;
         WorkOrder splitWorkOrder = createSplitWorkOrder(workOrder, quantityToProcess);
 
-        if (storageService.isWorkValid(splitWorkOrder)) {
+        if (StorageHelper.isWorkValid(splitWorkOrder)) {
             // Update original work order quantity
             workOrder.setQuantity(workOrder.getQuantity() - quantityToProcess);
 

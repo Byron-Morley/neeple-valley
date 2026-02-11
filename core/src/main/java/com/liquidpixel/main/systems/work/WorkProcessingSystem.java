@@ -9,7 +9,6 @@ import com.liquidpixel.main.handlers.HarvestWorkHandler;
 import com.liquidpixel.main.handlers.TransportWorkHandler;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.pathfinding.api.IMapService;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.interfaces.work.IWorkOrderHandler;
 import com.liquidpixel.main.model.storage.WorkOrder;
@@ -20,7 +19,6 @@ import java.util.List;
 
 public class WorkProcessingSystem extends IteratingSystem {
 
-    IStorageService storageService;
     IMapService mapService;
     IItemService itemService;
 
@@ -28,15 +26,14 @@ public class WorkProcessingSystem extends IteratingSystem {
     private final HarvestWorkHandler harvestHandler;
 
 
-    public WorkProcessingSystem(IStorageService storageService, IMapService mapService, IItemService itemService) {
+    public WorkProcessingSystem(IMapService mapService, IItemService itemService) {
         super(Family.all(SettlementComponent.class).get());
-        this.storageService = storageService;
         this.mapService = mapService;
         this.itemService = itemService;
 
         // Initialize handlers
         this.harvestHandler = new HarvestWorkHandler(mapService, itemService);
-        this.transportHandler = new TransportWorkHandler(storageService, mapService, itemService);
+        this.transportHandler = new TransportWorkHandler(mapService, itemService);
     }
 
     @Override

@@ -40,7 +40,7 @@ carry_storage:
 
 warehouse:
   label: Warehouse
-  sprite: workshops/storehouse
+  sprite: providers/storehouse
   clickBehavior: storage_window
   jobs: 1
   bodyModel: custom_house_body_3
@@ -48,3 +48,5 @@ warehouse:
     slots: 4
     workshop: true
     priority: 2
+  building:
+    door: true

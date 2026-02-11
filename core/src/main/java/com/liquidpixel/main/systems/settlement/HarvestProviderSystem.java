@@ -9,9 +9,9 @@ import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.exceptions.storage.InsufficientQuantityException;
 import com.liquidpixel.main.exceptions.storage.InsufficientSpaceException;
 import com.liquidpixel.item.factories.ItemFactory;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.item.Item;
 import com.liquidpixel.main.model.item.StorageItem;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.sprite.api.factory.ISpriteFactory;
@@ -24,20 +24,18 @@ import static com.liquidpixel.main.engine.GameClock.SECONDS_PER_DAY;
 public class HarvestProviderSystem extends IteratingSystem {
 
     static final float UPDATE_INTERVAL = 2f;
-    IStorageService storageService;
     ISpriteFactory spriteFactory;
 
-    public HarvestProviderSystem(IStorageService storageService, ISpriteFactory spriteFactory) {
+    public HarvestProviderSystem(ISpriteFactory spriteFactory) {
         super(Family.all(HarvestProviderComponent.class).get());
-        this.storageService = storageService;
         this.spriteFactory = spriteFactory;
     }
 
     @Override
-    protected void processEntity(Entity entity, float deltaTime) {
+    protected void processEntity(Entity providerEntity, float deltaTime) {
 
-        HarvestProviderComponent provider = Mappers.harvestProvider.get(entity);
-        AssetComponent building = Mappers.asset.get(entity);
+        HarvestProviderComponent provider = Mappers.harvestProvider.get(providerEntity);
+        AssetComponent building = Mappers.asset.get(providerEntity);
 
         if (building == null) {
             throw new RuntimeException("HarvestProviderSystem: Building not set for harvest provider");
@@ -53,14 +51,14 @@ public class HarvestProviderSystem extends IteratingSystem {
         if (settlement.getTimeSinceLastUpdate() >= UPDATE_INTERVAL) {
             if (provider.isActive()) {
                 if (isReadyToHarvest(provider, settlement)) {
-                    harvest(entity, provider, settlement);
+                    harvest(providerEntity, provider, settlement);
                 } else {
                     calculateTimeLeftTillHarvest(provider, settlement);
                 }
             } else {
                 Item item = ItemFactory.getModels().get(provider.getResource());
-                if (canBeActivated(entity, item)) {
-                    activateHarvestCycle(entity, 0f);
+                if (canBeActivated(providerEntity, item)) {
+                    activateHarvestCycle(providerEntity, 0f);
                 }
             }
             settlement.setTimeSinceLastUpdate(0f);
@@ -86,9 +84,9 @@ public class HarvestProviderSystem extends IteratingSystem {
         if (quantity > 0) {
             GameSprite sprite = spriteFactory.getSprite(item.getSpriteName());
             try {
-                storageService.addItem(Mappers.storage.get(entity), new StorageItem(name, quantity, item.getStackSize(), sprite));
+                StorageHelper.addItem(Mappers.storage.get(entity), new StorageItem(name, quantity, item.getStackSize(), sprite));
             } catch (InsufficientQuantityException exception) {
-                storageService.addItem(Mappers.storage.get(entity), new StorageItem(name, exception.getAvailable(), item.getStackSize(), sprite));
+                StorageHelper.addItem(Mappers.storage.get(entity), new StorageItem(name, exception.getAvailable(), item.getStackSize(), sprite));
             } catch (InsufficientSpaceException exception) {
                 System.out.println("Not enough space");
             }
@@ -123,7 +121,7 @@ public class HarvestProviderSystem extends IteratingSystem {
     private boolean canBeActivated(Entity entity, Item item) {
         if (Mappers.jobs.has(entity)) {
             if (!Mappers.jobs.get(entity).getWorkers().isEmpty() &&
-                storageService.hasSpace(Mappers.storage.get(entity), new StorageItem(item.getName(), 1, item.getStackSize(), spriteFactory.getSprite(item.getSpriteName())))) {
+                StorageHelper.hasSpace(Mappers.storage.get(entity), new StorageItem(item.getName(), 1, item.getStackSize(), spriteFactory.getSprite(item.getSpriteName())))) {
                 return true;
             }
         }

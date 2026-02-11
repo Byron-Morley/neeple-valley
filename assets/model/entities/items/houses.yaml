@@ -1,7 +1,9 @@
 house:
   label: House
-  sprite: workshops/house
+  sprite: houses/house
   bodyModel: custom_house_body_4
+  building:
+    door: true
 door:
   label: Door
   sprite: houses/door

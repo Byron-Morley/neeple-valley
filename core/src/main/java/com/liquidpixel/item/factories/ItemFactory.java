@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import static com.liquidpixel.main.services.items.StorageHelper.RESOURCE_STORAGE;
+
 public class ItemFactory {
 
     ISpriteComponentFactory spriteComponentFactory;
@@ -75,7 +77,7 @@ public class ItemFactory {
             }
 
             if (model.isResource()) {
-                Item invisibleStorage = models.get("storage/invisible_storage");
+                Item invisibleStorage = models.get(RESOURCE_STORAGE);
                 ItemComponent itemComponent = new ItemComponent(name, quantity);
                 ItemBuilder itemBuilder = buildItem(invisibleStorage, 1);
                 Entity entity = itemBuilder.build();

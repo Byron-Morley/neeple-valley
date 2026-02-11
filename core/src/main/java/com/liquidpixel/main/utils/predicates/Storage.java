@@ -6,8 +6,8 @@ import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.interfaces.IStorageItem;
 import com.liquidpixel.main.interfaces.IWorldMap;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.item.StorageItem;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.main.utils.Mappers;
 
 import java.util.List;
@@ -15,13 +15,11 @@ import java.util.List;
 public class Storage {
 
     IStorageItem item;
-    IStorageService storageService;
     IWorldMap worldMap;
 
 
-    public Storage(IStorageItem item, IStorageService storageService) {
+    public Storage(IStorageItem item) {
         this.item = item;
-        this.storageService = storageService;
     }
 
     public Storage(IStorageItem item, IWorldMap worldMap) {
@@ -31,18 +29,18 @@ public class Storage {
 
     public boolean hasAnySpace(Entity entity) {
         StorageComponent storageComponent = Mappers.storage.get(entity);
-        return storageService.hasAnySpace(storageComponent, item);
+        return StorageHelper.hasAnySpace(storageComponent, item);
     }
 
     public boolean hasItem(Entity entity) {
         StorageComponent storageComponent = Mappers.storage.get(entity);
-        return storageService.isItemQuantityAvailable(storageComponent, item);
+        return StorageHelper.isItemQuantityAvailable(storageComponent, item);
     }
 
     public boolean hasAnyQuantityOfItem(Entity entity) {
         StorageComponent storageComponent = Mappers.storage.get(entity);
         try {
-            return storageService.isItemQuantityAvailable(storageComponent, new StorageItem(item.getName(), 1, item.getStackSize(), item.getSprite()));
+            return StorageHelper.isItemQuantityAvailable(storageComponent, new StorageItem(item.getName(), 1, item.getStackSize(), item.getSprite()));
         } catch (Exception e) {
             return false;
         }
@@ -50,10 +48,6 @@ public class Storage {
 
     public void setItem(IStorageItem item) {
         this.item = item;
-    }
-
-    public void setStorageService(IStorageService storageService) {
-        this.storageService = storageService;
     }
 
     public void setWorldMap(IWorldMap worldMap) {

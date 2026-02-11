@@ -146,7 +146,7 @@ public class UserInterfaceManager implements Renderable, IUIManager, IWindowMana
 
         registerWindow(INFO_PANEL, new InfoPanelUI(selectionService));
 //        registerWindow(SELECTION_UI, new SelectionUI(selectionService, cameraService));
-        registerWindow(STORAGE_UI, new StorageUI(windowService, itemService, uiService));
+        registerWindow(STORAGE_UI, new StorageUI(windowService, itemService, uiService, spriteFactory));
 //        registerWindow(RECIPE_CHOICE, new RecipeListUI(itemService));
         registerWindow(GAME_CLOCK, new GameClockUI(mapService));
         registerWindow(WORK_ORDER_UI, new WorkOrderUI(settlementService));

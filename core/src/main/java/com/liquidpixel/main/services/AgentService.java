@@ -55,7 +55,7 @@ public class AgentService extends Service implements IAgentService {
         }
     }
 
-    public Entity getAgent(String type){
+    public Entity createAgent(String type){
         AgentBuilder agentBuilder = agentFactory.create(type);
         Entity agentEntity = agentBuilder.build();
         printEntityComponents(agentEntity);
@@ -67,7 +67,6 @@ public class AgentService extends Service implements IAgentService {
         AgentBuilder agentBuilder = agentFactory.create(type).at(location.x, location.y);
         Entity agentEntity = agentBuilder.build();
         printEntityComponents(agentEntity);
-
         getEngine().addEntity(agentEntity);
         return agentEntity;
     }

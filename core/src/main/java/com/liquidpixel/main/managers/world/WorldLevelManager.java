@@ -1,25 +1,25 @@
 package com.liquidpixel.main.managers.world;
 
-import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.core.components.core.StatusComponent;
-import com.liquidpixel.main.components.agent.AgentComponent;
-import com.liquidpixel.main.components.render.RenderComponent;
-import com.liquidpixel.main.factories.ComponentFactory;
-import com.liquidpixel.main.helpers.EquipHelper;
-import com.liquidpixel.main.model.RenderPriority;
-import com.liquidpixel.main.renderposition.EquipmentRenderPositionStrategy;
-import com.liquidpixel.sprite.components.AnimableSpriteComponent;
 import com.liquidpixel.core.core.Action;
 import com.liquidpixel.core.core.Direction;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.math.GridPoint2;
+import com.liquidpixel.main.components.DoorComponent;
+import com.liquidpixel.main.components.colony.BuildingComponent;
+import com.liquidpixel.main.components.colony.ExitDoorComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.engine.GameResources;
+import com.liquidpixel.main.helpers.BuildingHelper;
+import com.liquidpixel.main.interfaces.IStorageItem;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.managers.core.GameManager;
+import com.liquidpixel.main.services.items.StorageHelper;
+import com.liquidpixel.main.utils.LoopUtils;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.pathfinding.api.IMapService;
 import com.liquidpixel.sprite.api.ISpriteAnimationModule;
@@ -64,14 +64,38 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
-//        Entity item = itemService.getItem("ui/blue_tint").build();
-//        itemService.spawnItem(item, new GridPoint2(35, 35));
-
-        settlementService.buildInSettlement("resources/carrot", new GridPoint2(32, 32), 30);
 
 
         SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+        Entity warehouse1 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(20, 30));
+        Entity warehouse2 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(32, 30));
+
+
+        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(0,0), 20);
+        IStorageItem storageItem = itemService.getStorageItem(item);
+        StorageHelper.addItem(warehouse1, storageItem);
+
+        System.out.println("item added");
+//        Entity item = itemService.getItem("ui/blue_tint").build();
+//        itemService.spawnItem(item, new GridPoint2(35, 35));
+
+//        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+//        Entity house = settlementService.buildInSettlement("houses/house", new GridPoint2(20, 32));
+
 //
+//        Entity person = agentService.createAgent("population");
+
+//        Entity door = itemService.getItem("houses/door").build();
+//        itemService.spawnItem(door, new GridPoint2(32, 32));
+
+//        GridPoint2 origin = new GridPoint2(0, 0);
+//        LoopUtils.insideOut(16, 16, origin, (position) -> {
+//            System.out.println(position);
+//        });
+
+
+//        exitWorkshop();
+
 //        Entity person = agentService.spawnAgent(new GridPoint2(32, 32), "population");
 //        settlement.addPopulation(person);
 
@@ -79,33 +103,7 @@ public class WorldLevelManager extends GameManager {
 //        Entity tool = itemService.getItem("tools/rod").build();
 //        itemService.spawnItem(tool, new GridPoint2(32, 32));
 
-
-
-
         System.out.println("item added");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //        spriteModule.setComponentFactory(new ComponentFactory());
 //        ISpriteComponentFactory animationComponentFactory = spriteModule.getSpriteComponentFactory();
@@ -315,6 +313,23 @@ public class WorldLevelManager extends GameManager {
 
     }
 
+    private void exitWorkshop() {
+        Entity woodCutter = settlementService.buildInSettlement("providers/wood-cutter", new GridPoint2(30, 32));
+        Entity person = agentService.spawnAgent(new GridPoint2(30, 32), "man");
+
+        SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+        settlement.addPopulation(person);
+        BuildingHelper.spawnInBuilding(person, woodCutter);
+
+        runAfterFrames(20, () -> {
+            BuildingComponent building = Mappers.building.get(woodCutter);
+            Entity door = building.getDoor();
+            DoorComponent doorComponent = Mappers.door.get(door);
+            doorComponent.addOccupant(person);
+            person.add(new ExitDoorComponent(door));
+        });
+    }
+
 
     private static void setStatus(Entity entity, Action action, Direction direction) {
         StatusComponent status = Mappers.status.get(entity);
@@ -339,7 +354,7 @@ public class WorldLevelManager extends GameManager {
         settlementService.buildInSettlement(town, "houses/house_2", new GridPoint2(31, 33));
         settlementService.buildInSettlement(town, "storage/warehouse", new GridPoint2(36, 33));
 
-        Entity person = agentService.getAgent("population");
+        Entity person = agentService.createAgent("population");
         settlement.addPopulation(person);
         settlement.addPersonToHouse(person);
         settlement.addPersonToJob(person);
@@ -351,7 +366,7 @@ public class WorldLevelManager extends GameManager {
 //
         settlementService.buildInSettlement(town, "providers/farm", new GridPoint2(29, 30));
 
-        person = agentService.getAgent("population");
+        person = agentService.createAgent("population");
         settlement.addPopulation(person);
         settlement.addPersonToHouse(person);
         settlement.addPersonToJob(person);
@@ -375,5 +390,19 @@ public class WorldLevelManager extends GameManager {
                 }
             }
         }
+    }
+
+    public void runAfterFrames(int frames, Runnable action) {
+        engine.addSystem(new EntitySystem() {
+            int counter = frames;
+
+            @Override
+            public void update(float deltaTime) {
+                if (counter-- <= 0) {
+                    action.run();
+                    engine.removeSystem(this);
+                }
+            }
+        });
     }
 }

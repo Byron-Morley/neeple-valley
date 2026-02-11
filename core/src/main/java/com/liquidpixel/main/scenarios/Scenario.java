@@ -17,17 +17,15 @@ public class Scenario {
     protected ISettlementService settlementService;
     protected IAgentService agentService;
     protected IItemService itemService;
-    protected IStorageService storageService;
     protected List<Entity> spawnedEntities = new ArrayList<>();
 
-    public Scenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
+    public Scenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
         this.mapService = mapService;
         this.worldMap = worldMap;
         this.selectionService = selectionService;
         this.settlementService = settlementService;
         this.agentService = agentService;
         this.itemService = itemService;
-        this.storageService = storageService;
     }
 
     protected void trackEntity(Entity entity) {

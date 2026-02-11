@@ -242,7 +242,7 @@ public class ItemBuilder {
 
     public void withStorage(Storage storage) {
         entity.add(new StorageComponent(storage));
-        if (storage.isWorkshop()) entity.add(new WorkshopComponent());
+        if (storage.isWorkshop()) entity.add(new WorkshopComponent(storage.getInput()));
         if (storage.isTile()) entity.add(new StorageTileComponent());
         if (storage.isGroup()) entity.add(new StorageGroupComponent());
     }

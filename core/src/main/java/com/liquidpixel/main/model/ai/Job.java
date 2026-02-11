@@ -5,20 +5,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Job {
 
-    @JsonProperty
     String id;
 
-    @JsonProperty
     Entity workshop;
 
-    @JsonProperty
     Entity agent;
 
-
-    @JsonCreator
     public Job(String id, Entity workshop, Entity agent) {
         this.workshop = workshop;
         this.agent = agent;

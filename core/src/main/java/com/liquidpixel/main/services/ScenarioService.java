@@ -20,20 +20,18 @@ public class ScenarioService implements IScenarioService {
     private final ISettlementService settlementService;
     private final IAgentService agentService;
     private final IItemService itemService;
-    private final IStorageService storageService;
 
     private IScenario currentScenario;
     private final Map<String, Class<? extends IScenario>> scenarioClasses = new HashMap<>();
 
     public ScenarioService(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                          ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
+                          ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
         this.mapService = mapService;
         this.worldMap = worldMap;
         this.selectionService = selectionService;
         this.settlementService = settlementService;
         this.agentService = agentService;
         this.itemService = itemService;
-        this.storageService = storageService;
 
         initializeScenarioRegistry();
     }
@@ -45,7 +43,7 @@ public class ScenarioService implements IScenarioService {
 //        scenarioClasses.put("Selection", SelectionScenario.class);
 //        scenarioClasses.put("Haul", HaulScenario.class);
 //        scenarioClasses.put("ProcGenScenario", ProcGenScenario.class);
-//        scenarioClasses.put("DoorScenario", DoorScenario.class);
+        scenarioClasses.put("DoorScenario", DoorScenario.class);
 //        scenarioClasses.put("BuildingScenario", BuildingScenario.class);
 //        scenarioClasses.put("FarmingScenario", FarmingScenario.class);
 //        scenarioClasses.put("AgentColorScenario", AgentColorScenario.class);
@@ -74,8 +72,7 @@ public class ScenarioService implements IScenarioService {
                 ISelectionService.class,
                 ISettlementService.class,
                 IAgentService.class,
-                IItemService.class,
-                IStorageService.class
+                IItemService.class
             );
 
             currentScenario = constructor.newInstance(
@@ -84,8 +81,7 @@ public class ScenarioService implements IScenarioService {
                 selectionService,
                 settlementService,
                 agentService,
-                itemService,
-                storageService
+                itemService
             );
 
             return currentScenario;

@@ -3,6 +3,9 @@ package com.liquidpixel.main.systems.settlement;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.liquidpixel.core.core.Status;
+import com.liquidpixel.main.components.DoNotRenderComponent;
+import com.liquidpixel.main.components.DoorComponent;
 import com.liquidpixel.main.components.colony.ExitDoorComponent;
 import com.liquidpixel.main.components.render.FadeComponent;
 import com.liquidpixel.main.interfaces.IDoorService;
@@ -46,12 +49,22 @@ public class ExitDoorSystem extends IteratingSystem {
     }
 
     private void handleOpenState(Entity person, ExitDoorComponent exitDoor) {
-        doorService.closeDoor(exitDoor.getDoor());
+        Entity door = exitDoor.getDoor();
+        IAnimationService animationService = doorService.closeDoor(door);
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onAnimationFinished() {
+                animationService.setAnimation(new Status("CLOSED", ""));
+            }
+        });
+        DoorComponent doorComponent = Mappers.door.get(door);
+        doorComponent.removeOccupant(person);
         person.remove(ExitDoorComponent.class);
         Mappers.status.get(person).setAction(Action.STANDING);
     }
 
     private void handleWalkingState(Entity person, ExitDoorComponent exitDoor) {
+
         if (Mappers.fade.has(person)) {
             FadeComponent fadeComponent = Mappers.fade.get(person);
             if (!fadeComponent.isFading() && !renderService.isFullyVisible(person)) {
@@ -67,15 +80,19 @@ public class ExitDoorSystem extends IteratingSystem {
 
     private void handleOpeningState(Entity person, ExitDoorComponent exitDoor) {
         IAnimationService animationService = new AnimationService(exitDoor.getDoor());
-
-        if (animationService.isAnimationFinished()) {
-            exitDoor.state = Action.WALKING;
-        }
+        person.remove(DoNotRenderComponent.class);
+        animationService.addListener(new AnimationService.AnimationListener() {
+            @Override
+            public void onAnimationFinished() {
+                exitDoor.state = Action.WALKING;
+            }
+        });
     }
 
     private void handleClosedState(Entity person, ExitDoorComponent exitDoor) {
         if (doorService.canExitDoor(person)) {
             EntityInteractionManager.getInstance().registerInteraction(exitDoor.getDoor(), person);
+
             exitDoor.state = Action.OPENING;
         } else {
             person.remove(ExitDoorComponent.class);

@@ -19,8 +19,8 @@ import java.util.List;
 public class DoorScenario extends Scenario implements IScenario {
 
     public DoorScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                        ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+                        ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class DoorScenario extends Scenario implements IScenario {
 
     @Override
     public boolean loadState(String stateId) {
-        // Clear current state first
         reset();
 
         switch (stateId) {

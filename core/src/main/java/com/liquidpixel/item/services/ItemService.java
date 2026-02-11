@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.main.components.agent.AgentComponent;
 import com.liquidpixel.main.components.agent.WorkerComponent;
@@ -11,6 +12,7 @@ import com.liquidpixel.main.components.render.RenderComponent;
 import com.liquidpixel.main.interfaces.managers.IItemManager;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.main.interfaces.work.IWorkService;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.badlogic.gdx.math.GridPoint2;
 import com.liquidpixel.item.builders.ItemBuilder;
@@ -36,16 +38,17 @@ import com.liquidpixel.sprite.model.Ramp;
 import java.util.*;
 import java.util.List;
 
+import static com.liquidpixel.main.services.items.StorageHelper.RESOURCE_STORAGE;
 import static com.liquidpixel.main.utils.utils.getList;
 
 public class ItemService extends Service implements IItemService {
     IWorkService workService;
     IItemManager itemManager;
-    ISpriteFactory  spriteFactory;
+    ISpriteFactory spriteFactory;
     ComponentMapper<RenderComponent> rm = Mappers.render;
     ComponentMapper<TileableComponent> tm = Mappers.tileset;
 
-    public ItemService(IItemManager itemManager, ISpriteFactory  spriteFactory) {
+    public ItemService(IItemManager itemManager, ISpriteFactory spriteFactory) {
         this.itemManager = itemManager;
         this.workService = new WorkService(this);
         this.spriteFactory = spriteFactory;
@@ -254,11 +257,16 @@ public class ItemService extends Service implements IItemService {
             .build();
     }
 
-    public IStorageItem getStorageItem(Entity entity){
+    public IStorageItem getStorageItem(Entity entity) {
         ItemComponent itemComponent = entity.getComponent(ItemComponent.class);
         SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
         GameSprite gameSprite = spriteFactory.getSprite(spriteComponent.getName());
-        return new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), gameSprite);
+
+        if (Mappers.storage.has(entity) && itemComponent.getName().equals(RESOURCE_STORAGE)) {
+            return StorageHelper.getResource(entity);
+        } else {
+            return new StorageItem(itemComponent.getName(), itemComponent.getQuantity(), itemComponent.getStackSize(), gameSprite);
+        }
     }
 
 }

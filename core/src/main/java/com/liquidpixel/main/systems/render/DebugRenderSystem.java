@@ -24,8 +24,8 @@ public class DebugRenderSystem extends EntitySystem {
     SpriteBatch spriteBatch;
     OrthographicCamera camera;
     MapGraph mapGraph;
-    public static boolean RENDER_DEBUG = true;
-    public static boolean RENDER_GRID = true;
+    public static boolean RENDER_DEBUG = false;
+    public static boolean RENDER_GRID = false;
     public static boolean RENDER_CONNECTIONS = false; // Flag to toggle connection rendering
     public static boolean RENDER_COST_CONNECTIONS = false; // Flag to toggle cost-based connection rendering
     float MAX_COST = 2f; // Maximum connection cost for color scaling

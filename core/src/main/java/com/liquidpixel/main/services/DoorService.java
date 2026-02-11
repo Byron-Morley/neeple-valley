@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.core.components.core.StatusComponent;
+import com.liquidpixel.core.core.Status;
 import com.liquidpixel.main.components.DoNotRenderComponent;
 import com.liquidpixel.main.components.DoorComponent;
 import com.liquidpixel.pathfinding.components.TraverseComponent;
@@ -14,22 +15,23 @@ import com.liquidpixel.main.interfaces.IDoorService;
 import com.liquidpixel.core.core.Action;
 import com.liquidpixel.core.core.Direction;
 import com.liquidpixel.main.utils.Mappers;
+import com.liquidpixel.sprite.api.services.IAnimationService;
+import com.liquidpixel.sprite.services.AnimationService;
 
 public class DoorService extends Service implements IDoorService {
+
     @Override
-    public void openDoor(Entity door) {
-        if (Mappers.status.has(door)) {
-            StatusComponent statusComponent = Mappers.status.get(door);
-            statusComponent.setAction(Action.OPENING);
-        }
+    public IAnimationService openDoor(Entity door) {
+        IAnimationService animationService = new AnimationService(door);
+        animationService.setAnimation(new Status("OPENING", ""));
+        return animationService;
     }
 
     @Override
-    public void closeDoor(Entity door) {
-        if (Mappers.status.has(door)) {
-            StatusComponent statusComponent = Mappers.status.get(door);
-            statusComponent.setAction(Action.CLOSING);
-        }
+    public IAnimationService closeDoor(Entity door) {
+        IAnimationService animationService = new AnimationService(door);
+        animationService.setAnimation(new Status("CLOSING", ""));
+        return animationService;
     }
 
     @Override
@@ -96,9 +98,14 @@ public class DoorService extends Service implements IDoorService {
 
             // OPEN DOOR
             if (statusComponent.getAction() == Action.CLOSED) {
-                openDoor(door);
+                IAnimationService animationService = openDoor(door);
+                animationService.addListener(new AnimationService.AnimationListener() {
+                    @Override
+                    public void onAnimationFinished() {
+                        animationService.setAnimation(new Status("OPEN", ""));
+                    }
+                });
             }
-
             return true;
         } else {
             return false;

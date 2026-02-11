@@ -1,6 +1,7 @@
 package com.liquidpixel.main.services.items;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
@@ -14,10 +15,7 @@ import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.exceptions.storage.InsufficientQuantityException;
 import com.liquidpixel.main.exceptions.storage.InsufficientSpaceException;
 import com.liquidpixel.main.interfaces.*;
-import com.liquidpixel.main.interfaces.managers.ISelectionManager;
-import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.main.interfaces.services.ISettlementService;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.model.item.StorageItem;
 import com.liquidpixel.sprite.model.GameSprite;
@@ -29,19 +27,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StorageService implements IStorageService {
+public class StorageHelper {
 
-    IItemService itemService;
-    ISelectionManager selectionManager;
-    ISpriteFactory spriteFactory;
+    public static String RESOURCE_STORAGE = "storage/invisible_storage";
 
-    public StorageService(ISelectionManager selectionManager, IItemService itemService, ISpriteFactory spriteFactory) {
-        this.itemService = itemService;
-        this.selectionManager = selectionManager;
-        this.spriteFactory = spriteFactory;
+    public static void addItem(Entity storage, IStorageItem storageItem) {
+        if (Mappers.storage.has(storage)) {
+            StorageComponent storageComponent = Mappers.storage.get(storage);
+            addItem(storageComponent, storageItem);
+        } else {
+            Gdx.app.error("StorageHelper", "Storage entity does not have a storage component");
+        }
     }
 
-    public void addItem(StorageComponent storage, IStorageItem storageItem) {
+    public static void addItem(StorageComponent storage, IStorageItem storageItem) {
         if (storageItem == null || storageItem.getQuantity() <= 0) {
             return;
         }
@@ -68,7 +67,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    public IStorageItem removeItem(StorageComponent storage, IStorageItem storageItem) {
+    public static IStorageItem removeItem(StorageComponent storage, IStorageItem storageItem) {
         if (storageItem.getQuantity() <= 0) {
             throw new IllegalArgumentException("Quantity to remove must be positive");
         }
@@ -104,7 +103,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    public int getAvailableQuantity(StorageComponent storage, String itemName) {
+    public static int getAvailableQuantity(StorageComponent storage, String itemName) {
         try {
 
             // Get the item from storage
@@ -125,7 +124,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    public boolean isItemQuantityAvailable(StorageComponent storage, IStorageItem storageItem) {
+    public static boolean isItemQuantityAvailable(StorageComponent storage, IStorageItem storageItem) {
         try {
             if (storageItem.getQuantity() <= 0) {
                 return false;
@@ -159,7 +158,7 @@ public class StorageService implements IStorageService {
         }
     }
 
-    public boolean isWorkValid(IWorkOrder workOrder) {
+    public static boolean isWorkValid(IWorkOrder workOrder) {
         try {
             return (isItemQuantityAvailable(Mappers.storage.get(workOrder.getOrigin()), workOrder.getItem())
                 && hasSpace(Mappers.storage.get(workOrder.getDestination()), workOrder.getItem())
@@ -169,8 +168,7 @@ public class StorageService implements IStorageService {
         }
     }
 
-    @Override
-    public IStorageItem getAnyItemICanCarry(StorageComponent storage) {
+    public static IStorageItem getAnyItemICanCarry(StorageComponent storage) {
         if (storage == null || storage.getItems().isEmpty()) {
             return null;
         }
@@ -199,8 +197,7 @@ public class StorageService implements IStorageService {
         return null;
     }
 
-    @Override
-    public IStorageItem getFullStack(StorageComponent storage) {
+    public static IStorageItem getFullStack(StorageComponent storage) {
         if (storage == null || storage.getItems().isEmpty()) {
             return null;
         }
@@ -226,7 +223,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    public boolean hasSpace(StorageComponent storage, IStorageItem storageItem) {
+    public static boolean hasSpace(StorageComponent storage, IStorageItem storageItem) {
         if (storageItem.getQuantity() <= 0) {
             return true; // No space needed for zero or negative quantity
         }
@@ -272,7 +269,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    public boolean hasAnySpace(StorageComponent storage, IStorageItem storageItem) {
+    public static boolean hasAnySpace(StorageComponent storage, IStorageItem storageItem) {
         if (storageItem == null) {
             return false;
         }
@@ -289,7 +286,7 @@ public class StorageService implements IStorageService {
         return hasSpace(storage, singleItem);
     }
 
-    public int getAvailableSlots(StorageComponent storage) {
+    public static int getAvailableSlots(StorageComponent storage) {
         int totalSlots = storage.getSlots();
 
         // Merge regular items with reserved space to get an accurate picture of used space
@@ -312,7 +309,7 @@ public class StorageService implements IStorageService {
     }
 
     // Add this mergeItems function to support the above methods
-    public Map<String, IStorageItem> mergeItems(Map<String, IStorageItem> targetItems, Map<String, IStorageItem> sourceItems) {
+    public static Map<String, IStorageItem> mergeItems(Map<String, IStorageItem> targetItems, Map<String, IStorageItem> sourceItems) {
         if (sourceItems == null || sourceItems.isEmpty()) {
             return new HashMap<>(targetItems != null ? targetItems : new HashMap<>());
         }
@@ -360,8 +357,7 @@ public class StorageService implements IStorageService {
     }
 
 
-    @Override
-    public StorageQueryResult isThereEnoughSpaceForItem(Entity storageLocation, IStorageItem item, List<IWorkOrder> storageWorkOrders) {
+    public static StorageQueryResult isThereEnoughSpaceForItem(Entity storageLocation, IStorageItem item, List<IWorkOrder> storageWorkOrders) {
         StorageQueryResult result = new StorageQueryResult();
 
         // Get the storage component from the entity
@@ -454,7 +450,7 @@ public class StorageService implements IStorageService {
      * Calculate how much of a specific item can fit in the storage.
      * This includes empty slots and partially filled slots with the same item.
      */
-    private StorageQueryResult calculateAvailableSpaceForItem(StorageComponent storage, IStorageItem item) {
+    private static StorageQueryResult calculateAvailableSpaceForItem(StorageComponent storage, IStorageItem item) {
         StorageQueryResult result = new StorageQueryResult();
 
         if (item == null || item.getQuantity() <= 0) {
@@ -498,7 +494,7 @@ public class StorageService implements IStorageService {
         return result;
     }
 
-    public Entity createGroupStorage(GridPoint2 point, ISettlementService settlementService, int width, int height) {
+    public static Entity createGroupStorage(GridPoint2 point, ISettlementService settlementService, int width, int height) {
 
         Entity entity = settlementService.buildInSettlement("storage/storage_group", point);
         entity.remove(RenderComponent.class);
@@ -515,7 +511,7 @@ public class StorageService implements IStorageService {
         for (int x = 0; x < height; x++) {
             for (int y = 0; y < width; y++) {
                 GridPoint2 gridPoint = new GridPoint2(point.x + x, point.y + y);
-                Entity storage = settlementService.buildInSettlement("storage/invisible_storage", gridPoint);
+                Entity storage = settlementService.buildInSettlement(RESOURCE_STORAGE, gridPoint);
                 StorageComponent storageComponent = Mappers.storage.get(storage);
                 storageComponent.setPriority(groupStorage.getPriority());
                 storageGroupComponent.addStorageSpot(gridPoint, storage);
@@ -524,8 +520,7 @@ public class StorageService implements IStorageService {
         return entity;
     }
 
-    @Override
-    public void setPriority(Entity entity, int priority) {
+    public static void setPriority(Entity entity, int priority) {
         if (Mappers.storage.has(entity)) {
             StorageComponent storage = Mappers.storage.get(entity);
             storage.setPriority(priority);
@@ -536,7 +531,7 @@ public class StorageService implements IStorageService {
         }
     }
 
-    public Image createStorageImage(IStorageItem item) {
+    public static Image createStorageImage(IStorageItem item, ISpriteFactory spriteFactory) {
         try {
             // Use the sprite from the IStorageItem
             GameSprite sprite = item.getSprite();
@@ -568,17 +563,28 @@ public class StorageService implements IStorageService {
             // Fallback to a default texture if item sprite not found
             System.out.println("Could not load sprite for: " + item.getName());
             try {
-
-                TextureRegion texture = spriteFactory.getTextureWithFallback(item.getSpriteName(), -1);
-                Image fallbackImage = new Image(new TextureRegionDrawable(texture));
-                fallbackImage.setScaling(com.badlogic.gdx.utils.Scaling.fit); // Maintain aspect ratio
-                return fallbackImage;
+                if (spriteFactory != null) {
+                    TextureRegion texture = spriteFactory.getTextureWithFallback(item.getSpriteName(), -1);
+                    Image fallbackImage = new Image(new TextureRegionDrawable(texture));
+                    fallbackImage.setScaling(com.badlogic.gdx.utils.Scaling.fit);
+                    return fallbackImage;
+                }
             } catch (Exception fallbackException) {
                 // Return empty image if no fallback available
                 return new Image();
             }
         }
+        return new Image();
     }
 
 
+    public static IStorageItem getResource(Entity entity) {
+        if (Mappers.storage.has(entity)) {
+            StorageComponent storage = Mappers.storage.get(entity);
+            if (!storage.getItems().isEmpty()) {
+                return storage.getItems().values().iterator().next();
+            }
+        }
+        return null;
+    }
 }

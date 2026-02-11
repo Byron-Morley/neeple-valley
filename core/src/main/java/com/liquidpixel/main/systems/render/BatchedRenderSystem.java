@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import com.liquidpixel.core.components.core.PositionComponent;
+import com.liquidpixel.main.components.DoNotRenderComponent;
 import com.liquidpixel.main.helpers.ItemHelper;
 import com.liquidpixel.main.managers.EntityInteractionManager;
 import com.liquidpixel.sprite.model.GameSprite;
@@ -30,7 +31,7 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
     private Array<String> missingSprites = new Array<>();
 
     public BatchedRenderSystem() {
-        super(Family.all(PositionComponent.class, RenderComponent.class).get(), new ZComparator());
+        super(Family.all(PositionComponent.class, RenderComponent.class).exclude(DoNotRenderComponent.class).get(), new ZComparator());
         this.batch = GameResources.get().getBatch();
     }
 

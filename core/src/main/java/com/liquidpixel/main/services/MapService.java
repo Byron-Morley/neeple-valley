@@ -167,8 +167,8 @@ public class MapService extends Service implements IMapService, Initializable {
 
 
     private void createAllChunks() {
-        LoopUtils.insideOut(worldMap.getMapConfiguration().getChunkCountX(), worldMap.getMapConfiguration().getChunkCountY(), (x, y) -> {
-            createChunk(new GridPoint2(x, y));
+        LoopUtils.insideOut(worldMap.getMapConfiguration().getChunkCountX(), worldMap.getMapConfiguration().getChunkCountY(), (coordinate) -> {
+            createChunk(coordinate);
         });
     }
 

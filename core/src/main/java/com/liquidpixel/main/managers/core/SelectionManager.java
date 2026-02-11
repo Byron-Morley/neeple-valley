@@ -9,7 +9,7 @@ import com.liquidpixel.main.interfaces.managers.ISelectionManager;
 import com.liquidpixel.main.interfaces.services.*;
 import com.liquidpixel.main.services.SelectionService;
 import com.liquidpixel.main.services.SettlementService;
-import com.liquidpixel.main.services.items.StorageService;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.main.ui.common.EntitySelectionUI;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.selection.api.IClickAction;
@@ -42,7 +42,6 @@ public class SelectionManager implements ISelectionManager {
     IPlayerInputService playerInputService;
     IItemService itemService;
     ISettlementService settlementService;
-    IStorageService storageService;
     ISelectionService selectionService;
 
     public SelectionManager(IPlayerInputService playerInputService, IItemService itemService, ISpriteFactory spriteFactory) {
@@ -51,7 +50,6 @@ public class SelectionManager implements ISelectionManager {
         this.selectedEntities = new HashSet<>();
         settlementService = new SettlementService(this, itemService, spriteFactory);
         selectionService = new SelectionService(this, itemService);
-        storageService = new StorageService(this, itemService, spriteFactory);
     }
 
     @Override
@@ -199,9 +197,5 @@ public class SelectionManager implements ISelectionManager {
 
     public void setSelectedSettlement(Entity selectedSettlement) {
         this.selectedSettlement = selectedSettlement;
-    }
-
-    public IStorageService getStorageService() {
-        return storageService;
     }
 }

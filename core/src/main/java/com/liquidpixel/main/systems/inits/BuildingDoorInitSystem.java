@@ -9,7 +9,6 @@ import com.liquidpixel.main.components.DoorComponent;
 import com.liquidpixel.main.components.colony.BuildingComponent;
 import com.liquidpixel.main.components.inits.BuildingDoorInitComponent;
 import com.liquidpixel.main.interfaces.services.IItemService;
-import com.liquidpixel.main.managers.EntityInteractionManager;
 import com.liquidpixel.main.utils.Mappers;
 
 public class BuildingDoorInitSystem extends IteratingSystem {

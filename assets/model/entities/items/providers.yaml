@@ -81,6 +81,7 @@ stone-cutter:
   storage:
     slots: 2
     workshop: true
+    input: resources/stone
   clickBehavior: storage_window
   bodyModel: custom_house_body
   building:
@@ -93,6 +94,7 @@ wood-cutter:
     slots: 2
     workshop: true
     priority: 0
+    input: resources/stone
   clickBehavior: storage_window
   bodyModel: custom_house_body
   building:

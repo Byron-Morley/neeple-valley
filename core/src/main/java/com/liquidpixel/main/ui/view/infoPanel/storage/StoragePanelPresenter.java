@@ -5,6 +5,7 @@ import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.interfaces.IStorageItem;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
+import com.liquidpixel.main.services.items.StorageHelper;
 
 import java.util.List;
 
@@ -61,9 +62,9 @@ public class StoragePanelPresenter extends VisTable {
     }
 
     private void addSlotContent(IStorageItem item) {
-//        Image image = createStorageImage(item);
-//        StorageSlotUI storageSlotUI = new StorageSlotUI(image, item.getQuantity() + "/" + item.getStackSize());
-//        contentTable.add(storageSlotUI);
+        Image image = StorageHelper.createStorageImage(item, null);
+        StorageSlotUI storageSlotUI = new StorageSlotUI(image, item.getQuantity() + "/" + item.getStackSize());
+        contentTable.add(storageSlotUI);
     }
 
     private void addEmptySlot() {

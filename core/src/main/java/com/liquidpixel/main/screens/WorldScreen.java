@@ -276,7 +276,7 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
 
         //Farming
         engine.addSystem(new FarmSystem(itemManager.getItemService()));
-        engine.addSystem(new GrowSystem(selectionManager.getStorageService(), spriteFactory));
+        engine.addSystem(new GrowSystem(spriteFactory));
 
 
         //Rendering
@@ -298,7 +298,7 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
         engine.addSystem(new EntityPickupSystem(cameraManager.getCameraService()));
         engine.addSystem(new EquipmentSystem());
         engine.addSystem(new HarvestSystem(itemManager.getItemService(), mapManager.getMapService().getWorldMap(), selectionManager.getSelectionService()));
-        engine.addSystem(new HaulSystem(mapManager.getMapService(), itemManager.getItemService(), selectionManager.getStorageService()));
+        engine.addSystem(new HaulSystem(mapManager.getMapService(), itemManager.getItemService()));
         engine.addSystem(new MovementTaskSystem(mapManager.getMapService(), taskManager));
         engine.addSystem(new WorkTaskSystem());
         engine.addSystem(new DoWorkSystem(mapManager.getMapService(), itemManager.getItemService()));
@@ -322,12 +322,12 @@ public class WorldScreen implements Screen, Initializable, GameSetup {
         engine.addSystem(new MapUpdateSystem(mapManager.getMapService(), this.obstacleBuildListener));
         engine.addSystem(new ColonySystem(selectionManager.getSettlementService()));
         engine.addSystem(new ImmigrationSystem(agentService));
-        engine.addSystem(new HarvestProviderSystem(selectionManager.getStorageService(), spriteFactory));
-        engine.addSystem(new ProviderWorkCreationSystem(selectionManager.getStorageService()));
+        engine.addSystem(new HarvestProviderSystem(spriteFactory));
+        engine.addSystem(new ProviderWorkCreationSystem());
         engine.addSystem(new HarvestWorkCreationSystem(itemManager.getItemService()));
-        engine.addSystem(new WorkerAssignmentSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
-        engine.addSystem(new WorkProcessingSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
-        engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getStorageService(), selectionManager.getSettlementService()));
+        engine.addSystem(new WorkerAssignmentSystem(mapManager.getMapService(), itemManager.getItemService()));
+        engine.addSystem(new WorkProcessingSystem(mapManager.getMapService(), itemManager.getItemService()));
+        engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getSettlementService()));
         engine.addSystem(new BuildingSystem(itemManager.getItemService(), selectionManager.getSettlementService()));
         engine.addSystem(new PopulationUpdateSystem());
         engine.addSystem(new AutoAssignJobSystem());

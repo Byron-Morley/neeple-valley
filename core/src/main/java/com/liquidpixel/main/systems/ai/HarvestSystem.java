@@ -74,7 +74,6 @@ public class HarvestSystem extends IteratingSystem {
     private void handleIdleState(Entity agent, HarvestComponent harvest) {
         Gdx.app.debug("HarvestSystem", "IDLE");
 
-
         Vector2 agentPosition = agent.getComponent(PositionComponent.class).getPosition();
         GridPoint2 interactionPoint = harvest.getInteractionPoint();
 

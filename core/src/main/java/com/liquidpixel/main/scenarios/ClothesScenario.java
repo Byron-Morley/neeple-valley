@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClothesScenario extends Scenario implements IScenario {
-    public ClothesScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+    public ClothesScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService, ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override

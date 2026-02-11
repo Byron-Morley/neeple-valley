@@ -7,10 +7,12 @@ import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.interfaces.*;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.main.interfaces.ui.IWindowService;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.main.services.ui.UIService;
 import com.liquidpixel.main.ui.common.ReuseableWindow;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisWindow;
+import com.liquidpixel.sprite.api.factory.ISpriteFactory;
 
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class StorageUI extends ReuseableWindow implements IGet<Group>, Updatable
     VisTable contentTable;
     IItemService itemService;
     UIService uiService;
+    ISpriteFactory spriteFactory;
 
-    public StorageUI(IWindowService windowService, IItemService itemService, UIService uiService) {
+    public StorageUI(IWindowService windowService, IItemService itemService, UIService uiService, ISpriteFactory spriteFactory) {
         super("Storage Menu");
         this.windowService = windowService;
         this.itemService = itemService;
         this.uiService = uiService;
+        this.spriteFactory = spriteFactory;
         init();
     }
 
@@ -86,9 +90,9 @@ public class StorageUI extends ReuseableWindow implements IGet<Group>, Updatable
     }
 
     private void addSlotContent(IStorageItem item) {
-//        Image image = createStorageImage(item);
-//        StorageSlotUI storageSlotUI = new StorageSlotUI(image, item.getQuantity() + "/" + item.getStackSize());
-//        contentTable.add(storageSlotUI);
+        Image image = StorageHelper.createStorageImage(item, spriteFactory);
+        StorageSlotUI storageSlotUI = new StorageSlotUI(image, item.getQuantity() + "/" + item.getStackSize());
+        contentTable.add(storageSlotUI);
     }
 
     private void addEmptySlot() {

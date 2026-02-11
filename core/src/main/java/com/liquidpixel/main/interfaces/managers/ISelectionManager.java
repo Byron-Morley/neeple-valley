@@ -3,7 +3,6 @@ package com.liquidpixel.main.interfaces.managers;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.GridPoint2;
 import com.liquidpixel.selection.api.IClickAction;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.interfaces.services.ISelectionService;
 import com.liquidpixel.main.interfaces.services.ISettlementService;
 
@@ -32,8 +31,6 @@ public interface ISelectionManager {
     Entity getSelectedSettlement();
 
     void setSelectedSettlement(Entity selectedSettlement);
-
-    IStorageService getStorageService();
 
     boolean executeLeftClickAction(GridPoint2 position, boolean isNewClick);
 

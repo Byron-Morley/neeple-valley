@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.main.components.agent.AgentComponent;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.pathfinding.components.MovementTaskComponent;
 import com.liquidpixel.main.components.ai.actions.HaulComponent;
 import com.liquidpixel.main.components.player.CarryComponent;
@@ -17,7 +18,6 @@ import com.liquidpixel.main.interfaces.IStorageItem;
 import com.liquidpixel.main.interfaces.IWorldMap;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.pathfinding.api.IMapService;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.status.WorkState;
 import com.liquidpixel.main.utils.Mappers;
 import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
@@ -29,9 +29,8 @@ public class HaulSystem extends IteratingSystem {
     IItemService itemService;
     IMapService mapService;
     IWorldMap worldMap;
-    IStorageService storageService;
 
-    public HaulSystem(IMapService mapService, IItemService itemService, IStorageService storageService) {
+    public HaulSystem(IMapService mapService, IItemService itemService) {
         super(Family.all(
             HaulComponent.class,
             AgentComponent.class,
@@ -40,7 +39,6 @@ public class HaulSystem extends IteratingSystem {
         this.itemService = itemService;
         this.mapService = mapService;
         this.worldMap = mapService.getWorldMap();
-        this.storageService = storageService;
     }
 
     @Override
@@ -94,7 +92,7 @@ public class HaulSystem extends IteratingSystem {
         if (Mappers.storageTile.has(hauling.getDestination())) hauling.getDestination().add(new StorageRenderRefreshComponent());
 
         try {
-            storageService.addItem(storage, item);
+            StorageHelper.addItem(storage, item);
         } catch (Exception e) {
             agent.remove(CarryComponent.class);
             hauling.state = WorkState.FAILED;
@@ -123,7 +121,7 @@ public class HaulSystem extends IteratingSystem {
         //do we need to split the stack?
         if (quantityToPickup < storageItem.getQuantity()) {
             storageComponent.unReserveItem(hauling.getItem());
-            storageService.removeItem(storageComponent, hauling.getItem());
+            StorageHelper.removeItem(storageComponent, hauling.getItem());
         } else {
             MarkComponent markComponent = Mappers.mark.get(storage);
             if (markComponent != null) getEngine().removeEntity(markComponent.getMark());
@@ -136,7 +134,7 @@ public class HaulSystem extends IteratingSystem {
 
     private void planMovingToDestination(Entity agent, HaulComponent hauling) {
         IStorageItem item = hauling.getItem();
-        storageService.addItem(Mappers.storage.get(agent), item);
+        StorageHelper.addItem(Mappers.storage.get(agent), item);
 
         Entity carryItem = itemService.getItem("storage/carry_storage").build();
 

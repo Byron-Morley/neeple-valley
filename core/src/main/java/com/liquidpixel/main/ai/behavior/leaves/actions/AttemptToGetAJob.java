@@ -8,6 +8,7 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.liquidpixel.main.ai.blackboards.BehaviorBlackboard;
 import com.liquidpixel.main.components.agent.AgentJobComponent;
 import com.liquidpixel.main.components.workshop.JobComponent;
+import com.liquidpixel.main.model.ai.Job;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AttemptToGetAJob extends LeafTask<BehaviorBlackboard> {
 
             if (jobComponent.hasJobAvailable()) {
 
-//                String jobString = jobComponent.get
+//                String jobString = jobComponent.getJob();
 //                Job job = new Job(jobString, workshop, entity);
 //                jobComponent.assignJob(job);
 //                entity.add(new AgentJobComponent(job));

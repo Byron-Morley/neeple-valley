@@ -22,10 +22,12 @@ public class MapManager implements IMapManager {
     public static float TIME_PER_TILE = 2f;
 
     public static boolean RIVER_ON = true;
-    public static boolean TERRAIN_ITEMS_ON = false;
+    public static boolean TERRAIN_ITEMS_ON = true;
     public static long NON_WATER_SEED = 709748066;
     public static long MUDDY_SEED = -1150544974;
     public static long WATER_SEED = -922278602;
+    public static long BIG_POND_SEED = -1957991068;
+    public static long SMALL_POND_SEED = -1815501226;
 
     IWorldMap worldMap;
     ITaskManager taskManager;
@@ -49,7 +51,7 @@ public class MapManager implements IMapManager {
         seed = random.nextInt();
 
         //TODO remove seed
-        GameState.setSeed(seed);
+        GameState.setSeed(SMALL_POND_SEED);
         System.out.println("Seed: " + seed);
 
         terrainManager = new TerrainManager();

@@ -11,9 +11,9 @@ import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.engine.GameClock;
 import com.liquidpixel.main.factories.ModelFactory;
 import com.liquidpixel.main.interfaces.IStorageItem;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 import com.liquidpixel.main.model.item.Item;
 import com.liquidpixel.main.model.item.StorageItem;
+import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.sprite.api.services.IAnimationService;
 import com.liquidpixel.sprite.model.GameSprite;
 import com.liquidpixel.core.core.Action;
@@ -28,12 +28,10 @@ import static com.liquidpixel.main.utils.utils.getFilenameFromPath;
 
 public class GrowSystem extends IteratingSystem {
 
-    IStorageService storageService;
     ISpriteFactory spriteFactory;
 
-    public GrowSystem(IStorageService storageService, ISpriteFactory spriteFactory) {
+    public GrowSystem(ISpriteFactory spriteFactory) {
         super(Family.all(FarmComponent.class).get());
-        this.storageService = storageService;
         this.spriteFactory = spriteFactory;
     }
 
@@ -103,7 +101,7 @@ public class GrowSystem extends IteratingSystem {
         GameSprite sprite = spriteFactory.getSprite(item.getSpriteName(), 0);
         IStorageItem storageItem = new StorageItem(itemName, 1, item.getStackSize(), sprite);
 
-        storageService.addItem(storageComponent, storageItem);
+        StorageHelper.addItem(storageComponent, storageItem);
 
         // Safely remove from the list using iterator
         cropIterator.remove();

@@ -58,8 +58,8 @@ public class ChunkRenderer implements Renderable, IChunkManager {
                 CULLING_RADIUS,
                 chunkX,
                 chunkY,
-                (x, y) -> {
-                    Chunk chunk = chunks.get(new GridPoint2(x, y));
+                (coordinate) -> {
+                    Chunk chunk = chunks.get(coordinate);
                     if (chunk != null) renderChunk(chunk);
                 }
             );

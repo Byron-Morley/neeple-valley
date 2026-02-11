@@ -55,7 +55,7 @@ public class ImmigrationSystem extends IteratingSystem {
 
     private void addPopulation(SettlementComponent settlement, int immigration) {
         for (int i = 0; i < immigration; i++) {
-            Entity person = agentService.getAgent("population");
+            Entity person = agentService.createAgent("population");
             settlement.addPopulation(person);
             settlement.addPersonToHouse(person);
             settlement.addPersonToJob(person);

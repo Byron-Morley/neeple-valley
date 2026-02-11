@@ -6,7 +6,6 @@ import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.liquidpixel.main.ai.blackboards.BehaviorBlackboard;
 import com.liquidpixel.main.components.storage.StorageComponent;
-import com.liquidpixel.main.interfaces.services.IStorageService;
 
 public class CanICarryOutWork extends LeafTask<BehaviorBlackboard> {
     @Override

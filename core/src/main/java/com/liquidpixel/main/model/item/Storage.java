@@ -13,6 +13,7 @@ public class Storage {
     boolean group = false;
     boolean workshop = false;
     boolean tile = false;
+    String input = "resources/wood_log";
 
     private List<IStorageItem> items;
 
@@ -58,5 +59,9 @@ public class Storage {
 
     public int getPriority() {
         return priority;
+    }
+
+    public String getInput() {
+        return input;
     }
 }

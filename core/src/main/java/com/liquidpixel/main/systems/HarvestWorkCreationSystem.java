@@ -3,11 +3,10 @@ package com.liquidpixel.main.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
-import com.liquidpixel.main.components.BodyComponent;
 import com.liquidpixel.main.components.HarvestableComponent;
 import com.liquidpixel.item.components.ItemComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
-import com.liquidpixel.main.components.ui.MarkComponent;
+import com.liquidpixel.main.helpers.WorkOrderHelper;
 import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.main.interfaces.work.IWorkOrder;
 import com.liquidpixel.main.model.storage.WorkOrder;
@@ -24,28 +23,22 @@ public class HarvestWorkCreationSystem extends IntervalIteratingSystem {
     IItemService itemService;
 
     public HarvestWorkCreationSystem(IItemService itemService) {
-        super(Family.all(HarvestableComponent.class, MarkComponent.class, ItemComponent.class, BodyComponent.class).get(), 2f);
-        this.itemService =itemService;
+        super(Family.all(HarvestableComponent.class, ItemComponent.class).get(), 2f);
+        this.itemService = itemService;
     }
 
     @Override
     protected void processEntity(Entity entity) {
         SettlementComponent settlement = getSettlementFromAsset(entity);
-        ItemComponent itemComponent = Mappers.item.get(entity);
-        if (!doesOrderAlreadyExist(entity)) {
-            IWorkOrder workOrder = new WorkOrder(entity, entity, itemService.getStorageItem(entity), HARVEST);
-            settlement.addWorkOrder(workOrder);
+        if (Mappers.mark.has(entity) || settlement != null) {
+            if (!WorkOrderHelper.doesOrderAlreadyExist(entity)) {
+                IWorkOrder workOrder = new WorkOrder(entity, entity, itemService.getStorageItem(entity), HARVEST);
+                settlement.addWorkOrder(workOrder);
+            }
+        } else {
+            // outside settlement range
+            // send to console
+            // report this to the workshop so the user can fix
         }
-    }
-
-    private boolean doesOrderAlreadyExist(Entity entity) {
-        SettlementComponent settlement = getSettlementFromAsset(entity);
-        List<IWorkOrder> workOrders = settlement.getWorkOrders();
-
-        return workOrders
-            .stream()
-            .filter(work->work.getType().equals(HARVEST))
-            .filter(work->work.getOrigin().equals(entity))
-            .anyMatch(IWorkOrder::isActive);
     }
 }

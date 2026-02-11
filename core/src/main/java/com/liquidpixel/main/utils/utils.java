@@ -2,6 +2,7 @@ package com.liquidpixel.main.utils;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.liquidpixel.main.components.items.SettlementComponent;
@@ -25,8 +26,13 @@ public class utils {
     }
 
     public static SettlementComponent getSettlementFromAsset(Entity entity) {
-        Entity settlementEntity = Mappers.asset.get(entity).getSettlement();
-        return Mappers.settlement.get(settlementEntity);
+        try {
+            Entity settlementEntity = Mappers.asset.get(entity).getSettlement();
+            return Mappers.settlement.get(settlementEntity);
+        } catch (Exception e) {
+//            Gdx.app.log("Error getting settlement from asset: ", String.valueOf(e.getMessage()));
+            return null;
+        }
     }
 
     public static List<GridPoint2> getAdjacentCoordinates(int x, int y, int width, int height) {
@@ -47,7 +53,6 @@ public class utils {
 
         return adjacentCoordinates;
     }
-
 
 
     public static List<Vector2> getAdjacentCoordinates(float x, float y, float width, float height) {
@@ -93,11 +98,9 @@ public class utils {
 
         int lastSlashIndex = path.lastIndexOf('/');
         if (lastSlashIndex == -1) {
-            // No slash found, return the original string
             return path;
         }
 
-        // Return the part after the last slash
         return path.substring(lastSlashIndex + 1);
     }
 }

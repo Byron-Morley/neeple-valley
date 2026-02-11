@@ -2,8 +2,13 @@ package com.liquidpixel.main.services;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.GridPoint2;
+import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.main.components.AssetComponent;
 import com.liquidpixel.item.components.ItemComponent;
+import com.liquidpixel.main.components.DoNotRenderComponent;
+import com.liquidpixel.main.components.DoorComponent;
+import com.liquidpixel.main.components.colony.BuildingComponent;
+import com.liquidpixel.main.components.colony.EnterDoorComponent;
 import com.liquidpixel.main.components.items.SettlementComponent;
 import com.liquidpixel.main.components.storage.StorageComponent;
 import com.liquidpixel.main.factories.ModelFactory;
@@ -268,5 +273,4 @@ public class SettlementService implements ISettlementService {
             .filter(order -> order.getState() == state)
             .collect(Collectors.toList());
     }
-
 }

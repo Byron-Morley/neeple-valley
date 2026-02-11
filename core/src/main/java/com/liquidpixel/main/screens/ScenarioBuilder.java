@@ -289,7 +289,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
 
         //Farming
         engine.addSystem(new FarmSystem(itemManager.getItemService()));
-        engine.addSystem(new GrowSystem(selectionManager.getStorageService(), spriteFactory));
+        engine.addSystem(new GrowSystem(spriteFactory));
 
         //Rendering
         engine.addSystem(new FadeSystem());
@@ -313,7 +313,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new EntityPickupSystem(cameraManager.getCameraService()));
         engine.addSystem(new EquipmentSystem());
         engine.addSystem(new HarvestSystem(itemManager.getItemService(), mapManager.getMapService().getWorldMap(), selectionManager.getSelectionService()));
-        engine.addSystem(new HaulSystem(mapManager.getMapService(), itemManager.getItemService(), selectionManager.getStorageService()));
+        engine.addSystem(new HaulSystem(mapManager.getMapService(), itemManager.getItemService()));
         engine.addSystem(new MovementTaskSystem(mapManager.getMapService(), taskManager));
         engine.addSystem(new WorkTaskSystem());
         engine.addSystem(new DoWorkSystem(mapManager.getMapService(), itemManager.getItemService()));
@@ -328,22 +328,18 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new FollowSystem());
         engine.addSystem(new TileRenderSystem(itemManager.getItemService()));
         engine.addSystem(new TileSelectionRenderSystem(itemManager.getItemService(), selectionManager.getSelectionService(), mapManager.getMapService().getWorldMap()));
-
-
-
-
         engine.addSystem(new DebugRenderSystem((MapGraph) mapManager.getWorldMap()));
         engine.addSystem(new MapUpdateSystem(mapManager.getMapService(), this.obstacleBuildListener));
         engine.addSystem(new ColonySystem(selectionManager.getSettlementService()));
         engine.addSystem(new ImmigrationSystem(agentService));
-        engine.addSystem(new HarvestProviderSystem(selectionManager.getStorageService(), spriteFactory));
+        engine.addSystem(new HarvestProviderSystem(spriteFactory));
 
         engine.addSystem(new HarvestWorkCreationSystem(itemManager.getItemService()));
-        engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getStorageService(), selectionManager.getSettlementService()));
-        engine.addSystem(new ProviderWorkCreationSystem(selectionManager.getStorageService()));
+        engine.addSystem(new CreateConsumerWorkSystem(selectionManager.getSettlementService()));
+        engine.addSystem(new ProviderWorkCreationSystem());
 
-        engine.addSystem(new WorkerAssignmentSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
-        engine.addSystem(new WorkProcessingSystem(selectionManager.getStorageService(), mapManager.getMapService(), itemManager.getItemService()));
+        engine.addSystem(new WorkerAssignmentSystem(mapManager.getMapService(), itemManager.getItemService()));
+        engine.addSystem(new WorkProcessingSystem(mapManager.getMapService(), itemManager.getItemService()));
         engine.addSystem(new BuildingSystem(itemManager.getItemService(), selectionManager.getSettlementService()));
         engine.addSystem(new PopulationUpdateSystem());
         engine.addSystem(new AutoAssignJobSystem());
@@ -368,6 +364,8 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
         engine.addSystem(new ExitDoorSystem());
         engine.addSystem(new FishingSystem());
 
+
+        engine.addSystem(new WorkshopWorkCreationSystem(itemManager.getItemService()));
 
 
         //        engine.addSystem(new RenderSystem());
@@ -401,8 +399,7 @@ public class ScenarioBuilder implements Screen, Initializable, GameSetup {
             selectionManager.getSelectionService(),
             selectionManager.getSettlementService(),
             agentService,
-            itemManager.getItemService(),
-            selectionManager.getStorageService()
+            itemManager.getItemService()
         );
 
         // Set the scenarioService in UserInterfaceManager now that it's created

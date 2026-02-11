@@ -22,8 +22,8 @@ import java.util.List;
 public class BuildingScenario extends Scenario implements IScenario {
 
     public BuildingScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                            ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+                            ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override

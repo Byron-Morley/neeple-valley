@@ -17,8 +17,8 @@ import java.util.List;
 public class CombatScenario extends Scenario implements IScenario {
 
     public CombatScenario(IMapService mapService, IWorldMap worldMap, ISelectionService selectionService,
-                          ISettlementService settlementService, IAgentService agentService, IItemService itemService, IStorageService storageService) {
-        super(mapService, worldMap, selectionService, settlementService, agentService, itemService, storageService);
+                          ISettlementService settlementService, IAgentService agentService, IItemService itemService) {
+        super(mapService, worldMap, selectionService, settlementService, agentService, itemService);
     }
 
     @Override

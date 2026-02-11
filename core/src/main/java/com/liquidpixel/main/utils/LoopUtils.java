@@ -9,7 +9,7 @@ public class LoopUtils {
 
     @FunctionalInterface
     public interface CoordinateProcessor {
-        void process(int x, int y);
+        void process(GridPoint2 coordinate);
     }
 
     @FunctionalInterface
@@ -36,12 +36,23 @@ public class LoopUtils {
                     if (x >= 0 && x < boundsX && y >= 0 && y < boundsY) {
                         if (!visited.contains(new GridPoint2(x, y))) {
                             visited.add(new GridPoint2(x, y));
-                            processor.process(x, y);
+                            processor.process(new GridPoint2(x, y));
                         }
                     }
                 }
             }
         }
+    }
+
+    public static void insideOut(int width, int height, GridPoint2 center, CoordinateProcessor processor) {
+        insideOut(width, height, (coordinate) -> {
+
+            int dx = (center.x - (width / 2)) + coordinate.x;
+            int dy = (center.y - (height / 2)) + coordinate.y;
+
+            GridPoint2 position = new GridPoint2(dx, dy);
+            processor.process(position);
+        });
     }
 
     public static void loopArrayFromMiddle(int length, IntProcessor processor) {
