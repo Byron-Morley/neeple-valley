@@ -36,10 +36,12 @@ public class DoorService extends Service implements IDoorService {
 
     @Override
     public void enterDoor(Entity person) {
+
         EnterDoorComponent enterDoor = Mappers.enterDoor.get(person);
         GridPoint2 origin = enterDoor.getInside();
+
         if (Mappers.position.get(person).getPosition().equals(new Vector2(origin.x, origin.y))) {
-            enterDoor.state = EnterDoorComponent.State.CLOSE;
+//            enterDoor.state = EnterDoorComponent.State.CLOSE;
         } else if (!Mappers.traverse.has(person)) {
             walkInDoors(person);
         }
@@ -50,6 +52,7 @@ public class DoorService extends Service implements IDoorService {
                 walkInDoors(person);
             }
         }
+
     }
 
     private void walkInDoors(Entity person) {

@@ -23,7 +23,7 @@ public class InfoPanelUIPresenter extends VisTable {
     }
 
     private void init() {
-//        debugAll();
+        //        debugAll();
         contentTable = new VisTable();
 
         // Create the storage panel presenter
@@ -31,6 +31,7 @@ public class InfoPanelUIPresenter extends VisTable {
 
         if (Mappers.storage.has(entity)) {
             storagePanelPresenter.setStorageComponent(storageComponent);
+            storagePanelPresenter.setEntity(entity);
         }
 
         peoplePanelPresenter = new PeoplePanelPresenter();
@@ -58,6 +59,11 @@ public class InfoPanelUIPresenter extends VisTable {
         this.entity = entity;
         this.storageComponent = entity.getComponent(StorageComponent.class);
         storagePanelPresenter.setStorageComponent(storageComponent);
+        storagePanelPresenter.setEntity(entity);
         peoplePanelPresenter.setEntity(entity);
+    }
+
+    public StoragePanelPresenter getStoragePanelPresenter() {
+        return storagePanelPresenter;
     }
 }

@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.liquidpixel.core.components.core.PositionComponent;
 import com.liquidpixel.main.components.agent.AgentComponent;
+import com.liquidpixel.main.components.colony.BuildingComponent;
+import com.liquidpixel.main.components.colony.EnterDoorComponent;
 import com.liquidpixel.main.services.items.StorageHelper;
 import com.liquidpixel.pathfinding.components.MovementTaskComponent;
 import com.liquidpixel.main.components.ai.actions.HaulComponent;
@@ -85,6 +87,7 @@ public class HaulSystem extends IteratingSystem {
     }
 
     private void handleDroppingOffState(Entity agent, HaulComponent hauling) {
+
         if (Mappers.carry.has(agent)) {
             getEngine().removeEntity(Mappers.carry.get(agent).getItem());
             agent.remove(CarryComponent.class);
@@ -95,7 +98,8 @@ public class HaulSystem extends IteratingSystem {
         StorageComponent storage = Mappers.storage.get(hauling.getDestination());
         storage.unReserveSpace(item);
 
-        if (Mappers.storageTile.has(hauling.getDestination())) hauling.getDestination().add(new StorageRenderRefreshComponent());
+        if (Mappers.storageTile.has(hauling.getDestination()))
+            hauling.getDestination().add(new StorageRenderRefreshComponent());
 
         try {
             StorageHelper.addItem(storage, item);
@@ -165,21 +169,26 @@ public class HaulSystem extends IteratingSystem {
     }
 
     private void handleIdleState(Entity agent, HaulComponent hauling) {
-        Vector2 agentPosition = agent.getComponent(PositionComponent.class).getPosition();
-        GridPoint2 itemPosition = hauling.getItemPickupLocation();
-        GridPoint2 target = mapService.findValidInteractionPoint(reduceToCell(agentPosition), itemPosition);
 
-        if (target == null) {
-            hauling.setInaccessiblePosition(itemPosition);
-            hauling.state = WorkState.FAILED;
-            return;
-        }
-
-        if (target.equals(reduceToCell(agentPosition))) {
-            hauling.state = WorkState.PICKING_UP;
+        if (Mappers.building.has(hauling.getOrigin())) {
+            if (!Mappers.enterDoor.has(agent)) agent.add(new EnterDoorComponent(hauling.getOrigin()));
         } else {
-            hauling.state = WorkState.MOVING_TO_ITEM;
-            agent.add(new MovementTaskComponent(target));
+            Vector2 agentPosition = agent.getComponent(PositionComponent.class).getPosition();
+            GridPoint2 itemPosition = hauling.getItemPickupLocation();
+            GridPoint2 target = mapService.findValidInteractionPoint(reduceToCell(agentPosition), itemPosition);
+
+            if (target == null) {
+                hauling.setInaccessiblePosition(itemPosition);
+                hauling.state = WorkState.FAILED;
+                return;
+            }
+
+            if (target.equals(reduceToCell(agentPosition))) {
+                hauling.state = WorkState.PICKING_UP;
+            } else {
+                hauling.state = WorkState.MOVING_TO_ITEM;
+                agent.add(new MovementTaskComponent(target));
+            }
         }
     }
 }

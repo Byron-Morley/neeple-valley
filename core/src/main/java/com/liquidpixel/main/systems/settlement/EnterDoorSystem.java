@@ -73,6 +73,7 @@ public class EnterDoorSystem extends IteratingSystem {
         EnterDoorComponent enterDoor = Mappers.enterDoor.get(person);
         if (doorService.canEnterDoor(person)) {
             enterDoor.state = EnterDoorComponent.State.OPENING;
+            System.out.println("entering door");
         } else if(!Mappers.movetask.has(person)){
             person.add(new MovementTaskComponent(enterDoor.getDoorStep()));
         }

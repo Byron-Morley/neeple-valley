@@ -51,13 +51,13 @@ public class WorkerAssignmentSystem extends IntervalIteratingSystem {
             findAnyJob(workOrderList, worker, settlement);
         }
 
-        for (Entity worker : workers) {
-            if (Mappers.agentjob.has(worker)) {
-                findJobRelatedWork(workOrderList, worker, settlement);
-            } else {
-                findNonJobRelatedWork(workOrderList, worker, settlement);
-            }
-        }
+//        for (Entity worker : workers) {
+//            if (Mappers.agentjob.has(worker)) {
+//                findJobRelatedWork(workOrderList, worker, settlement);
+//            } else {
+//                findNonJobRelatedWork(workOrderList, worker, settlement);
+//            }
+//        }
     }
 
     private void findAnyJob(List<IWorkOrder> workOrderList, Entity worker, SettlementComponent settlement) {

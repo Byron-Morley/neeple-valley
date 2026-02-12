@@ -69,8 +69,14 @@ public class WorldLevelManager extends GameManager {
 
         SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
 
-        Entity person = agentService.spawnAgent(new GridPoint2(32, 32), "man");
+        Entity person = agentService.spawnAgent(new GridPoint2(20, 20), "man");
         settlement.addPopulation(person);
+
+//        Entity person1 = agentService.spawnAgent(new GridPoint2(32, 15), "man");
+//        settlement.addPopulation(person1);
+//
+//        Entity person2 = agentService.spawnAgent(new GridPoint2(32, 32), "man");
+//        settlement.addPopulation(person2);
 
 
         Entity warehouse1 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(20, 30));

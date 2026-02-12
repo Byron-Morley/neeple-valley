@@ -6,38 +6,28 @@ import com.badlogic.ashley.core.Component;
 import com.liquidpixel.main.interfaces.IStatusComponent;
 import com.liquidpixel.main.interfaces.IStorageItem;
 import com.liquidpixel.main.model.status.WorkState;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HaulComponent implements Component, IStatusComponent {
 
-    @JsonProperty
     public WorkState state = WorkState.IDLE;
 
-    @JsonProperty
     IStorageItem item;
 
     Entity origin;
 
-    @JsonProperty
     GridPoint2 itemPickupLocation;
 
-    @JsonProperty
     GridPoint2 itemDropLocation;
 
     Entity destination;
 
-    @JsonProperty
     GridPoint2 inaccessiblePosition = null;
 
-    @JsonCreator
     public HaulComponent(
-        @JsonProperty("state") WorkState state,
-        @JsonProperty("itemName") IStorageItem item,
-        @JsonProperty("itemPickupLocation") GridPoint2 itemPickupLocation,
-        @JsonProperty("itemDropLocation") GridPoint2 itemDropLocation
+        WorkState state,
+        IStorageItem item,
+        GridPoint2 itemPickupLocation,
+        GridPoint2 itemDropLocation
     ) {
         this.state = state;
         this.item = item;

@@ -86,4 +86,8 @@ public class InfoPanelUI extends ReuseableWindow implements IGet<Group>, Updatab
             }
         }
     }
+
+    public InfoPanelUIPresenter getPresenter() {
+        return presenter;
+    }
 }

@@ -9,7 +9,7 @@ public class EnterDoorComponent implements Component {
 
     public enum State {IDLE, OPENING, WALKING, OPEN, CLOSE}
 
-    public State state = State.IDLE;
+    public State state;
 
     Entity door;
 
@@ -18,6 +18,7 @@ public class EnterDoorComponent implements Component {
 
     public EnterDoorComponent(Entity door) {
         this.door = door;
+        this.state = State.IDLE;
     }
 
     public Entity getDoor() {
