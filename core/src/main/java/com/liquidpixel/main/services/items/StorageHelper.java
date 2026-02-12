@@ -66,6 +66,15 @@ public class StorageHelper {
         }
     }
 
+    public static IStorageItem removeItem(Entity storage, IStorageItem storageItem) {
+        if (Mappers.storage.has(storage)) {
+            StorageComponent storageComponent = Mappers.storage.get(storage);
+            return removeItem(storageComponent, storageItem);
+        } else {
+            Gdx.app.error("StorageHelper", "Storage entity does not have a storage component");
+        }
+        return null;
+    }
 
     public static IStorageItem removeItem(StorageComponent storage, IStorageItem storageItem) {
         if (storageItem.getQuantity() <= 0) {

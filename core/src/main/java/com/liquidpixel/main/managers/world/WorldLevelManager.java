@@ -64,18 +64,29 @@ public class WorldLevelManager extends GameManager {
 
         System.out.println("World Level Manager Initialized");
 
+//        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(20,20), 20);
 
 
         SettlementComponent settlement = Mappers.settlement.get(selectionService.getSelectedSettlement());
+
+        Entity person = agentService.spawnAgent(new GridPoint2(32, 32), "man");
+        settlement.addPopulation(person);
+
+
         Entity warehouse1 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(20, 30));
         Entity warehouse2 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(32, 30));
 
 
-        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(0,0), 20);
+        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(20,20), 20);
         IStorageItem storageItem = itemService.getStorageItem(item);
+
+        StorageHelper.removeItem(item, storageItem);
         StorageHelper.addItem(warehouse1, storageItem);
+        StorageHelper.setPriority(warehouse2, 3);
+
 
         System.out.println("item added");
+
 //        Entity item = itemService.getItem("ui/blue_tint").build();
 //        itemService.spawnItem(item, new GridPoint2(35, 35));
 

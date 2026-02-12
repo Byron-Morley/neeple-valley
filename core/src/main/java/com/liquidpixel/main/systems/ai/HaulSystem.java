@@ -20,7 +20,13 @@ import com.liquidpixel.main.interfaces.services.IItemService;
 import com.liquidpixel.pathfinding.api.IMapService;
 import com.liquidpixel.main.model.status.WorkState;
 import com.liquidpixel.main.utils.Mappers;
+import com.liquidpixel.sprite.components.LayerBuildComponent;
+import com.liquidpixel.sprite.components.RefreshLayerBuildComponent;
 import com.liquidpixel.sprite.components.RefreshSpriteRequirementComponent;
+import com.liquidpixel.sprite.model.Layer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.liquidpixel.main.utils.PositionUtils.reduceToCell;
 
@@ -135,19 +141,8 @@ public class HaulSystem extends IteratingSystem {
     private void planMovingToDestination(Entity agent, HaulComponent hauling) {
         IStorageItem item = hauling.getItem();
         StorageHelper.addItem(Mappers.storage.get(agent), item);
+        Entity carryItem = itemService.getItem(item.getName(), 10).build();
 
-        Entity carryItem = itemService.getItem("storage/carry_storage").build();
-
-
-        //TODO FIX ME
-
-//        StackableSpriteComponent stackableSpriteComponent = Mappers.stackableSprite.get(carryItem);
-//        stackableSpriteComponent.setItemSprite(item.getSpriteName());
-
-
-
-
-        carryItem.add(new RefreshSpriteRequirementComponent());
         itemService.spawnItem(carryItem, new GridPoint2(-300, -300));
         agent.add(new CarryComponent(carryItem));
 

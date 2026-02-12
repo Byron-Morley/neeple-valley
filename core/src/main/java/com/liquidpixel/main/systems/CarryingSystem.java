@@ -43,7 +43,7 @@ public class CarryingSystem extends EntitySystem {
                 RenderComponent renderComponent = rm.get(item);
 
                 float x = positionComponent.getPosition().x - 0f;
-                float y = positionComponent.getPosition().y + 1.5f;
+                float y = positionComponent.getPosition().y + 1.7f;
 
                 renderComponent.setPriority(RenderPriority.CARRYABLE);
 

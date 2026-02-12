@@ -11,7 +11,7 @@ storage_group:
 invisible_storage:
   label: Storage Space
   clickBehavior: storage_window
-  sprite: ui/blue_tint
+  sprite: ui/blank
   storage:
     tile: true
     priority: 0
