@@ -30,9 +30,23 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
     private SpriteBatch batch;
     private Array<String> missingSprites = new Array<>();
 
+    private float timeSinceLastSort = 0f;
+    private static final float SORT_INTERVAL = 0.05f; // 20x per second (tune)
+
+
     public BatchedRenderSystem() {
         super(Family.all(PositionComponent.class, RenderComponent.class).exclude(DoNotRenderComponent.class).get(), new ZComparator());
         this.batch = GameResources.get().getBatch();
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        timeSinceLastSort += deltaTime;
+        if (timeSinceLastSort >= SORT_INTERVAL) {
+            forceSort();
+            timeSinceLastSort = 0f;
+        }
+        super.update(deltaTime);
     }
 
     @Override
@@ -137,7 +151,8 @@ public class BatchedRenderSystem extends SortedIteratingSystem {
                 List<GridPoint2> walkablePoints = b2.generateAbsolutePositions(p2.getGridPosition());
                 GridPoint2 position = p1.getGridPosition();
                 for (GridPoint2 point : walkablePoints) {
-                    if (position.x < point.x - 0.5f && position.x > point.x + 0.5f) {
+                    // position.x must be within the point.x range (this was impossible before)
+                    if (position.x > point.x - 0.5f && position.x < point.x + 0.5f) {
                         if (position.y < point.y + 1) {
                             return 1;
                         }

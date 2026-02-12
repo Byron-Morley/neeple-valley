@@ -74,10 +74,10 @@ public class WorldLevelManager extends GameManager {
 
 
         Entity warehouse1 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(20, 30));
-        Entity warehouse2 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(32, 30));
+        Entity warehouse2 = settlementService.buildInSettlement("storage/warehouse", new GridPoint2(32, 40));
 
 
-        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(20,20), 20);
+        Entity item = settlementService.buildInSettlement("resources/stone",new GridPoint2(20,20), 80);
         IStorageItem storageItem = itemService.getStorageItem(item);
 
         StorageHelper.removeItem(item, storageItem);

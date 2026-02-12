@@ -60,7 +60,24 @@ public class MapGraph implements TiledGraph<FlatTiledNode> {
     }
 
     private void connectNodes(FlatTiledNode sourceNode, FlatTiledNode subNode) {
-        if (sourceNode.getType() == NodeType.TILE_FLOOR && subNode.getType() == NodeType.TILE_FLOOR && !areNodesConnected(sourceNode, subNode)) {
+        if (sourceNode.getType() == NodeType.TILE_FLOOR
+            && subNode.getType() == NodeType.TILE_FLOOR
+            && !areNodesConnected(sourceNode, subNode)) {
+
+            // Block diagonal corner-cutting:
+            // allow diagonal only if BOTH adjacent cardinal neighbors are walkable.
+            int dx = subNode.getX() - sourceNode.getX();
+            int dy = subNode.getY() - sourceNode.getY();
+            boolean isDiagonal = Math.abs(dx) == 1 && Math.abs(dy) == 1;
+
+            if (isDiagonal) {
+                FlatTiledNode sideA = getNode(new GridPoint2(sourceNode.getX() + dx, sourceNode.getY()));
+                FlatTiledNode sideB = getNode(new GridPoint2(sourceNode.getX(), sourceNode.getY() + dy));
+
+                if (sideA == null || sideB == null) return;
+                if (!sideA.isWalkable() || !sideB.isWalkable()) return;
+            }
+
             sourceNode.addConnection(new FlatTiledConnection(this, sourceNode, subNode));
         }
     }
@@ -111,7 +128,7 @@ public class MapGraph implements TiledGraph<FlatTiledNode> {
         try {
             FlatTiledNode node = getNode(position);
             node.setType(nodeType);
-            if(nodeType == NodeType.TILE_WALL){
+            if (nodeType == NodeType.TILE_WALL) {
                 removeNodeConnections(node);
             }
         } catch (NullPointerException e) {
